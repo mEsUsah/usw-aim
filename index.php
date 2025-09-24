@@ -12,7 +12,8 @@
             // list all directories
             $files = scandir(__DIR__);
             foreach ($files as $file) {
-                if (is_dir($file)) {
+                // only list visible directories
+                if (is_dir($file) && substr($file, 0, 1) !== '.') {
                     echo '<li><a href="' . $file . '">' . $file . '</a></li>';
                 }
             }
