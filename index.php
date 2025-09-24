@@ -9,10 +9,12 @@
     <h1>Directory Listing</h1>
     <ul>
         <?php
-            // list all directories and files
+            // list all directories
             $files = scandir(__DIR__);
             foreach ($files as $file) {
-                echo '<li><a href="' . $file . '">' . $file . '</a></li>';
+                if (is_dir($file)) {
+                    echo '<li><a href="' . $file . '">' . $file . '</a></li>';
+                }
             }
         ?>
     </ul>
