@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>USW - AIM</title>
 </head>
 <body>
-    <h1>Directory Listing</h1>
+    <h1>Advanced Internet and Mobile Computing</h1>
+    <p>Work during my USW studies autumn 2025</p>
     <ul>
         <?php
             // list all directories
