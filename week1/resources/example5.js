@@ -1,25 +1,49 @@
+class Student {
+    constructor(name, course, results) {
+        this.name = name;
+        this.course = course;
+        this.results = results;
+    }
+
+    printDetailsHtml() {
+        var details = '<b>Student Name:</b> ' + this.name + '<br>' +
+            '<b>Course:</b> ' + this.course + '<br>' +
+            '<b>Results:</b> <br>';
+
+        this.results.forEach(function(result) {
+            details = details + result.module + ' ' + result.mark + '%' + '<br>';
+        });
+
+        return details;
+    }
+}
+
 function showModules() {
-    var modules = ['Maths','Programming', 'Web Development']
-    var modulesCombined = ['Maths', 45, 'Programming', 98,'Web Development', 75]
-    var marks = [45, 28, 65];
-    var arrayLength = modules.length;
-    var modulesMessage = '';
-    var i;
+    var students = [];
+    
+    students.push(new Student('Alice Johnson', 'Computer Science', [
+        { module: 'Maths', mark: 80 },
+        { module: 'Programming', mark: 78 },
+        { module: 'Web Development', mark: 92 }
+    ]));
+    
+    students.push(new Student('Bob Smith', 'Information Technology', [
+        { module: 'Web Development', mark: 65 },
+        { module: 'Programming', mark: 72 },
+        { module: 'Web Development', mark: 68 }
+    ]));
 
-    // for (i = 0; i < arrayLength; i=i+2) {
-    //     modulesMessage = modulesMessage + modules[i] + ' ' + modulesCombined[i+1] + '%' + '<br>';
-    // }
+    students.push(new Student('Charlie Brown', 'Software Engineering', [
+        { module: 'Maths', mark: 90 },
+        { module: 'Programming', mark: 88 },
+        { module: 'Web Development', mark: 95 }
+    ]));
 
-    // modules.forEach(function(module, index) {
-    //     modulesMessage = modulesMessage + module + ' ' + marks[index] + '%' + '<br>';
-    // });
-
-    var index = 0;
-    do {
-        index++;
-        modulesMessage = modulesMessage + modules[index - 1] + ' ' + marks[index - 1] + '%' + '<br>';
-    } while (index < modules.length);
-    document.getElementById('outputElement').innerHTML = modulesMessage;
+    var output = '';
+    students.forEach(function(student) {
+        output += student.printDetailsHtml() + '<br>';
+    });
+    document.getElementById('outputElement').innerHTML = output;
 }
 
 showModules();
