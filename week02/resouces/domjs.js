@@ -71,3 +71,39 @@ function manipulateDOM8(){
     
     els[1].className='full';
 }
+
+function manipulateDOM9(){
+    var el = document.getElementById('one');
+    var parel = el.parentNode;
+    parel.className = 'rounded';
+}
+
+function manipulateDOM10(){
+    var el = document.getElementById('two');
+    var preSib = el.previousElementSibling;
+    var nexSib = el.nextElementSibling;
+
+    if (preSib) {
+        preSib.className = 'full';
+    }
+    if (nexSib) {
+        nexSib.className = 'full';
+    } 
+}
+
+function manipulateDOM11(){
+    var els = document.getElementsByTagName('ul');
+
+    if (els.length >= 1) {
+        var firChi = els[0].firstElementChild;
+        var lasChi = els[0].lastElementChild;
+
+        if (firChi) {
+            firChi.className = 'full';
+        }
+        if (lasChi) {
+            lasChi.className = 'full';
+        } 
+    } 
+}
+
