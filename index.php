@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USW - AIM</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
     <h1>Advanced Internet and Mobile Computing</h1>
