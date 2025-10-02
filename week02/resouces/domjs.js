@@ -104,6 +104,52 @@ function manipulateDOM11(){
         if (lasChi) {
             lasChi.className = 'full';
         } 
-    } 
+    }
+
+    document.getElementById('two').innerText = 'BSc Artificial Intelligence';
 }
+
+function manipulateDOM12(){
+    var el = document.getElementById('four');
+    var elTxt = el.firstChild.nodeValue;
+
+    elTxt = elTxt.replace('Mechatronics', 'Multimedia Studies');
+    el.firstChild.nodeValue = elTxt;
+
+    document.getElementById('one').firstChild.nextSibling.nodeValue = ' BSc Games Design';
+}
+
+function manipulateDOM13(){
+    var el = document.getElementById('four');
+    var elTxt = el.textContent;
+
+    elTxt = elTxt.replace('Mechatronics', 'Multimedia Studies');
+    el.textContent = elTxt;
+}
+
+function manipulateDOM14(){
+    var courseUpdated = '<b> Updated!</b>'
+    var el = document.getElementById('four');
+    var elTxt = el.textContent;
+
+    elTxt = elTxt + courseUpdated;
+    el.innerHTML = elTxt;
+}
+
+function manipulateDOM15(){
+    var newEl = document.createElement('li');
+    var newTxt = document.createTextNode('BSc Theoretical Robotics');
+
+    newEl.appendChild(newTxt);
+    var loc = document.getElementsByTagName('ul')[0];
+    loc.appendChild(newEl);
+}
+
+function manipulateDOM16(){
+    var delEl = document.getElementsByTagName('li')[2];
+    var parDelEl = delEl.parentNode;
+
+    parDelEl.removeChild(delEl);
+}
+
 
