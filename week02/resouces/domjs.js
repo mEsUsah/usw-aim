@@ -152,4 +152,73 @@ function manipulateDOM16(){
     parDelEl.removeChild(delEl);
 }
 
+function manipulateDOM17(){
+    var el = document.getElementsByTagName('li')[2];
+    var revClass = ' Has no class attribute';
+
+    if (el.hasAttribute('class')) {
+        revClass = ' ' + el.getAttribute('class');
+    }
+
+    el.textContent = el.textContent + revClass;
+}
+
+function manipulateDOM18(){
+    var el = document.getElementsByTagName('link')[0];
+
+    el.setAttribute('href', 'domcss2.css');
+}
+
+function manipulateDOM19(){
+    var el = document.getElementsByTagName('li')[2];
+
+    if (el.hasAttribute('class')) {
+        el.removeAttribute('class');
+    }
+}
+
+function clearRunning(){
+    var els = document.getElementsByClassName('running');
+    for (let i=els.length-1; i>=0; i--){
+        els[i].classList.remove('running');
+    }
+}
+
+function manipulateDOMinsert(){
+    newEl = document.createElement('li');
+    newEl.className = 'running';
+    emEl = document.createElement('em');
+    emEl.textContent = ' BSc Theoretical Robotics';
+    newEl.appendChild(emEl);
+
+    let list = document.getElementsByTagName('ul')[0];
+    let children = list.children;
+    
+    if (children.length < 1) {
+        list.appendChild(newEl);
+        return;
+    }
+
+
+    for (let i=0; i<children.length; i++){
+        if(!children[i].classList.contains('running')){
+            list.insertBefore(newEl, children[i]);
+            return;
+        }
+    };
+
+    list.appendChild(newEl);
+}
+
+function setIdTwoAsNotRunning(){
+    document.getElementById('two')?.classList.remove('running');
+}
+
+function removeAllNotRunning(){
+    var list = document.querySelector('ul');
+    var notRunning = list.querySelectorAll('li:not(.running)');
+    notRunning.forEach(function(item){
+        list.removeChild(item);
+    });
+}
 
