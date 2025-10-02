@@ -222,3 +222,28 @@ function removeAllNotRunning(){
     });
 }
 
+function doSomeCrazyStuff(){
+    var list = document.querySelector('ul');
+    var items = list.querySelectorAll('li');
+
+    if (items.length < 2) return;
+
+    var runningCourses = list.querySelectorAll('li.running');
+    if (!runningCourses.length) {
+        items[0].classList.add('running');
+        items[1].classList.add('running');
+    }
+    if (runningCourses.length % 2 === 0){ 
+        return;
+    } 
+
+    var notRunningCourses = list.querySelectorAll('li:not(.running)');
+    if (runningCourses.length % 2 !== 0 && notRunningCourses.length > 0){
+        notRunningCourses[0].classList.add('running');
+    }
+
+    if (runningCourses.length % 2 !== 0 && notRunningCourses.length === 0){
+        list.lastElementChild.classList.add('running');
+    }
+}
+
