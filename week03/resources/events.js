@@ -10,12 +10,16 @@ function doEvents() {
 
 function toggleStatus(event) {
     var element = event.target;
-    console.log(element);
-    if (element.className === 'full') {
-        element.className = 'running';
+    if (element.classList.contains('full')) {
+        element.classList.remove('full');
+        element.classList.add('running');
     }
-    else if (element.className === 'running') {
-        element.className = 'full';
+    else if (element.classList.contains('running')) {
+        element.classList.remove('running');
+        element.classList.add('full');
+    }
+    else {
+        element.classList.add('running');
     }
 }
 
