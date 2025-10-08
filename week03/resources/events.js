@@ -12,7 +12,6 @@ function toggleStatus(event) {
     var element = event.target;
     if (element.classList.contains('full')) {
         element.classList.remove('full');
-        element.classList.add('running');
     }
     else if (element.classList.contains('running')) {
         element.classList.remove('running');
