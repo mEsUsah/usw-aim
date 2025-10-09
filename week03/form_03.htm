@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Form Three</title>
+    <link rel="stylesheet" href="resources/form.css" />
+</head>
+<body>
+    <div id="page">
+        <h1>Course Catalogue</h1>
+        <h2>Publicity</h2>
+        <form action="FormEcho.php" method="post" id="publicity">
+            <label><input type="radio" name="source" value="print" id="print" checked>Newspaper or Magazine</label>
+            <label><input type="radio" name="source" value="internet" id="internet">Internet</label>
+            <label><input type="radio" name="source" value="other" id="other">Other</label>
+            <textarea rows="5" cols="30" name="other-text" id="othertext" placeholder="Please specify"></textarea>
+            <span id="textCount" class="hide"></span>
+
+            <input type="submit" id='submit' value="Save" >
+        </form>
+    </div>
+    <script src="resources/form_03.js"></script>
+</body>
+
+</html>
