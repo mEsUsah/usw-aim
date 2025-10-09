@@ -72,6 +72,11 @@ input[type='submit']:hover {
     position: relative;
 }
 
+label[for='awardType'], label[for='subject'] {
+	display: inline-block; 
+	width: 4em;}
+
+
 .feedback {
     color: hsl(360, 70%, 70%);
     padding: 10px 0 0 22px;

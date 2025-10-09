@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Form Five</title>
+    <link rel="stylesheet" href="resources/form.css" />
+</head>
+
+<body>
+    <div id="page">
+        <h1>Course Catalogue</h1>
+        <h2>Choose Course</h2>
+        <form action="FormEcho.php" method="post">
+
+            <div>
+                <label for="awardType">Award: </label>
+                <select id="awardType" name="awardType">
+                    <option value="choose">Please choose an Award type</option>
+                    <option value="degree">Degree</option>
+                    <option value="hnd">HND</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="subject">Subject: </label>
+                <select id="subject" name="subject">
+                    <option value="choose">Please choose an Award type first</option>
+                </select>
+                <p id="hndMessage" class="hide">An HND is a two-year full-time course.</p>
+                <p id="degreeMessage" class="hide">A Degree is a three-year full-time or five-year part-time course. Please select mode.</p>
+            </div>
+
+            <div id="modeWrapper">
+            </div>
+
+            <input type="submit" value="Select">
+
+        </form>
+    </div>
+    <script src="resources/form_05.js"></script>
+</body>
+
+</html>
