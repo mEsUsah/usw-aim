@@ -1,0 +1,15 @@
+{
+  "name": "canvas",
+  "version": "1.0.0",
+  "description": "learning project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx mix watch",
+    "build": "npx mix --production"
+  },
+  "author": "Stanley Skarshaug",
+  "license": "ISC",
+  "devDependencies": {
+    "laravel-mix": "^6.0.49"
+  }
+}
