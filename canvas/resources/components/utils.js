@@ -30,8 +30,12 @@ export function fix_dpi(canvas) {
     canvas.setAttribute('height', style.height() * dpi);
 }
 
-export function clearCanvas(ctx){
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+export function clearCanvas(ctx, displayData){
+    ctx.clearRect(-displayData.offsetX, 
+                    -displayData.offsetY, 
+                    displayData.width + displayData.offsetX * 2, 
+                    displayData.height + displayData.offsetY * 2
+                );
 }
 
 export function drawGrid(ctx, displayData, minor, major, stroke, fill){
@@ -53,11 +57,15 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.fillStyle = fill;
     ctx.font = "16px Arial";
 
-
-    for(let x = 0; x < ctx.canvas.width; x += minor){
+    
+    let startX = -(displayData.offsetX - displayData.offsetX % minor);
+    let endX = Math.max(displayData.offsetX + displayData.width, displayData.width);
+    let startY = -(displayData.offsetY - displayData.offsetY % minor);
+    let endY = Math.max(displayData.offsetY + displayData.height, displayData.height);
+    for(let x = startX; x < endX; x += minor){
         ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, ctx.canvas.height);
+        ctx.moveTo(x, startY);
+        ctx.lineTo(x, endY);
         if(x % major == 0) {
             ctx.lineWidth = 0.5;
             ctx.fillText(x,x,13);
@@ -67,10 +75,11 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
         ctx.stroke();
     }
 
-    for(let y = 0; y < ctx.canvas.height; y += minor){
+    
+    for(let y = startY; y < endY; y += minor){
         ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(ctx.canvas.width, y);
+        ctx.moveTo(startX, y);
+        ctx.lineTo(endX, y);
         if(y % major == 0){
             ctx.lineWidth = 0.5;
             ctx.fillText(y,0,y+13);

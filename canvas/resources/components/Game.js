@@ -56,7 +56,7 @@ export class Game{
         }
 
         // Render the game state
-        clearCanvas(this.ctx);
+        clearCanvas(this.ctx, this.displayData);
         if(SHOW_GRID) drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) drawFPS(this.ctx, this.frameData.fps.avg);
     
