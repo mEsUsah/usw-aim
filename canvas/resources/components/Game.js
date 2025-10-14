@@ -1,12 +1,11 @@
-import {fix_dpi, drawGrid, drawFPS, clearCanvas, resizeCanvas} from './utils.js';
+import {fix_dpi, drawGrid, drawFPS, clearCanvas, resizeCanvas, updateFrameData, radian} from './utils.js';
 
 const SHOW_FPS = true;
 const SHOW_GRID = true;
 const GAME_WIDTH = 800;
-const GAME_HEIGHT = 800;
+const GAME_HEIGHT = 600;
 
 export class Game{
-
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
@@ -26,13 +25,29 @@ export class Game{
             width: GAME_WIDTH,
             height: GAME_HEIGHT
         };
-
-
+        
         fix_dpi(this.canvas);
-
+        
         window.addEventListener('resize', () =>{
             resizeCanvas(this.ctx, this.displayData);
         });
+        
+
+        // PoC: Store click locations and draw circles there
+        this.clickLocations = [];
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / this.displayData.scale - this.displayData.offsetX;
+            const y = (e.clientY - rect.top) / this.displayData.scale - this.displayData.offsetY;
+            
+            console.log(`Click at canvas coordinates: (${x.toFixed(2)}, ${y.toFixed(2)})`);
+
+            this.clickLocations.push({
+                x: x,
+                y: y
+            });
+        });
+        // PoC END
 
         this.start();
     };
@@ -44,22 +59,26 @@ export class Game{
 
     gameLoop(timestamp) {
         // Update game state
-        this.frameData.deltaTime = timestamp - this.frameData.lastTime;
-        this.frameData.lastTime = timestamp;
-        this.frameData.fps.accum += Math.floor(1000 / this.frameData.deltaTime);
-        this.frameData.fps.frames++;
-        
-        if(this.frameData.fps.frames >= 60){
-            this.frameData.fps.avg = Math.floor(this.frameData.fps.accum / this.frameData.fps.frames);
-            this.frameData.fps.accum = 0;
-            this.frameData.fps.frames = 0;
-        }
+        updateFrameData(timestamp, this.frameData);
 
         // Render the game state
         clearCanvas(this.ctx, this.displayData);
         if(SHOW_GRID) drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) drawFPS(this.ctx, this.frameData.fps.avg);
-    
+
+
+        // PoC START: Store click locations and draw circles there
+        this.clickLocations.forEach(circle => {
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = "red";
+            this.ctx.fillStyle = "orange";
+            this.ctx.lineWidth  = 10;
+            this.ctx.arc(circle.x, circle.y, 10, 0, 2 * Math.PI, false);
+            this.ctx.stroke();
+            this.ctx.fill();
+        });
+        // PoC END
+
         // Request the next frame
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     };
