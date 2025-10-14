@@ -34,16 +34,25 @@ export function clearCanvas(ctx){
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
-export function drawGrid(ctx, minor, major, stroke, fill){
+export function drawGrid(ctx, displayData, minor, major, stroke, fill){
+    displayData = displayData || {
+        scale: 1,
+        offsetX: 0,
+        offsetY: 0,
+        width: 800,
+        height: 800
+    };
     minor = minor || 10;
     major = major || minor*5;
     stroke = stroke || "#00FF00";
     fill = fill || "#009900";
+
     ctx.save(); // save the current state of the context before doing something to it.
     
     ctx.strokeStyle = stroke;
     ctx.fillStyle = fill;
     ctx.font = "16px Arial";
+
 
     for(let x = 0; x < ctx.canvas.width; x += minor){
         ctx.beginPath();
@@ -71,6 +80,61 @@ export function drawGrid(ctx, minor, major, stroke, fill){
         ctx.stroke();
     }
 
+    // Draw arrow from viewport to left edge
+    ctx.beginPath();
+    ctx.strokeStyle = "red";
+    ctx.fillStyle = "red";
+    ctx.lineWidth = 2;
+    ctx.moveTo(0, displayData.height/2);
+    ctx.lineTo(-displayData.offsetX + 10, displayData.height/2);
+    ctx.lineTo(-displayData.offsetX + 10, (displayData.height/2) - 5);
+    ctx.lineTo(-displayData.offsetX, (displayData.height/2));
+    ctx.lineTo(-displayData.offsetX + 10, (displayData.height/2) + 5);
+    ctx.lineTo(-displayData.offsetX + 10, displayData.height/2);
+    ctx.stroke();
+    ctx.fill();
+
+    // Draw arrow from viewport to right edge
+    ctx.beginPath();
+    ctx.moveTo(displayData.width, displayData.height/2);
+    ctx.lineTo(displayData.width - 10 + displayData.offsetX, displayData.height/2);
+    ctx.lineTo(displayData.width - 10 + displayData.offsetX, (displayData.height/2) - 5);
+    ctx.lineTo(displayData.width + displayData.offsetX, (displayData.height/2));
+    ctx.lineTo(displayData.width - 10 + displayData.offsetX, (displayData.height/2) + 5);
+    ctx.lineTo(displayData.width - 10 + displayData.offsetX, displayData.height/2);
+    ctx.stroke();
+    ctx.fill();
+
+    // Draw arrow from viewport to top edge
+    ctx.beginPath();
+    ctx.moveTo(displayData.width/2, 0);
+    ctx.lineTo(displayData.width/2, -displayData.offsetY + 10);
+    ctx.lineTo((displayData.width/2) - 5, -displayData.offsetY + 10);
+    ctx.lineTo((displayData.width/2), -displayData.offsetY);
+    ctx.lineTo((displayData.width/2) + 5, -displayData.offsetY + 10);
+    ctx.lineTo(displayData.width/2, -displayData.offsetY + 10);
+    ctx.stroke();
+    ctx.fill();
+
+    // Draw arrow from viewport to bottom edge
+    ctx.beginPath();
+    ctx.moveTo(displayData.width/2, displayData.height);
+    ctx.lineTo(displayData.width/2, displayData.height + displayData.offsetY - 10);
+    ctx.lineTo((displayData.width/2) - 5, displayData.height + displayData.offsetY - 10);
+    ctx.lineTo((displayData.width/2), displayData.height + displayData.offsetY);
+    ctx.lineTo((displayData.width/2) + 5, displayData.height + displayData.offsetY - 10);
+    ctx.lineTo(displayData.width/2, displayData.height + displayData.offsetY - 10);
+    ctx.stroke();
+    ctx.fill();
+
+    // Draw a red border around the game area
+    ctx.save();
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 4;
+    ctx.fillStyle = "red";
+    ctx.strokeRect(20,20, displayData.width - 40,displayData.height - 40);
+    
+
     ctx.restore(); //Load the saved state of the canvas from before we did something to it.
 }
 
@@ -79,7 +143,7 @@ export function drawFPS(ctx, fps){
         
     ctx.fillStyle = "white";
     ctx.font = "24px Arial";
-    ctx.fillText("FPS: " + fps, 30, 54);
+    ctx.fillText("FPS: " + fps, 30, 48);
     
     ctx.restore();
 }

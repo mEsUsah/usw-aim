@@ -57,18 +57,8 @@ export class Game{
 
         // Render the game state
         clearCanvas(this.ctx);
-        if(SHOW_GRID) drawGrid(this.ctx);
+        if(SHOW_GRID) drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) drawFPS(this.ctx, this.frameData.fps.avg);
-
-
-        // Debug - Draw a red border around the game area
-        this.ctx.save();
-        this.ctx.strokeStyle = "red";
-        this.ctx.lineWidth = 4;
-        this.ctx.fillStyle = "red";
-        this.ctx.strokeRect(20,20, this.displayData.width - 40,this.displayData.height - 40);
-        this.ctx.restore();
-
     
         // Request the next frame
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
