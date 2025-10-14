@@ -38,6 +38,19 @@ export function clearCanvas(ctx, displayData){
                 );
 }
 
+export function updateFrameData(timestamp, frameData){
+    frameData.deltaTime = timestamp - frameData.lastTime;
+    frameData.lastTime = timestamp;
+    frameData.fps.accum += Math.floor(1000 / frameData.deltaTime);
+    frameData.fps.frames++;
+
+    if(frameData.fps.frames >= 60){
+        frameData.fps.avg = Math.floor(frameData.fps.accum / frameData.fps.frames);
+        frameData.fps.accum = 0;
+        frameData.fps.frames = 0;
+    }
+}
+
 export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     displayData = displayData || {
         scale: 1,
