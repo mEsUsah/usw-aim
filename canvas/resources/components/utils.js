@@ -1,9 +1,17 @@
 export const radian = Math.PI / 180;
 
-export function resizeCanvas(canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
+export function resizeCanvas(ctx, displayData) {
+    displayData.scale = Math.min(window.innerWidth / displayData.width, window.innerHeight / displayData.height);
+    ctx.canvas.width = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+
+    ctx.scale(displayData.scale, displayData.scale);
+
+    displayData.offsetX = Math.floor((window.innerWidth / displayData.scale - displayData.width) / 2);
+    displayData.offsetY = Math.floor((window.innerHeight / displayData.scale - displayData.height) / 2);
+
+    ctx.translate(displayData.offsetX, displayData.offsetY);
+}
 
 export function fix_dpi(canvas) {
     let dpi = window.devicePixelRatio;
@@ -51,7 +59,6 @@ export function drawGrid(ctx, minor, major, stroke, fill){
     }
 
     for(let y = 0; y < ctx.canvas.height; y += minor){
-        
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(ctx.canvas.width, y);
@@ -72,7 +79,7 @@ export function drawFPS(ctx, fps){
         
     ctx.fillStyle = "white";
     ctx.font = "24px Arial";
-    ctx.fillText("FPS: " + fps, ctx.canvas.width - 100, 40);
+    ctx.fillText("FPS: " + fps, 30, 54);
     
     ctx.restore();
 }

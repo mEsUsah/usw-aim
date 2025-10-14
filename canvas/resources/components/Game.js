@@ -1,6 +1,12 @@
-import {fix_dpi, drawGrid, drawFPS, clearCanvas} from './utils.js';
+import {fix_dpi, drawGrid, drawFPS, clearCanvas, resizeCanvas} from './utils.js';
+
+const SHOW_FPS = true;
+const SHOW_GRID = true;
+const GAME_WIDTH = 800;
+const GAME_HEIGHT = 800;
 
 export class Game{
+
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
@@ -13,16 +19,28 @@ export class Game{
                 avg: 0
             }
         };
-        this.showFPS = true;
-        this.showGrid = true;
+        this.displayData = {
+            scale: 1,
+            offsetX: 0,
+            offsetY: 0,
+            width: GAME_WIDTH,
+            height: GAME_HEIGHT
+        };
+
 
         fix_dpi(this.canvas);
+
+        window.addEventListener('resize', () =>{
+            resizeCanvas(this.ctx, this.displayData);
+        });
+
         this.start();
     };
 
     start(){
+        resizeCanvas(this.ctx, this.displayData);
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
-    }
+    }; 
 
     gameLoop(timestamp) {
         // Update game state
@@ -37,13 +55,20 @@ export class Game{
             this.frameData.fps.frames = 0;
         }
 
-        
-        
-
         // Render the game state
         clearCanvas(this.ctx);
-        if(this.showGrid) drawGrid(this.ctx);
-        if(this.showFPS) drawFPS(this.ctx, this.frameData.fps.avg);
+        if(SHOW_GRID) drawGrid(this.ctx);
+        if(SHOW_FPS) drawFPS(this.ctx, this.frameData.fps.avg);
+
+
+        // Debug - Draw a red border around the game area
+        this.ctx.save();
+        this.ctx.strokeStyle = "red";
+        this.ctx.lineWidth = 4;
+        this.ctx.fillStyle = "red";
+        this.ctx.strokeRect(20,20, this.displayData.width - 40,this.displayData.height - 40);
+        this.ctx.restore();
+
     
         // Request the next frame
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
