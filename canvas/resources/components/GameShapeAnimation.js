@@ -1,51 +1,51 @@
 export default class GameShapeAnimation {
     static INFINITE = -1;
-    constructor(duration, loop, startDelay, deleteTime) {
-        this.duration = duration;
+    static FORWARD = 1;
+    static BACKWARD = 2;
+
+    constructor(config) {
+        this.config = {};
+        this.config.duration = config.duration || 1000;
+        this.config.loop = config.loop || 0; // -1 inifinitely, 0 no loop, n times
+        this.config.direction = config.direction || GameShapeAnimation.FORWARD;
+        this.config.startDelay = config.startDelay || 0;
+        
         this.progress = 0;
         this.lifetime = 0;
-        this.loop = loop; // -1 inifinitely, 0 no loop, n times
         this.loopCount = 1;
-        this.startDelay = startDelay || 0;
-        this.deleteTime = deleteTime || 0;
     }
 
     updateProgress(deltaTime) {
         this.progress += deltaTime;
         this.lifetime += deltaTime;
 
+        // console.log("Animation progress", this.progress, "/", this.duration, "lifetime", this.lifetime);
+
         // Not started yet
-        if(this.lifetime < this.startDelay) {
-            this.progress = 0;
+        if(this.lifetime < this.config.startDelay) {
+            if(this.config.direction === GameShapeAnimation.FORWARD) this.progress = 0;
+            if(this.config.direction === GameShapeAnimation.BACKWARD) this.progress = this.config.duration;
             return;
         }
 
         // Looping logic
-        if(this.progress > this.duration 
-            && (this.loop === GameShapeAnimation.INFINITE || this.loopCount < this.loop)
+        if(this.progress > this.config.duration 
+            && (this.config.loop === GameShapeAnimation.INFINITE || this.loopCount < this.config.loop)
         ) {
             this.loopCount++;
-            this.progress = this.progress % this.duration;
+            this.progress = this.progress % this.config.duration;
         }
 
         // Stop at duration if not looping
-        if( this.progress > this.duration 
-            && this.loop === 0
+        if( this.progress > this.config.duration
+            && this.config.loop === 0
         ) {
-            this.progress = this.duration;
+            this.progress = this.config.duration;
         }        
     }
 
     getProgress() {
-        return this.progress / this.duration;
-    }
-
-    getIsPastDeleteTime() {
-        if(this.deleteTime > 0 
-            && this.lifetime > (this.startDelay + this.deleteTime)
-        ) {
-            return true;
-        }
-        return false;
+        
+        return this.progress / this.config.duration;
     }
 }

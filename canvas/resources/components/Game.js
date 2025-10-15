@@ -1,6 +1,8 @@
 import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
 import * as graphicDebug from './graphicDebug.js' ;
 import GameObject from './GameObject.js';
+import GameShape from './GameShape.js';
+import GameShapeAnimation from './GameShapeAnimation.js';
 
 const SHOW_FPS = true;
 const SHOW_GRID = true;
@@ -48,7 +50,47 @@ export class Game{
             console.log(e.clientX, e.clientY, "->", x, y);
 
             const gameObject = new GameObject(x, y);
-            gameObject.addAnimation(500, 0); // 1 second animation, no loop, no delay
+            
+            let shape1 = new GameShape('circle', {x:x, y:y, radius:10});
+            // shape1.addAnimation(new GameShapeAnimation({duration: 1000, direction: "forward", startDelay: 0, endDelay: 0}));
+            gameObject.addShape(shape1);
+
+            let shape2 = new GameShape('circle', {x:x+20, y:y, radius:10});
+            shape2.addAnimation(new GameShapeAnimation({
+                duration: 1000, 
+                direction: GameShapeAnimation.FORWARD,
+                startDelay: 0, 
+                endDelay: 200
+            }));
+            gameObject.addShape(shape2);
+
+            let shape3 = new GameShape('circle', {x:x-20, y:y, radius:10});
+            shape3.addAnimation(new GameShapeAnimation({
+                duration: 1000, 
+                direction: GameShapeAnimation.BACKWARD, 
+                startDelay: 0, 
+                endDelay: 400
+            }));
+            gameObject.addShape(shape3);
+
+            let shape4 = new GameShape('circle', {x:x, y:y+20, radius:10});
+            shape4.addAnimation(new GameShapeAnimation({
+                duration: 1000, 
+                direction: GameShapeAnimation.FORWARD, 
+                startDelay: 0, 
+                endDelay: 600
+            }));
+            gameObject.addShape(shape4);
+
+            let shape5 = new GameShape('circle', {x:x, y:y-20, radius:10});
+            shape5.addAnimation(new GameShapeAnimation({
+                duration: 1000, 
+                direction: GameShapeAnimation.BACKWARD, 
+                startDelay: 0, 
+                endDelay: 800
+            }));
+            gameObject.addShape(shape5);
+
             this.gameObjects.push(gameObject);
         });
         // PoC END
@@ -67,10 +109,7 @@ export class Game{
 
         // PoC: Update animations
         this.gameObjects.forEach(gameObject => {
-            gameObject.animations.forEach(animation => {
-                animation.updateProgress(this.frameData.deltaTime);
-            });
-            gameObject.deleteCompletedAnimations();
+            gameObject.update(this.frameData.deltaTime);
         });
         // PoC END
 
@@ -84,16 +123,7 @@ export class Game{
 
         // PoC START: Store click locations and draw circles there
         this.gameObjects.forEach(gameObject => {
-            gameObject.animations.forEach((animation, i) => {
-                const progress = animation.getProgress();
-                const endAngle = progress * 2 * Math.PI;
-                this.ctx.beginPath();
-                this.ctx.strokeStyle = "red";
-                this.ctx.fillStyle = "orange";
-                this.ctx.lineWidth  = 2;
-                this.ctx.arc(gameObject.x + i * 20, gameObject.y, 10, 0, endAngle, false);
-                this.ctx.stroke();
-            });
+            gameObject.draw(this.ctx);
         });
         // PoC END
 
