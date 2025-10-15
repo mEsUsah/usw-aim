@@ -6,15 +6,6 @@ export default class GameObject {
         this.shapes = [];
     }
 
-    // addAnimation(length, loop, startDelay, deleteTime) {
-    //     const animation = new GameShapeAnimation(length, loop, startDelay, deleteTime);
-    //     this.animations.push(animation);
-    // }
-
-    // deleteCompletedAnimations() {
-    //     this.animations = this.animations.filter(animation => !animation.getIsPastDeleteTime());
-    // }
-
     addShape(shape) {
         this.shapes.push(shape);
     }
@@ -22,6 +13,14 @@ export default class GameObject {
     update(deltaTime) {
         this.shapes.forEach(shape => {
             shape.update(deltaTime);
+        });
+
+        // Remove shapes with longer lifetime than ttl
+        this.shapes = this.shapes.filter(shape => {
+            if(shape.config.ttl) {
+                return shape.lifetime < shape.config.ttl;
+            }
+            return true;
         });
     }
 
