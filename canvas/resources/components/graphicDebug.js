@@ -107,7 +107,6 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.fill();
 
     // Draw a red border around the game area
-    ctx.save();
     ctx.strokeStyle = "red";
     ctx.lineWidth = 4;
     ctx.fillStyle = "red";
