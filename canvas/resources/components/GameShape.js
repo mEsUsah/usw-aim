@@ -39,6 +39,15 @@ export default class GameShape {
             }
             ctx.stroke();
         }
+
+
+        if(this.type == 'line') {
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo((this.config.x2 - this.config.x) * progress, (this.config.y2 - this.config.y) * progress);
+            ctx.stroke();
+        }
+
         ctx.restore();
     }
 }
