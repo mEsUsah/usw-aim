@@ -21,7 +21,7 @@ export default class GameObject {
 
     update(deltaTime) {
         this.shapes.forEach(shape => {
-            shape.updateAnimation(deltaTime);
+            shape.update(deltaTime);
         });
     }
 

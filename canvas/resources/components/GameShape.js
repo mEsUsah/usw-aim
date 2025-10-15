@@ -5,13 +5,15 @@ export default class GameShape {
         this.type = type;
         this.config = config;
         this.animation = null;
+        this.lifetime = 0;
     }
 
     addAnimation(animation) {
         this.animation = animation;
     }
 
-    updateAnimation(deltaTime) {
+    update(deltaTime) {
+        this.lifetime += deltaTime;
         if(this.animation) {
             this.animation.updateProgress(deltaTime);
         }
