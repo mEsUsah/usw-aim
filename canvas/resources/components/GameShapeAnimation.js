@@ -19,13 +19,9 @@ export default class GameShapeAnimation {
         this.progress += deltaTime;
         this.lifetime += deltaTime;
 
-        // console.log("Animation progress", this.progress, "/", this.duration, "lifetime", this.lifetime);
-
         // Not started yet
         if(this.lifetime < this.config.startDelay) {
-            if(this.config.direction === GameShapeAnimation.FORWARD) this.progress = 0;
-            if(this.config.direction === GameShapeAnimation.BACKWARD) this.progress = this.config.duration;
-            return;
+            this.progress = 0;
         }
 
         // Looping logic
