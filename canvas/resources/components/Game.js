@@ -47,49 +47,53 @@ export class Game{
             const rect = canvas.getBoundingClientRect();
             const x = (e.clientX - rect.left) / this.displayData.scale - this.displayData.offsetX;
             const y = (e.clientY - rect.top) / this.displayData.scale - this.displayData.offsetY;
-            console.log(e.clientX, e.clientY, "->", x, y);
 
             const gameObject = new GameObject(x, y);
-            
-            let shape1 = new GameShape('circle', {x:x, y:y, radius:10});
-            // shape1.addAnimation(new GameShapeAnimation({duration: 1000, direction: "forward", startDelay: 0, endDelay: 0}));
-            gameObject.addShape(shape1);
 
-            let shape2 = new GameShape('circle', {x:x+20, y:y, radius:10});
-            shape2.addAnimation(new GameShapeAnimation({
-                duration: 1000, 
+            const shape1 = new GameShape('line', {
+                x: x + 100, 
+                y: y - 100, 
+                x2: x, 
+                y2: y, 
+            });
+            const animation1 = new GameShapeAnimation({
+                duration: 100, // 1 second
+                startDelay: 0,
                 direction: GameShapeAnimation.FORWARD,
-                startDelay: 0, 
-                endDelay: 200
-            }));
+                loop: false
+            });
+            shape1.addAnimation(animation1);
+            gameObject.addShape(shape1);
+            
+            const shape2 = new GameShape('line', {
+                x: x, 
+                y: y - 10, 
+                x2: x, 
+                y2: y, 
+            });
+            const animation2 = new GameShapeAnimation({
+                duration: 1, // 1 second
+                startDelay: 100,
+                direction: GameShapeAnimation.FORWARD,
+                loop: false
+            });
+            shape2.addAnimation(animation2);
             gameObject.addShape(shape2);
 
-            let shape3 = new GameShape('circle', {x:x-20, y:y, radius:10});
-            shape3.addAnimation(new GameShapeAnimation({
-                duration: 1000, 
-                direction: GameShapeAnimation.BACKWARD, 
-                startDelay: 0, 
-                endDelay: 400
-            }));
+            const shape3 = new GameShape('line', {
+                x: x +10, 
+                y: y , 
+                x2: x, 
+                y2: y, 
+            });
+            const animation3 = new GameShapeAnimation({
+                duration: 1, // 1 second
+                startDelay: 100,
+                direction: GameShapeAnimation.FORWARD,
+                loop: false
+            });
+            shape3.addAnimation(animation3);
             gameObject.addShape(shape3);
-
-            let shape4 = new GameShape('circle', {x:x, y:y+20, radius:10});
-            shape4.addAnimation(new GameShapeAnimation({
-                duration: 1000, 
-                direction: GameShapeAnimation.FORWARD, 
-                startDelay: 0, 
-                endDelay: 600
-            }));
-            gameObject.addShape(shape4);
-
-            let shape5 = new GameShape('circle', {x:x, y:y-20, radius:10});
-            shape5.addAnimation(new GameShapeAnimation({
-                duration: 1000, 
-                direction: GameShapeAnimation.BACKWARD, 
-                startDelay: 0, 
-                endDelay: 800
-            }));
-            gameObject.addShape(shape5);
 
             this.gameObjects.push(gameObject);
         });
