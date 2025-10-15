@@ -1,6 +1,6 @@
 import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
 import * as graphicDebug from './graphicDebug.js' ;
-import { GameObject } from './GameObject.js';
+import GameObject from './GameObject.js';
 
 const SHOW_FPS = true;
 const SHOW_GRID = true;
@@ -48,9 +48,7 @@ export class Game{
             console.log(e.clientX, e.clientY, "->", x, y);
 
             const gameObject = new GameObject(x, y);
-            gameObject.addAnimation(1000, 0, 0); // 1 second animation, no loop, no delay
-            gameObject.addAnimation(1000, 0, 500); // 1 second animation, no loop, 500ms delay
-            gameObject.addAnimation(1000, 0, 500); // 1 second animation, no loop, 500ms delay
+            gameObject.addAnimation(500, 0); // 1 second animation, no loop, no delay
             this.gameObjects.push(gameObject);
         });
         // PoC END
@@ -72,6 +70,7 @@ export class Game{
             gameObject.animations.forEach(animation => {
                 animation.updateProgress(this.frameData.deltaTime);
             });
+            gameObject.deleteCompletedAnimations();
         });
         // PoC END
 
