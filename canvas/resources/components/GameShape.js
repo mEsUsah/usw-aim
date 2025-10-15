@@ -1,9 +1,9 @@
 import GameShapeAnimation from './GameShapeAnimation.js';
 
 export default class GameShape {
-    constructor(type, params) {
+    constructor(type, config) {
         this.type = type;
-        this.params = params;
+        this.config = config;
         this.animation = null;
     }
 
@@ -19,7 +19,7 @@ export default class GameShape {
 
     draw(ctx) {
         ctx.save();
-        ctx.translate(this.params.x, this.params.y);
+        ctx.translate(this.config.x, this.config.y);
         let progress = 1;
         let direction = GameShapeAnimation.FORWARD;
         if (this.animation) {
@@ -29,12 +29,11 @@ export default class GameShape {
 
         if(this.type === 'circle') {
             ctx.beginPath();
-            //  arc(x, y, radius, startAngle, endAngle, counterclockwise)
             if(direction === GameShapeAnimation.FORWARD) {
-                ctx.arc(0, 0, this.params.radius, 0, (2 * Math.PI * progress), false);
+                ctx.arc(0, 0, this.config.radius, 0, (2 * Math.PI * progress), false);
             } else {
                 if(progress === 1) progress = 0; // To avoid full circle when finished
-                ctx.arc(0, 0, this.params.radius, (2 * Math.PI * progress), 0, false);
+                ctx.arc(0, 0, this.config.radius, (2 * Math.PI * progress), 0, false);
             }
             ctx.stroke();
         }
