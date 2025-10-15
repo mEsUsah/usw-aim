@@ -20,6 +20,10 @@ export default class GameShape {
     }
 
     draw(ctx) {
+        
+        ctx.strokeStyle = this.config.color || "red";
+        ctx.lineWidth = this.config.lineWidth || 2;
+        
         ctx.save();
         ctx.translate(this.config.x, this.config.y);
         let progress = 1;
