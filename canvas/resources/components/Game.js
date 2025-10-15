@@ -19,11 +19,15 @@ export class Game{
             }
         };
         this.displayData = {
+            gameWidth: GAME_WIDTH,
+            gameHeight: GAME_HEIGHT,
             scale: 1,
             offsetX: 0,
             offsetY: 0,
-            width: GAME_WIDTH,
-            height: GAME_HEIGHT
+            screenStartX: 0,
+            screenStartY: 0,
+            screenEndX: 0,
+            screenEndY: 0
         };
         
         fix_dpi(this.canvas);

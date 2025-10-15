@@ -1,16 +1,23 @@
 export const radian = Math.PI / 180;
 
 export function resizeCanvas(ctx, displayData) {
-    displayData.scale = Math.min(window.innerWidth / displayData.width, window.innerHeight / displayData.height);
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
 
+    // Set scale to fit the game area within the canvas while maintaining aspect ratio
+    displayData.scale = Math.min(ctx.canvas.width / displayData.gameWidth, ctx.canvas.height / displayData.gameHeight);
     ctx.scale(displayData.scale, displayData.scale);
 
-    displayData.offsetX = Math.floor((window.innerWidth / displayData.scale - displayData.width) / 2);
-    displayData.offsetY = Math.floor((window.innerHeight / displayData.scale - displayData.height) / 2);
-
+    // Center the game area within the canvas
+    displayData.offsetX = Math.floor((ctx.canvas.width / displayData.scale - displayData.gameWidth) / 2);
+    displayData.offsetY = Math.floor((ctx.canvas.height / displayData.scale - displayData.gameHeight) / 2);
     ctx.translate(displayData.offsetX, displayData.offsetY);
+
+    // Update screen bounds coordinates
+    displayData.screenStartX = -displayData.offsetX;
+    displayData.screenStartY = -displayData.offsetY;
+    displayData.screenEndX = displayData.offsetX * 2 + displayData.gameWidth;
+    displayData.screenEndY = displayData.offsetY * 2 + displayData.gameHeight;
 }
 
 export function fix_dpi(canvas) {
@@ -31,11 +38,12 @@ export function fix_dpi(canvas) {
 }
 
 export function clearCanvas(ctx, displayData){
-    ctx.clearRect(-displayData.offsetX, 
-                    -displayData.offsetY, 
-                    displayData.width + displayData.offsetX * 2, 
-                    displayData.height + displayData.offsetY * 2
-                );
+    ctx.clearRect(
+        displayData.screenStartX, 
+        displayData.screenStartY, 
+        displayData.gameWidth + displayData.offsetX * 2, // width of clerar area
+        displayData.gameHeight + displayData.offsetY * 2 // height of clear area
+    );
 }
 
 export function updateFrameData(timestamp, frameData){
@@ -72,9 +80,9 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
 
     
     let startX = -(displayData.offsetX - displayData.offsetX % minor);
-    let endX = Math.max(displayData.offsetX + displayData.width, displayData.width);
+    let endX = Math.max(displayData.offsetX + displayData.gameWidth, displayData.gameWidth);
     let startY = -(displayData.offsetY - displayData.offsetY % minor);
-    let endY = Math.max(displayData.offsetY + displayData.height, displayData.height);
+    let endY = Math.max(displayData.offsetY + displayData.gameHeight, displayData.gameHeight);
     for(let x = startX; x < endX; x += minor){
         ctx.beginPath();
         ctx.moveTo(x, startY);
@@ -107,45 +115,45 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.strokeStyle = "red";
     ctx.fillStyle = "red";
     ctx.lineWidth = 2;
-    ctx.moveTo(0, displayData.height/2);
-    ctx.lineTo(-displayData.offsetX + 10, displayData.height/2);
-    ctx.lineTo(-displayData.offsetX + 10, (displayData.height/2) - 5);
-    ctx.lineTo(-displayData.offsetX, (displayData.height/2));
-    ctx.lineTo(-displayData.offsetX + 10, (displayData.height/2) + 5);
-    ctx.lineTo(-displayData.offsetX + 10, displayData.height/2);
+    ctx.moveTo(0, displayData.gameHeight/2);
+    ctx.lineTo(-displayData.offsetX + 10, displayData.gameHeight/2);
+    ctx.lineTo(-displayData.offsetX + 10, (displayData.gameHeight/2) - 5);
+    ctx.lineTo(-displayData.offsetX, (displayData.gameHeight/2));
+    ctx.lineTo(-displayData.offsetX + 10, (displayData.gameHeight/2) + 5);
+    ctx.lineTo(-displayData.offsetX + 10, displayData.gameHeight/2);
     ctx.stroke();
     ctx.fill();
 
     // Draw arrow from viewport to right edge
     ctx.beginPath();
-    ctx.moveTo(displayData.width, displayData.height/2);
-    ctx.lineTo(displayData.width - 10 + displayData.offsetX, displayData.height/2);
-    ctx.lineTo(displayData.width - 10 + displayData.offsetX, (displayData.height/2) - 5);
-    ctx.lineTo(displayData.width + displayData.offsetX, (displayData.height/2));
-    ctx.lineTo(displayData.width - 10 + displayData.offsetX, (displayData.height/2) + 5);
-    ctx.lineTo(displayData.width - 10 + displayData.offsetX, displayData.height/2);
+    ctx.moveTo(displayData.gameWidth, displayData.gameHeight/2);
+    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, displayData.gameHeight/2);
+    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, (displayData.gameHeight/2) - 5);
+    ctx.lineTo(displayData.gameWidth + displayData.offsetX, (displayData.gameHeight/2));
+    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, (displayData.gameHeight/2) + 5);
+    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, displayData.gameHeight/2);
     ctx.stroke();
     ctx.fill();
 
     // Draw arrow from viewport to top edge
     ctx.beginPath();
-    ctx.moveTo(displayData.width/2, 0);
-    ctx.lineTo(displayData.width/2, -displayData.offsetY + 10);
-    ctx.lineTo((displayData.width/2) - 5, -displayData.offsetY + 10);
-    ctx.lineTo((displayData.width/2), -displayData.offsetY);
-    ctx.lineTo((displayData.width/2) + 5, -displayData.offsetY + 10);
-    ctx.lineTo(displayData.width/2, -displayData.offsetY + 10);
+    ctx.moveTo(displayData.gameWidth/2, 0);
+    ctx.lineTo(displayData.gameWidth/2, -displayData.offsetY + 10);
+    ctx.lineTo((displayData.gameWidth/2) - 5, -displayData.offsetY + 10);
+    ctx.lineTo((displayData.gameWidth/2), -displayData.offsetY);
+    ctx.lineTo((displayData.gameWidth/2) + 5, -displayData.offsetY + 10);
+    ctx.lineTo(displayData.gameWidth/2, -displayData.offsetY + 10);
     ctx.stroke();
     ctx.fill();
 
     // Draw arrow from viewport to bottom edge
     ctx.beginPath();
-    ctx.moveTo(displayData.width/2, displayData.height);
-    ctx.lineTo(displayData.width/2, displayData.height + displayData.offsetY - 10);
-    ctx.lineTo((displayData.width/2) - 5, displayData.height + displayData.offsetY - 10);
-    ctx.lineTo((displayData.width/2), displayData.height + displayData.offsetY);
-    ctx.lineTo((displayData.width/2) + 5, displayData.height + displayData.offsetY - 10);
-    ctx.lineTo(displayData.width/2, displayData.height + displayData.offsetY - 10);
+    ctx.moveTo(displayData.gameWidth/2, displayData.gameHeight);
+    ctx.lineTo(displayData.gameWidth/2, displayData.gameHeight + displayData.offsetY - 10);
+    ctx.lineTo((displayData.gameWidth/2) - 5, displayData.gameHeight + displayData.offsetY - 10);
+    ctx.lineTo((displayData.gameWidth/2), displayData.gameHeight + displayData.offsetY);
+    ctx.lineTo((displayData.gameWidth/2) + 5, displayData.gameHeight + displayData.offsetY - 10);
+    ctx.lineTo(displayData.gameWidth/2, displayData.gameHeight + displayData.offsetY - 10);
     ctx.stroke();
     ctx.fill();
 
@@ -154,7 +162,7 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.strokeStyle = "red";
     ctx.lineWidth = 4;
     ctx.fillStyle = "red";
-    ctx.strokeRect(20,20, displayData.width - 40,displayData.height - 40);
+    ctx.strokeRect(20,20, displayData.gameWidth - 40,displayData.gameHeight - 40);
     
 
     ctx.restore(); //Load the saved state of the canvas from before we did something to it.

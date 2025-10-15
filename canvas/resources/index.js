@@ -1,4 +1,3 @@
-import {drawGrid, resizeCanvas} from './components/utils.js';
 import {Game} from './components/Game.js';
 
 window.onload = function() {
