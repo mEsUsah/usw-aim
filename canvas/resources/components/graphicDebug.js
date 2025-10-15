@@ -21,13 +21,13 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     stroke = stroke || "#00FF00";
     fill = fill || "#009900";
 
-    ctx.save(); // save the current state of the context before doing something to it.
+    ctx.save();
     
     ctx.strokeStyle = stroke;
     ctx.fillStyle = fill;
     ctx.font = "16px Arial";
 
-    
+    // Draw vertical lines
     let startX = -(displayData.offsetX - displayData.offsetX % minor);
     let endX = Math.max(displayData.offsetX + displayData.gameWidth, displayData.gameWidth);
     let startY = -(displayData.offsetY - displayData.offsetY % minor);
@@ -45,7 +45,7 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
         ctx.stroke();
     }
 
-    
+    // Draw horizontal lines
     for(let y = startY; y < endY; y += minor){
         ctx.beginPath();
         ctx.moveTo(startX, y);
@@ -113,8 +113,7 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.fillStyle = "red";
     ctx.strokeRect(20,20, displayData.gameWidth - 40,displayData.gameHeight - 40);
     
-
-    ctx.restore(); //Load the saved state of the canvas from before we did something to it.
+    ctx.restore();
 }
 
 
