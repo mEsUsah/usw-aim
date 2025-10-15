@@ -1,4 +1,5 @@
-import {fix_dpi, drawGrid, drawFPS, clearCanvas, resizeCanvas, updateFrameData, radian} from './utils.js';
+import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
+import { drawGrid, drawFPS } from './graphicDebug.js';
 
 const SHOW_FPS = true;
 const SHOW_GRID = true;
