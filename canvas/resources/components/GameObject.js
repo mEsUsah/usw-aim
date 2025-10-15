@@ -4,8 +4,8 @@ export class GameObject {
         this.y = y;
         this.animations = [];
     }
-    addAnimation(length, loop) {
-        const animation = new GameObjectAnimation(length, loop);
+    addAnimation(length, loop, startDelay) {
+        const animation = new GameObjectAnimation(length, loop, startDelay);
         this.animations.push(animation);
     }
 
@@ -13,27 +13,40 @@ export class GameObject {
 
 class GameObjectAnimation {
     static INFINITE = -1;
-    constructor(duration, loop) {
+    constructor(duration, loop, startDelay) {
         this.duration = duration;
         this.progress = 0;
+        this.lifetime = 0;
         this.loop = loop; // -1 inifinitely, 0 no loop, n times
         this.loopCount = 1;
+        this.startDelay = startDelay || 0;
+
     }
 
     updateProgress(deltaTime) {
         this.progress += deltaTime;
-        
-        // Looping logic
-        if(this.progress > this.duration && (this.loop === GameObjectAnimation.INFINITE || this.loopCount < this.loop)) {
-            this.loopCount++;
-            this.progress = this.progress % this.duration;
+        this.lifetime += deltaTime;
+
+        // Not started yet
+        if(this.lifetime < this.startDelay) {
+            this.progress = 0;
             return;
         }
 
-        // Stop at duration if not looping
-        if(this.progress > this.duration) {
-            this.progress = this.duration;
+        // Looping logic
+        if(this.progress > this.duration 
+            && (this.loop === GameObjectAnimation.INFINITE || this.loopCount < this.loop)
+        ) {
+            this.loopCount++;
+            this.progress = this.progress % this.duration;
         }
+
+        // Stop at duration if not looping
+        if( this.progress > this.duration 
+            && this.loop === 0
+        ) {
+            this.progress = this.duration;
+        }        
     }
 
     getProgress() {

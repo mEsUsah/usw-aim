@@ -48,7 +48,9 @@ export class Game{
             console.log(e.clientX, e.clientY, "->", x, y);
 
             const gameObject = new GameObject(x, y);
-            gameObject.addAnimation(1000, -1); // 1 second animation, no loop
+            gameObject.addAnimation(1000, 0, 0); // 1 second animation, no loop, no delay
+            gameObject.addAnimation(1000, 0, 500); // 1 second animation, no loop, 500ms delay
+            gameObject.addAnimation(1000, 0, 500); // 1 second animation, no loop, 500ms delay
             this.gameObjects.push(gameObject);
         });
         // PoC END
@@ -83,14 +85,14 @@ export class Game{
 
         // PoC START: Store click locations and draw circles there
         this.gameObjects.forEach(gameObject => {
-            gameObject.animations.forEach(animation => {
+            gameObject.animations.forEach((animation, i) => {
                 const progress = animation.getProgress();
                 const endAngle = progress * 2 * Math.PI;
                 this.ctx.beginPath();
                 this.ctx.strokeStyle = "red";
                 this.ctx.fillStyle = "orange";
                 this.ctx.lineWidth  = 2;
-                this.ctx.arc(gameObject.x, gameObject.y, 10, 0, endAngle, false);
+                this.ctx.arc(gameObject.x + i * 20, gameObject.y, 10, 0, endAngle, false);
                 this.ctx.stroke();
             });
         });
