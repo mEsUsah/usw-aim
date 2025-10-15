@@ -27,7 +27,6 @@ export default class GameObject {
 
     draw(ctx) {
         if(!this.shapes.length) return;
-        // console.log("GameObject Draw shapes", this.shapes.length);
         ctx.save();
         this.shapes.forEach(shape => {
             shape.draw(ctx);

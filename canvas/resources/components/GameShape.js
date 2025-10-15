@@ -33,7 +33,7 @@ export default class GameShape {
             if(direction === GameShapeAnimation.FORWARD) {
                 ctx.arc(0, 0, this.params.radius, 0, (2 * Math.PI * progress), false);
             } else {
-                if(progress === 1) progress = 0; // To avoid full circle bug
+                if(progress === 1) progress = 0; // To avoid full circle when finished
                 ctx.arc(0, 0, this.params.radius, (2 * Math.PI * progress), 0, false);
             }
             ctx.stroke();
