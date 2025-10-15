@@ -1,5 +1,6 @@
 import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
 import * as graphicDebug from './graphicDebug.js' ;
+import { GameObject } from './GameObject.js';
 
 const SHOW_FPS = true;
 const SHOW_GRID = true;
@@ -38,19 +39,17 @@ export class Game{
         });
         
 
-        // PoC: Store click locations and draw circles there
-        this.clickLocations = [];
+        // PoC: Add animated circles where the user clicks
+        this.gameObjects = [];
         canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
             const x = (e.clientX - rect.left) / this.displayData.scale - this.displayData.offsetX;
             const y = (e.clientY - rect.top) / this.displayData.scale - this.displayData.offsetY;
-            
-            console.log(`Click at canvas coordinates: (${x.toFixed(2)}, ${y.toFixed(2)})`);
+            console.log(e.clientX, e.clientY, "->", x, y);
 
-            this.clickLocations.push({
-                x: x,
-                y: y
-            });
+            const gameObject = new GameObject(x, y);
+            gameObject.addAnimation(1000, -1); // 1 second animation, no loop
+            this.gameObjects.push(gameObject);
         });
         // PoC END
 
@@ -66,6 +65,16 @@ export class Game{
         // Update game state
         updateFrameData(timestamp, this.frameData);
 
+        // PoC: Update animations
+        this.gameObjects.forEach(gameObject => {
+            gameObject.animations.forEach(animation => {
+                animation.updateProgress(this.frameData.deltaTime);
+            });
+        });
+        // PoC END
+
+
+
         // Render the game state
         clearCanvas(this.ctx, this.displayData);
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
@@ -73,14 +82,17 @@ export class Game{
 
 
         // PoC START: Store click locations and draw circles there
-        this.clickLocations.forEach(circle => {
-            this.ctx.beginPath();
-            this.ctx.strokeStyle = "red";
-            this.ctx.fillStyle = "orange";
-            this.ctx.lineWidth  = 10;
-            this.ctx.arc(circle.x, circle.y, 10, 0, 2 * Math.PI, false);
-            this.ctx.stroke();
-            this.ctx.fill();
+        this.gameObjects.forEach(gameObject => {
+            gameObject.animations.forEach(animation => {
+                const progress = animation.getProgress();
+                const endAngle = progress * 2 * Math.PI;
+                this.ctx.beginPath();
+                this.ctx.strokeStyle = "red";
+                this.ctx.fillStyle = "orange";
+                this.ctx.lineWidth  = 2;
+                this.ctx.arc(gameObject.x, gameObject.y, 10, 0, endAngle, false);
+                this.ctx.stroke();
+            });
         });
         // PoC END
 
