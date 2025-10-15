@@ -1,5 +1,5 @@
 import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
-import { drawGrid, drawFPS } from './graphicDebug.js';
+import * as graphicDebug from './graphicDebug.js' ;
 
 const SHOW_FPS = true;
 const SHOW_GRID = true;
@@ -68,8 +68,8 @@ export class Game{
 
         // Render the game state
         clearCanvas(this.ctx, this.displayData);
-        if(SHOW_GRID) drawGrid(this.ctx, this.displayData);
-        if(SHOW_FPS) drawFPS(this.ctx, this.frameData.fps.avg);
+        if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
+        if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
 
         // PoC START: Store click locations and draw circles there
