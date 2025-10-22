@@ -111,9 +111,6 @@ export class Game{
     };
 
 
-
-
-
     handleUserInputs() {
         this.userInputs.forEach(input => {
             if(input.type == 'click') { 

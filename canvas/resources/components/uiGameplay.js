@@ -22,26 +22,21 @@ export function create(game){
         height: 40,
         color: "red"
     }));
-    menuButton.addShape(new GameShape('line', {
-        x: -12,
+    menuButton.addShape(new GameShape('rectangle', {
+        x: -10,
         y: -10,
-        x2: 12,
-        y2: -10,
-        color: "red"
+        width: 6,
+        height: 20,
+        color: "red",
+        fillColor: "red"
     }));
-    menuButton.addShape(new GameShape('line', {
-        x: -12,
-        y: 0,
-        x2: 12,
-        y2: 0,
-        color: "red"
-    }));
-    menuButton.addShape(new GameShape('line', {
-        x: -12,
-        y: 10,
-        x2: 12,
-        y2: 10,
-        color: "red"
+    menuButton.addShape(new GameShape('rectangle', {
+        x: 10,
+        y: -10,
+        width: -6,
+        height: 20,
+        color: "red",
+        fillColor: "red"
     }));
     game.gameObjects.gameplay.push(menuButton);
 }
