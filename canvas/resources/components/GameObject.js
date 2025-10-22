@@ -1,7 +1,7 @@
 export default class GameObject {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor(config) {
+        this.x = config.x;
+        this.y = config.y;
         this.animations = [];
         this.shapes = [];
     }
@@ -27,6 +27,7 @@ export default class GameObject {
     draw(ctx) {
         if(!this.shapes.length) return;
         ctx.save();
+        ctx.translate(this.x, this.y);
         this.shapes.forEach(shape => {
             shape.draw(ctx);
         });
