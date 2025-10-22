@@ -39,4 +39,63 @@ export function create(game){
         fillColor: "red"
     }));
     game.gameObjects.gameplay.push(menuButton);
+
+
+
+    // Player turn indicator
+    const turnIndicator = new GameObject({
+        variant: GameObject.VARIANT.TEXT,
+        x: 30,
+        y: 37.5,
+        name: 'turn_indicator',
+    });
+    turnIndicator.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Player:",
+        font: "30px Consolas",
+        color: "white"
+    }));
+    game.gameObjects.gameplay.push(turnIndicator);
+
+}
+
+export function updateTurnSymbol(game){
+    // Remove existing turn symbol
+    game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name !== 'turn_symbol');
+
+    // Add new turn symbol
+    const turnSymbol = new GameObject({
+        variant: GameObject.VARIANT.ILLUSTRATION,
+        x: 165,
+        y: 30,
+        name: 'turn_symbol',
+    });
+    if(game.playerTurn == 1){
+        turnSymbol.addShape(new GameShape('line', {
+            x: -15,
+            y: -15,
+            x2: 15,
+            y2: 15,
+            color: "rgba(40, 151, 255, 1)",
+            lineWidth: 4,
+        }));
+        turnSymbol.addShape(new GameShape('line', {
+            x: 15,
+            y: -15,
+            x2: -15,    
+            y2: 15,
+            color: "rgba(40, 151, 255, 1)",
+            lineWidth: 4,
+        }));
+    } else {
+        turnSymbol.addShape(new GameShape('circle', {
+            x: 0,
+            y: 0,
+            radius: 15,
+            color: "rgba(248, 66, 66, 1)",
+            lineWidth: 4,
+        }));
+    }
+    game.gameObjects.gameplay.push(turnSymbol);
 }

@@ -51,6 +51,7 @@ export class Game{
         };
         this.userInputs = [];
         this.playerTurn = 1;
+        uiGameplay.updateTurnSymbol(this);
         
         fix_dpi(this.canvas);
         
@@ -156,6 +157,7 @@ export class Game{
                                         }));
                                         this.playerTurn = 1;
                                     }
+                                    uiGameplay.updateTurnSymbol(this);
                                 }
                             }
 
