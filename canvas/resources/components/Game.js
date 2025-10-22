@@ -83,7 +83,7 @@ export class Game{
                 boardMargin: 60,
                 cellWidth: (GAME_WIDTH - 120) / this.boardSize,
                 cellHeight: (GAME_HEIGHT - 120) / this.boardSize,
-                cellPadding: 10
+                cellPadding: 20
             };
     };
 
@@ -134,14 +134,16 @@ export class Game{
                                             y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
                                             x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
                                             y2: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
-                                            color: "rgba(81, 81, 177, 1)",
+                                            color: "rgba(40, 151, 255, 1)",
+                                            lineWidth: 4,
                                         }));
                                         gameObject.addShape(new GameShape('line', {
                                             x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
                                             y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
                                             x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
                                             y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
-                                            color: "rgb(81, 81, 177)",
+                                            color: "rgba(40, 151, 255, 1)",
+                                            lineWidth: 4,
                                         }));
                                         this.playerTurn = 2;
                                     } else {
@@ -149,7 +151,8 @@ export class Game{
                                             x: 0,
                                             y: 0,
                                             radius: (this.gameConfig.cellWidth/2) - this.gameConfig.cellPadding,
-                                            color: "rgb(177, 81, 81)",
+                                            color: "rgba(248, 66, 66, 1)",
+                                            lineWidth: 4,
                                         }));
                                         this.playerTurn = 1;
                                     }
