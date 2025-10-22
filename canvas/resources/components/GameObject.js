@@ -3,7 +3,7 @@ export default class GameObject {
         BOARD: 1,
         BUTTON: 2,
         TEXT: 3,
-        ILLUSION: 4
+        ILLUSTRATION: 4
     };
 
     
