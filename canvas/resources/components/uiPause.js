@@ -1,5 +1,6 @@
 import GameObject from "./GameObject.js";
 import GameShape from "./GameShape.js";
+import GameShapeAnimation from "./GameShapeAnimation.js";
 
 export function create(game){
     const continueButton = new GameObject({
@@ -61,4 +62,33 @@ export function create(game){
         fillColor: "red"
     }));
     game.gameObjects.paused.push(stopButton);
+
+    const pauseText = new GameObject({
+        variant: GameObject.VARIANT.TEXT,
+        x: game.displayData.gameWidth / 2,
+        y: game.displayData.gameHeight / 2,
+        name: 'pause_text',
+    });
+    pauseText.addShape(new GameShape('text', {
+        x: -150,
+        y: 0,
+        text: "Game Paused",
+        font: "50px Consolas",
+        color: "white"
+    }));
+
+    const pauseLine = new GameShape('line', {
+        x: -150,
+        y:  5,
+        x2: 150,
+        y2: 5,
+        color: "white",
+        lineWidth: 4
+    });
+    pauseLine.addAnimation(new GameShapeAnimation({
+        duration: 1000,
+        loop: GameShapeAnimation.INFINITE,
+    }));
+    pauseText.addShape(pauseLine);
+    game.gameObjects.paused.push(pauseText);
 }
