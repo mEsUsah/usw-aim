@@ -4,30 +4,28 @@ import GameShape from "./GameShape.js";
 export function create(game){
     const continueButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: game.displayData.gameWidth / 2 + 70,
-        y: game.displayData.gameHeight / 2,
+        x: game.displayData.gameWidth - 30,
+        y: 30,
         name: 'continue_button',
         outline: {
-            top: 60,
-            left: 60,
-            bottom: 60,
-            right: 60
+            top: 20,
+            left: 20,
+            bottom: 20,
+            right: 20
         }
     });
     continueButton.addShape(new GameShape('rectangle', {
-        x: -60,
-        y: -60,
-        width: 120,
-        height: 120,
+        x: -20,
+        y: -20,
+        width: 40,
+        height: 40,
         color: "red"
     }));
     continueButton.addShape(new GameShape('polygon', {
-        x: -0,
-        y: -0,
         points: [
-            {x: -30, y: -40},
-            {x: 40, y: 0},
-            {x: -30, y: 40}
+            {x: -10, y: -10},
+            {x: 10, y: 0},
+            {x: -10, y: 10}
         ],
         color: "red",
         fillColor: "red"
@@ -37,28 +35,28 @@ export function create(game){
 
     const stopButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: game.displayData.gameWidth / 2 - 70,
-        y: game.displayData.gameHeight / 2 ,
+        x: game.displayData.gameWidth - 80,
+        y: 30,
         name: 'stop_button',
         outline: {
-            top: 60,
-            left: 60,
-            bottom: 60,
-            right: 60
+            top: 20,
+            left: 20,
+            bottom: 20,
+            right: 20
         }
     });
     stopButton.addShape(new GameShape('rectangle', {
-        x: -60,
-        y: -60,
-        width: 120,
-        height: 120,
+        x: -20,
+        y: -20,
+        width: 40,
+        height: 40,
         color: "red"
     }));
     stopButton.addShape(new GameShape('rectangle', {
-        x: -40,
-        y: -40,
-        width: 80,
-        height: 80,
+        x: -10,
+        y: -10,
+        width: 20,
+        height: 20,
         color: "red",
         fillColor: "red"
     }));
