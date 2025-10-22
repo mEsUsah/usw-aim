@@ -2,12 +2,13 @@ import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js'
 import * as graphicDebug from './graphicDebug.js' ;
 import GameObject from './GameObject.js';
 import GameShape from './GameShape.js';
+import { getMousePos } from './mouseUtils.js';
 import GameShapeAnimation from './GameShapeAnimation.js';
 
 const SHOW_FPS = true;
 const SHOW_GRID = true;
 const GAME_WIDTH = 800;
-const GAME_HEIGHT = 600;
+const GAME_HEIGHT = 800;
 
 export class Game{
     constructor(canvas) {
@@ -33,6 +34,14 @@ export class Game{
             screenEndX: 0,
             screenEndY: 0
         };
+
+        this.gameMode = 'gameplay'; // other modes could be 'menu', 'paused', etc.
+        this.gameObjects = {
+            gameplay: [],
+            menu: [],
+            paused: []
+        };
+        this.userInputs = [];
         
         fix_dpi(this.canvas);
         
@@ -40,64 +49,43 @@ export class Game{
             resizeCanvas(this.ctx, this.displayData);
         });
         
-
-        // PoC: Add animated circles where the user clicks
-        this.gameObjects = [];
-        canvas.addEventListener('click', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / this.displayData.scale - this.displayData.offsetX;
-            const y = (e.clientY - rect.top) / this.displayData.scale - this.displayData.offsetY;
-
-            const gameObject = new GameObject(x, y);
-
-            const shape1 = new GameShape('line', {
-                x: x + 100, 
-                y: y - 100, 
-                x2: x, 
-                y2: y, 
+        canvas.addEventListener('click', (event) => {
+            const mousePos = getMousePos(event, this.displayData, this.canvas);
+            this.userInputs.push({
+                type: 'click',
+                x: mousePos.x,
+                y: mousePos.y
             });
-            const animation1 = new GameShapeAnimation({
-                duration: 100, // 1 second
-                startDelay: 0,
-                direction: GameShapeAnimation.FORWARD,
-                loop: false
-            });
-            shape1.addAnimation(animation1);
-            gameObject.addShape(shape1);
-            
-            const shape2 = new GameShape('line', {
-                x: x, 
-                y: y - 10, 
-                x2: x, 
-                y2: y, 
-            });
-            const animation2 = new GameShapeAnimation({
-                duration: 1, // 1 second
-                startDelay: 100,
-                direction: GameShapeAnimation.FORWARD,
-                loop: false
-            });
-            shape2.addAnimation(animation2);
-            gameObject.addShape(shape2);
-
-            const shape3 = new GameShape('line', {
-                x: x +10, 
-                y: y , 
-                x2: x, 
-                y2: y, 
-            });
-            const animation3 = new GameShapeAnimation({
-                duration: 1, // 1 second
-                startDelay: 100,
-                direction: GameShapeAnimation.FORWARD,
-                loop: false
-            });
-            shape3.addAnimation(animation3);
-            gameObject.addShape(shape3);
-
-            this.gameObjects.push(gameObject);
         });
-        // PoC END
+        
+        // PoC: Add game objects with shapes as a grid
+        const boardSize = 3;
+        for(let i=0; i<boardSize; i++){
+            for(let j=0; j<boardSize; j++){
+                const gameObject = new GameObject({
+                    variant: GameObject.VARIANT.BOARD,
+                    x: 80 + i * 150,
+                    y: 80 + j * 150,
+                    name: `board_${i}_${j}`,
+                    outline: {
+                        top: 20,
+                        left: 20,
+                        bottom: 20,
+                        right: 20
+                    }
+                });
+                const shape = new GameShape('rectangle', {
+                    x: -20,
+                    y: -20,
+                    width: 40,
+                    height: 40,
+                    color: "red"
+                });
+                gameObject.addShape(shape);
+                this.gameObjects.gameplay.push(gameObject);
+            }
+        }
+        
 
         this.start();
     };
@@ -110,12 +98,12 @@ export class Game{
     gameLoop(timestamp) {
         // Update game state
         updateFrameData(timestamp, this.frameData);
+        this.handleUserInputs();
 
-        // PoC: Update animations
-        this.gameObjects.forEach(gameObject => {
+        // Update animations
+        this.gameObjects[this.gameMode].forEach(gameObject => {
             gameObject.update(this.frameData.deltaTime);
         });
-        // PoC END
 
 
 
@@ -125,13 +113,50 @@ export class Game{
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
 
-        // PoC START: Store click locations and draw circles there
-        this.gameObjects.forEach(gameObject => {
+        // Draw game objects
+        this.gameObjects[this.gameMode].forEach(gameObject => {
             gameObject.draw(this.ctx);
         });
-        // PoC END
 
         // Request the next frame
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     };
+
+
+
+
+
+    handleUserInputs() {
+        this.userInputs.forEach(input => {
+            if(input.type == 'click') { 
+                this.gameObjects[this.gameMode].forEach(gameObject => {
+                    if (gameObject.config.variant == GameObject.VARIANT.BOARD && gameObject.config.outline) {
+                        if (input.x >= gameObject.config.x - gameObject.config.outline.left &&
+                            input.x <= gameObject.config.x + gameObject.config.outline.right &&
+                            input.y >= gameObject.config.y - gameObject.config.outline.top &&
+                            input.y <= gameObject.config.y + gameObject.config.outline.bottom) {
+                                console.log(`Clicked on ${gameObject.config.name}`);
+                                gameObject.addShape(new GameShape('line', {
+                                    x: -20,
+                                    y: -20,
+                                    x2: 20,
+                                    y2: 20,
+                                    color: "yellow",
+                                    ttl: 1000 // shape lasts for 1 second
+                                }));
+                                gameObject.addShape(new GameShape('line', {
+                                    x: -20,
+                                    y: 20,
+                                    x2: 20,
+                                    y2: -20,
+                                    color: "yellow",
+                                    ttl: 1000 // shape lasts for 1 second
+                                }));
+                            }
+                    }
+                });
+            }
+        });
+        this.userInputs = [];
+    }
 }
