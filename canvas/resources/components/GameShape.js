@@ -41,6 +41,11 @@ export default class GameShape {
                     ctx.rect(this.config.width * (1 - progress), this.config.height * (1 - progress), this.config.width * progress, this.config.height * progress);
                 }
                 ctx.stroke();
+
+                if(this.config.fillColor) {
+                    ctx.fillStyle = this.config.fillColor;
+                    ctx.fill();
+                }
                 break;
             
             case 'circle':
@@ -70,7 +75,7 @@ export default class GameShape {
                 });
                 ctx.closePath();
                 ctx.stroke();
-                
+
                 if(this.config.fillColor) {
                     ctx.fillStyle = this.config.fillColor;
                     ctx.fill();
