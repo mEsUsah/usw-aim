@@ -2,6 +2,7 @@ import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js'
 import * as graphicDebug from './graphicDebug.js' ;
 import GameObject from './GameObject.js';
 import GameShape from './GameShape.js';
+import GameShapeAnimation from './GameShapeAnimation.js';
 import { getMousePos } from './mouseUtils.js';
 import * as uiMenu from './uiMenu.js';
 import * as uiGameplay from './uiGameplay.js';
@@ -130,31 +131,47 @@ export class Game{
                                     gameObject.state.occupiedBy = this.playerTurn; 
 
                                     if(this.playerTurn === 1){
-                                        gameObject.addShape(new GameShape('line', {
+                                        const line1 = new GameShape('line', {
                                             x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
                                             y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
                                             x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
                                             y2: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
                                             color: "rgba(40, 151, 255, 1)",
                                             lineWidth: 4,
+                                        });
+                                        line1.addAnimation(new GameShapeAnimation({
+                                            duration: 150,
+                                            direction: GameShapeAnimation.BACKWARD,
                                         }));
-                                        gameObject.addShape(new GameShape('line', {
+                                        gameObject.addShape(line1);
+                                        
+                                        const line2 = new GameShape('line', {
                                             x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
                                             y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
                                             x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
                                             y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
                                             color: "rgba(40, 151, 255, 1)",
                                             lineWidth: 4,
+                                        });
+                                        line2.addAnimation(new GameShapeAnimation({
+                                            duration: 150,
+                                            startDelay: 150
                                         }));
+                                        gameObject.addShape(line2);
                                         this.playerTurn = 2;
                                     } else {
-                                        gameObject.addShape(new GameShape('circle', {
+                                        const circle = new GameShape('circle', {
                                             x: 0,
                                             y: 0,
                                             radius: (this.gameConfig.cellWidth/2) - this.gameConfig.cellPadding,
                                             color: "rgba(248, 66, 66, 1)",
                                             lineWidth: 4,
+                                        });
+                                        circle.addAnimation(new GameShapeAnimation({
+                                            duration: 300,
                                         }));
+
+                                        gameObject.addShape(circle);
                                         this.playerTurn = 1;
                                     }
                                     uiGameplay.updateTurnSymbol(this);
