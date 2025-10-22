@@ -4,11 +4,17 @@ import GameObject from './GameObject.js';
 import GameShape from './GameShape.js';
 import { getMousePos } from './mouseUtils.js';
 import GameShapeAnimation from './GameShapeAnimation.js';
+import * as uiPause from './uiPause.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 800;
+const GAME_MODE = {
+    GAMEPLAY: 'gameplay',
+    MENU: 'menu',
+    PAUSED: 'paused'
+}
 
 export class Game{
     constructor(canvas) {
@@ -35,7 +41,7 @@ export class Game{
             screenEndY: 0
         };
 
-        this.gameMode = 'gameplay'; // other modes could be 'menu', 'paused', etc.
+        this.gameMode = GAME_MODE.GAMEPLAY;
         this.gameObjects = {
             gameplay: [],
             menu: [],
@@ -67,9 +73,9 @@ export class Game{
         };
 
         
-        
         this.createGameBoard();
         this.createGameplayUI();
+        uiPause.create(this);
 
         this.start();
     };
@@ -113,7 +119,7 @@ export class Game{
                 this.gameObjects[this.gameMode].forEach(gameObject => {
                     
                     // Check clock on board cells
-                    if (gameObject.config.variant == GameObject.VARIANT.BOARD && gameObject.config.outline) {
+                    if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
                         if (gameObject.checkCollision(input.x, input.y)) {
                                 gameObject.addShape(new GameShape('line', {
                                     x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
@@ -129,6 +135,15 @@ export class Game{
                                     y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
                                     color: "rgba(81, 81, 177, 1)",
                                 }));
+                        }
+                    }
+
+                    // Check click on menu button
+                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                        if (gameObject.checkCollision(input.x, input.y)) {
+                            if(gameObject.config.name === 'menu_button'){
+                                this.gameMode = GAME_MODE.PAUSED;
+                            }
                         }
                     }
                 });
@@ -211,4 +226,6 @@ export class Game{
         }));
         this.gameObjects.gameplay.push(menuButton);
     }
+
+    
 }
