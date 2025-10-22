@@ -20,7 +20,6 @@ export default class GameShape {
     }
 
     draw(ctx) {
-        
         ctx.strokeStyle = this.config.color || "red";
         ctx.lineWidth = this.config.lineWidth || 2;
         
@@ -60,6 +59,22 @@ export default class GameShape {
                 ctx.moveTo(0, 0);
                 ctx.lineTo((this.config.x2 - this.config.x) * progress, (this.config.y2 - this.config.y) * progress);
                 ctx.stroke();
+                break;
+
+            case 'polygon':
+                if(!this.config.points || this.config.points.length < 2) break;
+                ctx.beginPath();
+                ctx.moveTo(this.config.points[0].x, this.config.points[0].y);
+                this.config.points.forEach((point, index) => {
+                    ctx.lineTo(point.x, point.y);
+                });
+                ctx.closePath();
+                ctx.stroke();
+                
+                if(this.config.fillColor) {
+                    ctx.fillStyle = this.config.fillColor;
+                    ctx.fill();
+                }
                 break;
 
             default:
