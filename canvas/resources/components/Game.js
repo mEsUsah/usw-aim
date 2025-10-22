@@ -3,7 +3,6 @@ import * as graphicDebug from './graphicDebug.js' ;
 import GameObject from './GameObject.js';
 import GameShape from './GameShape.js';
 import { getMousePos } from './mouseUtils.js';
-import GameShapeAnimation from './GameShapeAnimation.js';
 import * as uiPause from './uiPause.js';
 import * as uiGameplay from './uiGameplay.js';
 
@@ -144,6 +143,15 @@ export class Game{
                         if (gameObject.checkCollision(input.x, input.y)) {
                             if(gameObject.config.name === 'menu_button'){
                                 this.gameMode = GAME_MODE.PAUSED;
+                            }
+                        }
+                    }
+
+                    // Check click on continue button
+                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                        if (gameObject.checkCollision(input.x, input.y)) {
+                            if(gameObject.config.name === 'continue_button'){
+                                this.gameMode = GAME_MODE.GAMEPLAY;
                             }
                         }
                     }
