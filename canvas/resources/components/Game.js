@@ -6,7 +6,7 @@ import { getMousePos } from './mouseUtils.js';
 import GameShapeAnimation from './GameShapeAnimation.js';
 
 const SHOW_FPS = false;
-const SHOW_GRID = true;
+const SHOW_GRID = false;
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 800;
 
@@ -58,7 +58,6 @@ export class Game{
             });
         });
         
-        // PoC: Add game objects with shapes as a grid
         this.gameConfig = {
             boardSize: 5,
             boardMargin: 60,
@@ -67,33 +66,10 @@ export class Game{
             cellPadding: 10
         };
 
-
-        for(let i=0; i<this.gameConfig.boardSize; i++){
-            for(let j=0; j<this.gameConfig.boardSize; j++){
-                const gameObject = new GameObject({
-                    variant: GameObject.VARIANT.BOARD,
-                    x: this.gameConfig.cellWidth/2 + i*this.gameConfig.cellWidth + this.gameConfig.boardMargin,
-                    y: this.gameConfig.cellHeight/2 + j * this.gameConfig.cellHeight + this.gameConfig.boardMargin,
-                    name: `board_${i}_${j}`,
-                    outline: {
-                        top: this.gameConfig.cellHeight/2,
-                        left: this.gameConfig.cellWidth/2,
-                        bottom: this.gameConfig.cellHeight/2,
-                        right: this.gameConfig.cellWidth/2
-                    }
-                });
-                const shape = new GameShape('rectangle', {
-                    x: -this.gameConfig.cellWidth/2,
-                    y: -this.gameConfig.cellHeight/2,
-                    width: this.gameConfig.cellWidth,
-                    height: this.gameConfig.cellHeight,
-                    color: "red"
-                });
-                gameObject.addShape(shape);
-                this.gameObjects.gameplay.push(gameObject);
-            }
-        }
         
+        
+        this.createGameBoard();
+        this.createGameplayUI();
 
         this.start();
     };
@@ -113,13 +89,10 @@ export class Game{
             gameObject.update(this.frameData.deltaTime);
         });
 
-
-
         // Render the game state
         clearCanvas(this.ctx, this.displayData);
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
-
 
         // Draw game objects
         this.gameObjects[this.gameMode].forEach(gameObject => {
@@ -138,25 +111,23 @@ export class Game{
         this.userInputs.forEach(input => {
             if(input.type == 'click') { 
                 this.gameObjects[this.gameMode].forEach(gameObject => {
+                    
+                    // Check clock on board cells
                     if (gameObject.config.variant == GameObject.VARIANT.BOARD && gameObject.config.outline) {
-                        if (input.x >= gameObject.config.x - gameObject.config.outline.left &&
-                            input.x <= gameObject.config.x + gameObject.config.outline.right &&
-                            input.y >= gameObject.config.y - gameObject.config.outline.top &&
-                            input.y <= gameObject.config.y + gameObject.config.outline.bottom) {
-                                console.log(`Clicked on ${gameObject.config.name}`);
+                        if (gameObject.checkCollision(input.x, input.y)) {
                                 gameObject.addShape(new GameShape('line', {
                                     x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
                                     y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
                                     x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
                                     y2: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
-                                    color: "yellow",
+                                    color: "rgba(81, 81, 177, 1)",
                                 }));
                                 gameObject.addShape(new GameShape('line', {
                                     x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
                                     y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
                                     x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
                                     y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
-                                    color: "yellow",
+                                    color: "rgba(81, 81, 177, 1)",
                                 }));
                         }
                     }
@@ -164,5 +135,80 @@ export class Game{
             }
         });
         this.userInputs = [];
+    }
+
+
+    createGameBoard(){
+        // Initialize board cells
+        for(let i=0; i<this.gameConfig.boardSize; i++){
+            for(let j=0; j<this.gameConfig.boardSize; j++){
+                const gameObject = new GameObject({
+                    variant: GameObject.VARIANT.BOARD,
+                    x: this.gameConfig.cellWidth/2 + i*this.gameConfig.cellWidth + this.gameConfig.boardMargin,
+                    y: this.gameConfig.cellHeight/2 + j * this.gameConfig.cellHeight + this.gameConfig.boardMargin,
+                    name: `board_${i}_${j}`,
+                    outline: {
+                        top: this.gameConfig.cellHeight/2,
+                        left: this.gameConfig.cellWidth/2,
+                        bottom: this.gameConfig.cellHeight/2,
+                        right: this.gameConfig.cellWidth/2
+                    }
+                });
+                const shape = new GameShape('rectangle', {
+                    x: -this.gameConfig.cellWidth/2,
+                    y: -this.gameConfig.cellHeight/2,
+                    width: this.gameConfig.cellWidth,
+                    height: this.gameConfig.cellHeight,
+                    color: "gray"
+                });
+                gameObject.addShape(shape);
+                this.gameObjects.gameplay.push(gameObject);
+            }
+        }
+    }
+
+    createGameplayUI(){
+        // Menu button
+        const menuButton = new GameObject({
+            variant: GameObject.VARIANT.BUTTON,
+            x: this.displayData.gameWidth - 30,
+            y: 30,
+            name: 'menu_button',
+            outline: {
+                top: 20,
+                left: 20,
+                bottom: 20,
+                right: 20
+            }
+        });
+        menuButton.addShape(new GameShape('rectangle', {
+            x: -20,
+            y: -20,
+            width: 40,
+            height: 40,
+            color: "red"
+        }));
+        menuButton.addShape(new GameShape('line', {
+            x: -12,
+            y: -10,
+            x2: 12,
+            y2: -10,
+            color: "red"
+        }));
+        menuButton.addShape(new GameShape('line', {
+            x: -12,
+            y: 0,
+            x2: 12,
+            y2: 0,
+            color: "red"
+        }));
+        menuButton.addShape(new GameShape('line', {
+            x: -12,
+            y: 10,
+            x2: 12,
+            y2: 10,
+            color: "red"
+        }));
+        this.gameObjects.gameplay.push(menuButton);
     }
 }

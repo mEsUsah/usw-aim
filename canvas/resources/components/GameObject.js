@@ -1,6 +1,7 @@
 export default class GameObject {
     static VARIANT = {
         BOARD: 1,
+        BUTTON: 2,
     };
 
     
@@ -36,5 +37,17 @@ export default class GameObject {
             shape.draw(ctx);
         });
         ctx.restore();
+    }
+
+    checkCollision(x, y) {
+        if(!this.config.outline) return false;
+        
+        if (x >= this.config.x - this.config.outline.left &&
+            x <= this.config.x + this.config.outline.right &&
+            y >= this.config.y - this.config.outline.top &&
+            y <= this.config.y + this.config.outline.bottom) {
+                return true;
+        }
+        return false;
     }
 }
