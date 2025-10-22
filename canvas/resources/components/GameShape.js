@@ -88,6 +88,12 @@ export default class GameShape {
                 }
                 break;
 
+            case 'text':
+                ctx.font = this.config.font || "20px Arial";
+                ctx.fillStyle = this.config.color || "black";
+                ctx.fillText(this.config.text || "", 0, 0);
+                break;
+
             default:
                 console.warn(`GameShape::draw - Unknown shape type: ${this.type}`);
                 break;
