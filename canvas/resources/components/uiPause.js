@@ -4,7 +4,7 @@ import GameShape from "./GameShape.js";
 export function create(game){
     const continueButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: game.displayData.gameWidth / 2,
+        x: game.displayData.gameWidth / 2 + 70,
         y: game.displayData.gameHeight / 2,
         name: 'continue_button',
         outline: {
@@ -33,4 +33,34 @@ export function create(game){
         fillColor: "red"
     }));
     game.gameObjects.paused.push(continueButton);
+
+
+    const stopButton = new GameObject({
+        variant: GameObject.VARIANT.BUTTON,
+        x: game.displayData.gameWidth / 2 - 70,
+        y: game.displayData.gameHeight / 2 ,
+        name: 'stop_button',
+        outline: {
+            top: 60,
+            left: 60,
+            bottom: 60,
+            right: 60
+        }
+    });
+    stopButton.addShape(new GameShape('rectangle', {
+        x: -60,
+        y: -60,
+        width: 120,
+        height: 120,
+        color: "red"
+    }));
+    stopButton.addShape(new GameShape('rectangle', {
+        x: -40,
+        y: -40,
+        width: 80,
+        height: 80,
+        color: "red",
+        fillColor: "red"
+    }));
+    game.gameObjects.paused.push(stopButton);
 }

@@ -3,8 +3,9 @@ import * as graphicDebug from './graphicDebug.js' ;
 import GameObject from './GameObject.js';
 import GameShape from './GameShape.js';
 import { getMousePos } from './mouseUtils.js';
-import * as uiPause from './uiPause.js';
+import * as uiMenu from './uiMenu.js';
 import * as uiGameplay from './uiGameplay.js';
+import * as uiPause from './uiPause.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -41,7 +42,7 @@ export class Game{
             screenEndY: 0
         };
 
-        this.gameMode = GAME_MODE.GAMEPLAY;
+        this.gameMode = GAME_MODE.MENU;
         this.gameObjects = {
             gameplay: [],
             menu: [],
@@ -72,7 +73,7 @@ export class Game{
             cellPadding: 10
         };
 
-        
+        uiMenu.create(this);
         uiGameplay.createGameBoard(this);
         uiGameplay.createGameplayUI(this);
         uiPause.create(this);
@@ -152,6 +153,24 @@ export class Game{
                         if (gameObject.checkCollision(input.x, input.y)) {
                             if(gameObject.config.name === 'continue_button'){
                                 this.gameMode = GAME_MODE.GAMEPLAY;
+                            }
+                        }
+                    }
+
+                    // Check click on start button
+                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                        if (gameObject.checkCollision(input.x, input.y)) {
+                            if(gameObject.config.name === 'start_button'){
+                                this.gameMode = GAME_MODE.GAMEPLAY;
+                            }
+                        }
+                    }
+
+                    // Check click on stop button
+                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                        if (gameObject.checkCollision(input.x, input.y)) {
+                            if(gameObject.config.name === 'stop_button'){
+                                this.gameMode = GAME_MODE.MENU;
                             }
                         }
                     }
