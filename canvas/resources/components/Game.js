@@ -5,7 +5,7 @@ import GameShape from './GameShape.js';
 import { getMousePos } from './mouseUtils.js';
 import GameShapeAnimation from './GameShapeAnimation.js';
 
-const SHOW_FPS = true;
+const SHOW_FPS = false;
 const SHOW_GRID = true;
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 800;
@@ -59,26 +59,34 @@ export class Game{
         });
         
         // PoC: Add game objects with shapes as a grid
-        const boardSize = 3;
-        for(let i=0; i<boardSize; i++){
-            for(let j=0; j<boardSize; j++){
+        this.gameConfig = {
+            boardSize: 5,
+            boardMargin: 60,
+            cellWidth: (GAME_WIDTH - 120) / 5,
+            cellHeight: (GAME_HEIGHT - 120) / 5,
+            cellPadding: 10
+        };
+
+
+        for(let i=0; i<this.gameConfig.boardSize; i++){
+            for(let j=0; j<this.gameConfig.boardSize; j++){
                 const gameObject = new GameObject({
                     variant: GameObject.VARIANT.BOARD,
-                    x: 80 + i * 150,
-                    y: 80 + j * 150,
+                    x: this.gameConfig.cellWidth/2 + i*this.gameConfig.cellWidth + this.gameConfig.boardMargin,
+                    y: this.gameConfig.cellHeight/2 + j * this.gameConfig.cellHeight + this.gameConfig.boardMargin,
                     name: `board_${i}_${j}`,
                     outline: {
-                        top: 20,
-                        left: 20,
-                        bottom: 20,
-                        right: 20
+                        top: this.gameConfig.cellHeight/2,
+                        left: this.gameConfig.cellWidth/2,
+                        bottom: this.gameConfig.cellHeight/2,
+                        right: this.gameConfig.cellWidth/2
                     }
                 });
                 const shape = new GameShape('rectangle', {
-                    x: -20,
-                    y: -20,
-                    width: 40,
-                    height: 40,
+                    x: -this.gameConfig.cellWidth/2,
+                    y: -this.gameConfig.cellHeight/2,
+                    width: this.gameConfig.cellWidth,
+                    height: this.gameConfig.cellHeight,
                     color: "red"
                 });
                 gameObject.addShape(shape);
@@ -137,22 +145,20 @@ export class Game{
                             input.y <= gameObject.config.y + gameObject.config.outline.bottom) {
                                 console.log(`Clicked on ${gameObject.config.name}`);
                                 gameObject.addShape(new GameShape('line', {
-                                    x: -20,
-                                    y: -20,
-                                    x2: 20,
-                                    y2: 20,
+                                    x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
+                                    y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
+                                    x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
+                                    y2: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
                                     color: "yellow",
-                                    ttl: 1000 // shape lasts for 1 second
                                 }));
                                 gameObject.addShape(new GameShape('line', {
-                                    x: -20,
-                                    y: 20,
-                                    x2: 20,
-                                    y2: -20,
+                                    x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
+                                    y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
+                                    x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
+                                    y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
                                     color: "yellow",
-                                    ttl: 1000 // shape lasts for 1 second
                                 }));
-                            }
+                        }
                     }
                 });
             }
