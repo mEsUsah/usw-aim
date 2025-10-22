@@ -1,4 +1,9 @@
 export default class GameObject {
+    static VARIANT = {
+        BOARD: 1,
+    };
+
+    
     constructor(config) {
         this.config = config;
         this.animations = [];
