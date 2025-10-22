@@ -8,18 +8,29 @@ export function create(game){
         y: game.displayData.gameHeight / 2,
         name: 'continue_button',
         outline: {
-            top: 30,
+            top: 60,
             left: 60,
-            bottom: 30,
+            bottom: 60,
             right: 60
         }
     });
     continueButton.addShape(new GameShape('rectangle', {
         x: -60,
-        y: -30,
+        y: -60,
         width: 120,
-        height: 60,
-        color: "green"
+        height: 120,
+        color: "red"
+    }));
+    continueButton.addShape(new GameShape('polygon', {
+        x: -0,
+        y: -0,
+        points: [
+            {x: -30, y: -40},
+            {x: 40, y: 0},
+            {x: -30, y: 40}
+        ],
+        color: "red",
+        fillColor: "red"
     }));
     game.gameObjects.paused.push(continueButton);
 }
