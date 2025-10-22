@@ -5,6 +5,7 @@ import GameShape from './GameShape.js';
 import { getMousePos } from './mouseUtils.js';
 import GameShapeAnimation from './GameShapeAnimation.js';
 import * as uiPause from './uiPause.js';
+import * as uiGameplay from './uiGameplay.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -73,8 +74,8 @@ export class Game{
         };
 
         
-        this.createGameBoard();
-        this.createGameplayUI();
+        uiGameplay.createGameBoard(this);
+        uiGameplay.createGameplayUI(this);
         uiPause.create(this);
 
         this.start();
@@ -151,81 +152,4 @@ export class Game{
         });
         this.userInputs = [];
     }
-
-
-    createGameBoard(){
-        // Initialize board cells
-        for(let i=0; i<this.gameConfig.boardSize; i++){
-            for(let j=0; j<this.gameConfig.boardSize; j++){
-                const gameObject = new GameObject({
-                    variant: GameObject.VARIANT.BOARD,
-                    x: this.gameConfig.cellWidth/2 + i*this.gameConfig.cellWidth + this.gameConfig.boardMargin,
-                    y: this.gameConfig.cellHeight/2 + j * this.gameConfig.cellHeight + this.gameConfig.boardMargin,
-                    name: `board_${i}_${j}`,
-                    outline: {
-                        top: this.gameConfig.cellHeight/2,
-                        left: this.gameConfig.cellWidth/2,
-                        bottom: this.gameConfig.cellHeight/2,
-                        right: this.gameConfig.cellWidth/2
-                    }
-                });
-                const shape = new GameShape('rectangle', {
-                    x: -this.gameConfig.cellWidth/2,
-                    y: -this.gameConfig.cellHeight/2,
-                    width: this.gameConfig.cellWidth,
-                    height: this.gameConfig.cellHeight,
-                    color: "gray"
-                });
-                gameObject.addShape(shape);
-                this.gameObjects.gameplay.push(gameObject);
-            }
-        }
-    }
-
-    createGameplayUI(){
-        // Menu button
-        const menuButton = new GameObject({
-            variant: GameObject.VARIANT.BUTTON,
-            x: this.displayData.gameWidth - 30,
-            y: 30,
-            name: 'menu_button',
-            outline: {
-                top: 20,
-                left: 20,
-                bottom: 20,
-                right: 20
-            }
-        });
-        menuButton.addShape(new GameShape('rectangle', {
-            x: -20,
-            y: -20,
-            width: 40,
-            height: 40,
-            color: "red"
-        }));
-        menuButton.addShape(new GameShape('line', {
-            x: -12,
-            y: -10,
-            x2: 12,
-            y2: -10,
-            color: "red"
-        }));
-        menuButton.addShape(new GameShape('line', {
-            x: -12,
-            y: 0,
-            x2: 12,
-            y2: 0,
-            color: "red"
-        }));
-        menuButton.addShape(new GameShape('line', {
-            x: -12,
-            y: 10,
-            x2: 12,
-            y2: 10,
-            color: "red"
-        }));
-        this.gameObjects.gameplay.push(menuButton);
-    }
-
-    
 }
