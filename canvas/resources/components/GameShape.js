@@ -60,6 +60,9 @@ export default class GameShape {
                 break;
             
             case 'line':
+                if(this.config.lineWidth) {
+                    ctx.lineWidth = this.config.lineWidth;
+                }
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
                 ctx.lineTo((this.config.x2 - this.config.x) * progress, (this.config.y2 - this.config.y) * progress);
