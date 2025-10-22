@@ -34,6 +34,16 @@ export default class GameShape {
         }
 
         switch(this.type) {
+            case 'rectangle':
+                ctx.beginPath();
+                if(direction === GameShapeAnimation.FORWARD) {
+                    ctx.rect(0, 0, this.config.width * progress, this.config.height * progress);
+                } else {
+                    ctx.rect(this.config.width * (1 - progress), this.config.height * (1 - progress), this.config.width * progress, this.config.height * progress);
+                }
+                ctx.stroke();
+                break;
+            
             case 'circle':
                 ctx.beginPath();
                 if(direction === GameShapeAnimation.FORWARD) {
