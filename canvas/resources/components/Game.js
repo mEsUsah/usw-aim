@@ -114,65 +114,79 @@ export class Game{
     handleUserInputs() {
         this.userInputs.forEach(input => {
             if(input.type == 'click') { 
-                this.gameObjects[this.gameMode].forEach(gameObject => {
+                switch(this.gameMode) {
+                    case GAME_MODE.GAMEPLAY:
+                        this.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
+                            // Check clock on board cells
+                            if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
+                                if (gameObject.checkCollision(input.x, input.y)) {
+                                        gameObject.addShape(new GameShape('line', {
+                                            x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
+                                            y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
+                                            x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
+                                            y2: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
+                                            color: "rgba(81, 81, 177, 1)",
+                                        }));
+                                        gameObject.addShape(new GameShape('line', {
+                                            x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
+                                            y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
+                                            x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
+                                            y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
+                                            color: "rgba(81, 81, 177, 1)",
+                                        }));
+                                }
+                            }
+
+                            // Check click on menu button
+                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                                if (gameObject.checkCollision(input.x, input.y)) {
+                                    if(gameObject.config.name === 'menu_button'){
+                                        this.gameMode = GAME_MODE.PAUSED;
+                                    }
+                                }
+                            }
+                            
+                        });
+                        break;
+
+                    case GAME_MODE.PAUSED:
+                        this.gameObjects[GAME_MODE.PAUSED].forEach(gameObject => {
+                            // Check click on continue button
+                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                                if (gameObject.checkCollision(input.x, input.y)) {
+                                    if(gameObject.config.name === 'continue_button'){
+                                        this.gameMode = GAME_MODE.GAMEPLAY;
+                                    }
+                                }
+                            }
+                            // Check click on stop button
+                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                                if (gameObject.checkCollision(input.x, input.y)) {
+                                    if(gameObject.config.name === 'stop_button'){
+                                        this.gameMode = GAME_MODE.MENU;
+                                    }
+                                }
+                            }
+                        });
+                        break;
+
+                    case GAME_MODE.MENU:
+                        this.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
+                            // Check click on start button
+                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+                                if (gameObject.checkCollision(input.x, input.y)) {
+                                    if(gameObject.config.name === 'start_button'){
+                                        this.gameMode = GAME_MODE.GAMEPLAY;
+                                        gameBoard.create(this);
+                                    }
+                                }
+                            }
+                        });
+                        break;
                     
-                    // Check clock on board cells
-                    if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
-                        if (gameObject.checkCollision(input.x, input.y)) {
-                                gameObject.addShape(new GameShape('line', {
-                                    x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
-                                    y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
-                                    x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
-                                    y2: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
-                                    color: "rgba(81, 81, 177, 1)",
-                                }));
-                                gameObject.addShape(new GameShape('line', {
-                                    x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
-                                    y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
-                                    x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
-                                    y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
-                                    color: "rgba(81, 81, 177, 1)",
-                                }));
-                        }
-                    }
-
-                    // Check click on menu button
-                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                        if (gameObject.checkCollision(input.x, input.y)) {
-                            if(gameObject.config.name === 'menu_button'){
-                                this.gameMode = GAME_MODE.PAUSED;
-                            }
-                        }
-                    }
-
-                    // Check click on continue button
-                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                        if (gameObject.checkCollision(input.x, input.y)) {
-                            if(gameObject.config.name === 'continue_button'){
-                                this.gameMode = GAME_MODE.GAMEPLAY;
-                            }
-                        }
-                    }
-
-                    // Check click on start button
-                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                        if (gameObject.checkCollision(input.x, input.y)) {
-                            if(gameObject.config.name === 'start_button'){
-                                this.gameMode = GAME_MODE.GAMEPLAY;
-                                gameBoard.create(this);
-                            }
-                        }
-                    }
-
-                    // Check click on stop button
-                    if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                        if (gameObject.checkCollision(input.x, input.y)) {
-                            if(gameObject.config.name === 'stop_button'){
-                                this.gameMode = GAME_MODE.MENU;
-                            }
-                        }
-                    }
-                });
+                    default:
+                        break;
+                }
             }
         });
         this.userInputs = [];
