@@ -7,8 +7,8 @@ export default class GameObject {
     
     constructor(config) {
         this.config = config;
-        this.animations = [];
         this.shapes = [];
+        this.state = {};
     }
 
     addShape(shape) {

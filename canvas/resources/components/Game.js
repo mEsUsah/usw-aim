@@ -16,7 +16,7 @@ const GAME_MODE = {
     GAMEPLAY: 'gameplay',
     MENU: 'menu',
     PAUSED: 'paused'
-}
+};
 
 export class Game{
     constructor(canvas) {
@@ -50,6 +50,7 @@ export class Game{
             paused: []
         };
         this.userInputs = [];
+        this.playerTurn = 1;
         
         fix_dpi(this.canvas);
         
@@ -66,19 +67,24 @@ export class Game{
             });
         });
         
-        this.gameConfig = {
-            boardSize: 5,
-            boardMargin: 60,
-            cellWidth: (GAME_WIDTH - 120) / 5,
-            cellHeight: (GAME_HEIGHT - 120) / 5,
-            cellPadding: 10
-        };
+        this.boardSize = 4;
+        this.gameConfig = this.config();
 
         uiMenu.create(this);
         uiGameplay.create(this);
         uiPause.create(this);
 
         this.start();
+    };
+
+    config(){
+        return {
+                boardSize: this.boardSize,
+                boardMargin: 60,
+                cellWidth: (GAME_WIDTH - 120) / this.boardSize,
+                cellHeight: (GAME_HEIGHT - 120) / this.boardSize,
+                cellPadding: 10
+            };
     };
 
     start(){
@@ -119,7 +125,10 @@ export class Game{
                         this.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
                             // Check clock on board cells
                             if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
-                                if (gameObject.checkCollision(input.x, input.y)) {
+                                if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
+                                    gameObject.state.occupiedBy = this.playerTurn; 
+
+                                    if(this.playerTurn === 1){
                                         gameObject.addShape(new GameShape('line', {
                                             x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
                                             y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
@@ -132,8 +141,18 @@ export class Game{
                                             y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
                                             x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
                                             y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
-                                            color: "rgba(81, 81, 177, 1)",
+                                            color: "rgb(81, 81, 177)",
                                         }));
+                                        this.playerTurn = 2;
+                                    } else {
+                                        gameObject.addShape(new GameShape('circle', {
+                                            x: 0,
+                                            y: 0,
+                                            radius: (this.gameConfig.cellWidth/2) - this.gameConfig.cellPadding,
+                                            color: "rgb(177, 81, 81)",
+                                        }));
+                                        this.playerTurn = 1;
+                                    }
                                 }
                             }
 
@@ -190,5 +209,5 @@ export class Game{
             }
         });
         this.userInputs = [];
-    }
+    };
 }
