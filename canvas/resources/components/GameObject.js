@@ -2,6 +2,8 @@ export default class GameObject {
     static VARIANT = {
         BOARD: 1,
         BUTTON: 2,
+        TEXT: 3,
+        ILLUSION: 4
     };
 
     
