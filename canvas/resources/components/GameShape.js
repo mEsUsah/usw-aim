@@ -49,6 +49,9 @@ export default class GameShape {
                 break;
             
             case 'circle':
+                if(this.config.lineWidth) {
+                    ctx.lineWidth = this.config.lineWidth;
+                }
                 ctx.beginPath();
                 if(direction === GameShapeAnimation.FORWARD) {
                     ctx.arc(0, 0, this.config.radius, 0, (2 * Math.PI * progress), false);
