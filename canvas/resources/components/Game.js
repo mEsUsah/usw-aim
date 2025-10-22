@@ -6,6 +6,7 @@ import { getMousePos } from './mouseUtils.js';
 import * as uiMenu from './uiMenu.js';
 import * as uiGameplay from './uiGameplay.js';
 import * as uiPause from './uiPause.js';
+import * as gameBoard from './gameBoard.js';    
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -74,8 +75,7 @@ export class Game{
         };
 
         uiMenu.create(this);
-        uiGameplay.createGameBoard(this);
-        uiGameplay.createGameplayUI(this);
+        uiGameplay.create(this);
         uiPause.create(this);
 
         this.start();
@@ -162,6 +162,7 @@ export class Game{
                         if (gameObject.checkCollision(input.x, input.y)) {
                             if(gameObject.config.name === 'start_button'){
                                 this.gameMode = GAME_MODE.GAMEPLAY;
+                                gameBoard.create(this);
                             }
                         }
                     }
