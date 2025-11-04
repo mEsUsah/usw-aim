@@ -1,5 +1,5 @@
-import { GAME_MODE } from '../Game.js';
-import GameObject from '../GameObject.js';
+import { GAME_MODE } from '../classes/Game.js';
+import GameObject from '../classes/GameObject.js';
 import * as gameBoard from '../gameBoard.js';
 
 export function handleUserInputMenu(game, input){

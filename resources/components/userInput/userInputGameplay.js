@@ -1,8 +1,8 @@
-import { GAME_MODE } from '../Game.js';
+import { GAME_MODE } from '../classes/Game.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
-import GameShape from '../GameShape.js';
-import GameShapeAnimation from '../GameShapeAnimation.js';
-import GameObject from '../GameObject.js';
+import GameShape from '../classes/GameShape.js';
+import GameShapeAnimation from '../classes/GameShapeAnimation.js';
+import GameObject from '../classes/GameObject.js';
 
 export function handleUserInputsGameplay(game, input){
     game.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {

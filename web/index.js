@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/components/Game.js":
-/*!**************************************!*\
-  !*** ./resources/components/Game.js ***!
-  \**************************************/
+/***/ "./resources/components/classes/Game.js":
+/*!**********************************************!*\
+  !*** ./resources/components/classes/Game.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,13 +13,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   GAME_MODE: () => (/* binding */ GAME_MODE),
 /* harmony export */   Game: () => (/* binding */ Game)
 /* harmony export */ });
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./resources/components/utils.js");
-/* harmony import */ var _graphicDebug_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphicDebug.js */ "./resources/components/graphicDebug.js");
-/* harmony import */ var _mouseUtils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mouseUtils.js */ "./resources/components/mouseUtils.js");
-/* harmony import */ var _ui_uiMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui/uiMenu.js */ "./resources/components/ui/uiMenu.js");
-/* harmony import */ var _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ui/uiGameplay.js */ "./resources/components/ui/uiGameplay.js");
-/* harmony import */ var _ui_uiPause_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ui/uiPause.js */ "./resources/components/ui/uiPause.js");
-/* harmony import */ var _userInput_userInput_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./userInput/userInput.js */ "./resources/components/userInput/userInput.js");
+/* harmony import */ var _utils_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/utils.js */ "./resources/components/utils/utils.js");
+/* harmony import */ var _utils_graphicDebug_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/graphicDebug.js */ "./resources/components/utils/graphicDebug.js");
+/* harmony import */ var _utils_mouseUtils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/mouseUtils.js */ "./resources/components/utils/mouseUtils.js");
+/* harmony import */ var _ui_uiMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ui/uiMenu.js */ "./resources/components/ui/uiMenu.js");
+/* harmony import */ var _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ui/uiGameplay.js */ "./resources/components/ui/uiGameplay.js");
+/* harmony import */ var _ui_uiPause_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ui/uiPause.js */ "./resources/components/ui/uiPause.js");
+/* harmony import */ var _userInput_userInput_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../userInput/userInput.js */ "./resources/components/userInput/userInput.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -76,12 +76,12 @@ var Game = /*#__PURE__*/function () {
     };
     this.gameFields = [];
     this.userInputs = [];
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.fix_dpi)(this.canvas);
+    (0,_utils_utils_js__WEBPACK_IMPORTED_MODULE_0__.fix_dpi)(this.canvas);
     window.addEventListener('resize', function () {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.resizeCanvas)(_this.ctx, _this.displayData);
+      (0,_utils_utils_js__WEBPACK_IMPORTED_MODULE_0__.resizeCanvas)(_this.ctx, _this.displayData);
     });
     canvas.addEventListener('click', function (event) {
-      var mousePos = (0,_mouseUtils_js__WEBPACK_IMPORTED_MODULE_2__.getMousePos)(event, _this.displayData, _this.canvas);
+      var mousePos = (0,_utils_mouseUtils_js__WEBPACK_IMPORTED_MODULE_2__.getMousePos)(event, _this.displayData, _this.canvas);
       _this.userInputs.push({
         type: 'click',
         x: mousePos.x,
@@ -119,7 +119,7 @@ var Game = /*#__PURE__*/function () {
     key: "start",
     value: function start() {
       var _this2 = this;
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.resizeCanvas)(this.ctx, this.displayData);
+      (0,_utils_utils_js__WEBPACK_IMPORTED_MODULE_0__.resizeCanvas)(this.ctx, this.displayData);
       window.requestAnimationFrame(function (timestamp) {
         return _this2.gameLoop(timestamp);
       });
@@ -129,7 +129,7 @@ var Game = /*#__PURE__*/function () {
     value: function gameLoop(timestamp) {
       var _this3 = this;
       // Update game state
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.updateFrameData)(timestamp, this.frameData);
+      (0,_utils_utils_js__WEBPACK_IMPORTED_MODULE_0__.updateFrameData)(timestamp, this.frameData);
       (0,_userInput_userInput_js__WEBPACK_IMPORTED_MODULE_6__.handleUserInputs)(this);
 
       // Update animations
@@ -138,9 +138,9 @@ var Game = /*#__PURE__*/function () {
       });
 
       // Render the game state
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.clearCanvas)(this.ctx, this.displayData);
-      if (SHOW_GRID) _graphicDebug_js__WEBPACK_IMPORTED_MODULE_1__.drawGrid(this.ctx, this.displayData);
-      if (SHOW_FPS) _graphicDebug_js__WEBPACK_IMPORTED_MODULE_1__.drawFPS(this.ctx, this.frameData.fps.avg);
+      (0,_utils_utils_js__WEBPACK_IMPORTED_MODULE_0__.clearCanvas)(this.ctx, this.displayData);
+      if (SHOW_GRID) _utils_graphicDebug_js__WEBPACK_IMPORTED_MODULE_1__.drawGrid(this.ctx, this.displayData);
+      if (SHOW_FPS) _utils_graphicDebug_js__WEBPACK_IMPORTED_MODULE_1__.drawFPS(this.ctx, this.frameData.fps.avg);
 
       // Draw game objects
       this.gameObjects[this.mode].forEach(function (gameObject) {
@@ -157,10 +157,10 @@ var Game = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./resources/components/GameObject.js":
-/*!********************************************!*\
-  !*** ./resources/components/GameObject.js ***!
-  \********************************************/
+/***/ "./resources/components/classes/GameObject.js":
+/*!****************************************************!*\
+  !*** ./resources/components/classes/GameObject.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -233,17 +233,17 @@ _defineProperty(GameObject, "VARIANT", {
 
 /***/ }),
 
-/***/ "./resources/components/GameShape.js":
-/*!*******************************************!*\
-  !*** ./resources/components/GameShape.js ***!
-  \*******************************************/
+/***/ "./resources/components/classes/GameShape.js":
+/*!***************************************************!*\
+  !*** ./resources/components/classes/GameShape.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ GameShape)
 /* harmony export */ });
-/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
+/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameShapeAnimation.js */ "./resources/components/classes/GameShapeAnimation.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -352,10 +352,10 @@ var GameShape = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./resources/components/GameShapeAnimation.js":
-/*!****************************************************!*\
-  !*** ./resources/components/GameShapeAnimation.js ***!
-  \****************************************************/
+/***/ "./resources/components/classes/GameShapeAnimation.js":
+/*!************************************************************!*\
+  !*** ./resources/components/classes/GameShapeAnimation.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -427,22 +427,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   create: () => (/* binding */ create)
 /* harmony export */ });
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameShape.js */ "./resources/components/GameShape.js");
+/* harmony import */ var _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./classes/GameObject.js */ "./resources/components/classes/GameObject.js");
+/* harmony import */ var _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classes/GameShape.js */ "./resources/components/classes/GameShape.js");
 
 
 function create(game) {
   // Clear existing game board objects
   game.gameObjects.gameplay = game.gameObjects.gameplay.filter(function (obj) {
-    return obj.config.variant !== _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BOARD;
+    return obj.config.variant !== _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BOARD;
   });
   game.gameFields = [];
 
   // Initialize board cells
   for (var i = 0; i < game.config.boardSize; i++) {
     for (var j = 0; j < game.config.boardSize; j++) {
-      var gameObject = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-        variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BOARD,
+      var gameObject = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BOARD,
         x: game.config.cellWidth / 2 + j * game.config.cellWidth + game.config.boardMargin,
         y: game.config.cellHeight / 2 + i * game.config.cellHeight + game.config.boardMargin,
         name: "board_".concat(i, "_").concat(j),
@@ -453,7 +453,7 @@ function create(game) {
           right: game.config.cellWidth / 2
         }
       });
-      var shape = new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+      var shape = new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
         x: -game.config.cellWidth / 2,
         y: -game.config.cellHeight / 2,
         width: game.config.cellWidth,
@@ -469,10 +469,496 @@ function create(game) {
 
 /***/ }),
 
-/***/ "./resources/components/graphicDebug.js":
-/*!**********************************************!*\
-  !*** ./resources/components/graphicDebug.js ***!
-  \**********************************************/
+/***/ "./resources/components/ui/uiGameplay.js":
+/*!***********************************************!*\
+  !*** ./resources/components/ui/uiGameplay.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   create: () => (/* binding */ create),
+/* harmony export */   updateTurnSymbol: () => (/* binding */ updateTurnSymbol)
+/* harmony export */ });
+/* harmony import */ var _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classes/GameObject.js */ "./resources/components/classes/GameObject.js");
+/* harmony import */ var _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/GameShape.js */ "./resources/components/classes/GameShape.js");
+
+
+function create(game) {
+  // Menu button
+  var menuButton = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
+    x: game.displayData.gameWidth - 30,
+    y: 30,
+    name: 'menu_button',
+    outline: {
+      top: 20,
+      left: 20,
+      bottom: 20,
+      right: 20
+    }
+  });
+  menuButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+    x: -20,
+    y: -20,
+    width: 40,
+    height: 40,
+    color: "red"
+  }));
+  menuButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+    x: -10,
+    y: -10,
+    width: 6,
+    height: 20,
+    color: "red",
+    fillColor: "red"
+  }));
+  menuButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+    x: 10,
+    y: -10,
+    width: -6,
+    height: 20,
+    color: "red",
+    fillColor: "red"
+  }));
+  game.gameObjects.gameplay.push(menuButton);
+
+  // Player turn indicator
+  var turnIndicator = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.TEXT,
+    x: 30,
+    y: 37.5,
+    name: 'turn_indicator'
+  });
+  turnIndicator.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('text', {
+    x: 0,
+    y: 0,
+    text: "Player:",
+    font: "30px Consolas",
+    color: "white"
+  }));
+  game.gameObjects.gameplay.push(turnIndicator);
+}
+function updateTurnSymbol(game) {
+  // Remove existing turn symbol
+  game.gameObjects.gameplay = game.gameObjects.gameplay.filter(function (obj) {
+    return obj.config.name !== 'turn_symbol';
+  });
+
+  // Add new turn symbol
+  var turnSymbol = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.ILLUSTRATION,
+    x: 165,
+    y: 30,
+    name: 'turn_symbol'
+  });
+  if (game.state.currentPlayer == 1) {
+    turnSymbol.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('line', {
+      x: -15,
+      y: -15,
+      x2: 15,
+      y2: 15,
+      color: "rgba(40, 151, 255, 1)",
+      lineWidth: 4
+    }));
+    turnSymbol.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('line', {
+      x: 15,
+      y: -15,
+      x2: -15,
+      y2: 15,
+      color: "rgba(40, 151, 255, 1)",
+      lineWidth: 4
+    }));
+  } else {
+    turnSymbol.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('circle', {
+      x: 0,
+      y: 0,
+      radius: 15,
+      color: "rgba(248, 66, 66, 1)",
+      lineWidth: 4
+    }));
+  }
+  game.gameObjects.gameplay.push(turnSymbol);
+}
+
+/***/ }),
+
+/***/ "./resources/components/ui/uiMenu.js":
+/*!*******************************************!*\
+  !*** ./resources/components/ui/uiMenu.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   create: () => (/* binding */ create)
+/* harmony export */ });
+/* harmony import */ var _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classes/GameObject.js */ "./resources/components/classes/GameObject.js");
+/* harmony import */ var _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/GameShape.js */ "./resources/components/classes/GameShape.js");
+
+
+function create(game) {
+  var startButton = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
+    x: game.displayData.gameWidth / 2,
+    y: game.displayData.gameHeight / 2,
+    name: 'start_button',
+    outline: {
+      top: 60,
+      left: 60,
+      bottom: 60,
+      right: 60
+    }
+  });
+  startButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+    x: -60,
+    y: -60,
+    width: 120,
+    height: 120,
+    color: "red"
+  }));
+  startButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('polygon', {
+    x: -0,
+    y: -0,
+    points: [{
+      x: -30,
+      y: -40
+    }, {
+      x: 40,
+      y: 0
+    }, {
+      x: -30,
+      y: 40
+    }],
+    color: "red",
+    fillColor: "red"
+  }));
+  game.gameObjects.menu.push(startButton);
+}
+
+/***/ }),
+
+/***/ "./resources/components/ui/uiPause.js":
+/*!********************************************!*\
+  !*** ./resources/components/ui/uiPause.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   create: () => (/* binding */ create)
+/* harmony export */ });
+/* harmony import */ var _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classes/GameObject.js */ "./resources/components/classes/GameObject.js");
+/* harmony import */ var _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/GameShape.js */ "./resources/components/classes/GameShape.js");
+/* harmony import */ var _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../classes/GameShapeAnimation.js */ "./resources/components/classes/GameShapeAnimation.js");
+
+
+
+function create(game) {
+  var continueButton = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
+    x: game.displayData.gameWidth - 30,
+    y: 30,
+    name: 'continue_button',
+    outline: {
+      top: 20,
+      left: 20,
+      bottom: 20,
+      right: 20
+    }
+  });
+  continueButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+    x: -20,
+    y: -20,
+    width: 40,
+    height: 40,
+    color: "red"
+  }));
+  continueButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('polygon', {
+    points: [{
+      x: -10,
+      y: -10
+    }, {
+      x: 10,
+      y: 0
+    }, {
+      x: -10,
+      y: 10
+    }],
+    color: "red",
+    fillColor: "red"
+  }));
+  game.gameObjects.paused.push(continueButton);
+  var stopButton = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
+    x: game.displayData.gameWidth - 80,
+    y: 30,
+    name: 'stop_button',
+    outline: {
+      top: 20,
+      left: 20,
+      bottom: 20,
+      right: 20
+    }
+  });
+  stopButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+    x: -20,
+    y: -20,
+    width: 40,
+    height: 40,
+    color: "red"
+  }));
+  stopButton.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
+    x: -10,
+    y: -10,
+    width: 20,
+    height: 20,
+    color: "red",
+    fillColor: "red"
+  }));
+  game.gameObjects.paused.push(stopButton);
+  var pauseText = new _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    variant: _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.TEXT,
+    x: game.displayData.gameWidth / 2,
+    y: game.displayData.gameHeight / 2,
+    name: 'pause_text'
+  });
+  pauseText.addShape(new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('text', {
+    x: -150,
+    y: 0,
+    text: "Game Paused",
+    font: "50px Consolas",
+    color: "white"
+  }));
+  var pauseLine = new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('line', {
+    x: -150,
+    y: 5,
+    x2: 150,
+    y2: 5,
+    color: "white",
+    lineWidth: 4
+  });
+  pauseLine.addAnimation(new _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+    duration: 1000,
+    loop: _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__["default"].INFINITE
+  }));
+  pauseText.addShape(pauseLine);
+  game.gameObjects.paused.push(pauseText);
+}
+
+/***/ }),
+
+/***/ "./resources/components/userInput/userInput.js":
+/*!*****************************************************!*\
+  !*** ./resources/components/userInput/userInput.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   handleUserInputs: () => (/* binding */ handleUserInputs)
+/* harmony export */ });
+/* harmony import */ var _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classes/Game.js */ "./resources/components/classes/Game.js");
+/* harmony import */ var _userInputGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userInputGameplay.js */ "./resources/components/userInput/userInputGameplay.js");
+/* harmony import */ var _userInputPause_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./userInputPause.js */ "./resources/components/userInput/userInputPause.js");
+/* harmony import */ var _userInputMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userInputMenu.js */ "./resources/components/userInput/userInputMenu.js");
+
+
+
+
+function handleUserInputs(game) {
+  game.userInputs.forEach(function (input) {
+    if (input.type == 'click') {
+      switch (game.mode) {
+        case _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY:
+          (0,_userInputGameplay_js__WEBPACK_IMPORTED_MODULE_1__.handleUserInputsGameplay)(game, input);
+          break;
+        case _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.PAUSED:
+          (0,_userInputPause_js__WEBPACK_IMPORTED_MODULE_2__.handleUserInputPause)(game, input);
+          break;
+        case _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.MENU:
+          (0,_userInputMenu_js__WEBPACK_IMPORTED_MODULE_3__.handleUserInputMenu)(game, input);
+          break;
+        default:
+          break;
+      }
+    }
+  });
+  game.userInputs = [];
+}
+;
+
+/***/ }),
+
+/***/ "./resources/components/userInput/userInputGameplay.js":
+/*!*************************************************************!*\
+  !*** ./resources/components/userInput/userInputGameplay.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   handleUserInputsGameplay: () => (/* binding */ handleUserInputsGameplay)
+/* harmony export */ });
+/* harmony import */ var _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classes/Game.js */ "./resources/components/classes/Game.js");
+/* harmony import */ var _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ui/uiGameplay.js */ "./resources/components/ui/uiGameplay.js");
+/* harmony import */ var _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../classes/GameShape.js */ "./resources/components/classes/GameShape.js");
+/* harmony import */ var _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../classes/GameShapeAnimation.js */ "./resources/components/classes/GameShapeAnimation.js");
+/* harmony import */ var _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../classes/GameObject.js */ "./resources/components/classes/GameObject.js");
+
+
+
+
+
+function handleUserInputsGameplay(game, input) {
+  game.gameObjects[_classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY].forEach(function (gameObject) {
+    // Check clock on board cells
+    if (gameObject.config.variant == _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_4__["default"].VARIANT.BOARD) {
+      if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
+        gameObject.state.occupiedBy = game.state.currentPlayer;
+        switch (game.state.currentPlayer) {
+          case 1:
+            addCrossShape(game, gameObject);
+            game.state.currentPlayer = 2;
+            break;
+          case 2:
+            addCircleShape(game, gameObject);
+            game.state.currentPlayer = 1;
+            break;
+          default:
+            break;
+        }
+        _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__.updateTurnSymbol(game);
+      }
+    }
+
+    // Check click on menu button
+    if (gameObject.config.variant == _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_4__["default"].VARIANT.BUTTON) {
+      if (gameObject.checkCollision(input.x, input.y)) {
+        if (gameObject.config.name === 'menu_button') {
+          game.mode = _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.PAUSED;
+        }
+      }
+    }
+  });
+}
+function addCrossShape(game, gameObject) {
+  var line1 = new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_2__["default"]('line', {
+    x: game.config.cellPadding - game.config.cellWidth / 2,
+    y: game.config.cellPadding - game.config.cellHeight / 2,
+    x2: game.config.cellWidth / 2 - game.config.cellPadding,
+    y2: game.config.cellHeight / 2 - game.config.cellPadding,
+    color: "rgba(40, 151, 255, 1)",
+    lineWidth: 4
+  });
+  line1.addAnimation(new _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
+    duration: 150,
+    direction: _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"].BACKWARD
+  }));
+  gameObject.addShape(line1);
+  var line2 = new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_2__["default"]('line', {
+    x: game.config.cellPadding - game.config.cellWidth / 2,
+    y: game.config.cellHeight / 2 - game.config.cellPadding,
+    x2: game.config.cellWidth / 2 - game.config.cellPadding,
+    y2: -game.config.cellHeight / 2 + game.config.cellPadding,
+    color: "rgba(40, 151, 255, 1)",
+    lineWidth: 4
+  });
+  line2.addAnimation(new _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
+    duration: 150,
+    startDelay: 150
+  }));
+  gameObject.addShape(line2);
+}
+function addCircleShape(game, gameObject) {
+  var circle = new _classes_GameShape_js__WEBPACK_IMPORTED_MODULE_2__["default"]('circle', {
+    x: 0,
+    y: 0,
+    radius: game.config.cellWidth / 2 - game.config.cellPadding,
+    color: "rgba(248, 66, 66, 1)",
+    lineWidth: 4
+  });
+  circle.addAnimation(new _classes_GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
+    duration: 300
+  }));
+  gameObject.addShape(circle);
+}
+
+/***/ }),
+
+/***/ "./resources/components/userInput/userInputMenu.js":
+/*!*********************************************************!*\
+  !*** ./resources/components/userInput/userInputMenu.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   handleUserInputMenu: () => (/* binding */ handleUserInputMenu)
+/* harmony export */ });
+/* harmony import */ var _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classes/Game.js */ "./resources/components/classes/Game.js");
+/* harmony import */ var _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/GameObject.js */ "./resources/components/classes/GameObject.js");
+/* harmony import */ var _gameBoard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../gameBoard.js */ "./resources/components/gameBoard.js");
+
+
+
+function handleUserInputMenu(game, input) {
+  game.gameObjects[_classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.MENU].forEach(function (gameObject) {
+    // Check click on start button
+    if (gameObject.config.variant == _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_1__["default"].VARIANT.BUTTON) {
+      if (gameObject.checkCollision(input.x, input.y)) {
+        if (gameObject.config.name === 'start_button') {
+          game.mode = _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY;
+          _gameBoard_js__WEBPACK_IMPORTED_MODULE_2__.create(game);
+        }
+      }
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/components/userInput/userInputPause.js":
+/*!**********************************************************!*\
+  !*** ./resources/components/userInput/userInputPause.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   handleUserInputPause: () => (/* binding */ handleUserInputPause)
+/* harmony export */ });
+/* harmony import */ var _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../classes/Game.js */ "./resources/components/classes/Game.js");
+/* harmony import */ var _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/GameObject.js */ "./resources/components/classes/GameObject.js");
+
+
+function handleUserInputPause(game, input) {
+  game.gameObjects[_classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.PAUSED].forEach(function (gameObject) {
+    // Check click on continue button
+    if (gameObject.config.variant == _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_1__["default"].VARIANT.BUTTON) {
+      if (gameObject.checkCollision(input.x, input.y)) {
+        if (gameObject.config.name === 'continue_button') {
+          game.mode = _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY;
+        }
+      }
+    }
+    // Check click on stop button
+    if (gameObject.config.variant == _classes_GameObject_js__WEBPACK_IMPORTED_MODULE_1__["default"].VARIANT.BUTTON) {
+      if (gameObject.checkCollision(input.x, input.y)) {
+        if (gameObject.config.name === 'stop_button') {
+          game.mode = _classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.MENU;
+        }
+      }
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/components/utils/graphicDebug.js":
+/*!****************************************************!*\
+  !*** ./resources/components/utils/graphicDebug.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -608,10 +1094,10 @@ function drawFPS(ctx, fps) {
 
 /***/ }),
 
-/***/ "./resources/components/mouseUtils.js":
-/*!********************************************!*\
-  !*** ./resources/components/mouseUtils.js ***!
-  \********************************************/
+/***/ "./resources/components/utils/mouseUtils.js":
+/*!**************************************************!*\
+  !*** ./resources/components/utils/mouseUtils.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -630,496 +1116,10 @@ function getMousePos(evt, displayData, canvas) {
 
 /***/ }),
 
-/***/ "./resources/components/ui/uiGameplay.js":
-/*!***********************************************!*\
-  !*** ./resources/components/ui/uiGameplay.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   create: () => (/* binding */ create),
-/* harmony export */   updateTurnSymbol: () => (/* binding */ updateTurnSymbol)
-/* harmony export */ });
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
-
-
-function create(game) {
-  // Menu button
-  var menuButton = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
-    x: game.displayData.gameWidth - 30,
-    y: 30,
-    name: 'menu_button',
-    outline: {
-      top: 20,
-      left: 20,
-      bottom: 20,
-      right: 20
-    }
-  });
-  menuButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
-    x: -20,
-    y: -20,
-    width: 40,
-    height: 40,
-    color: "red"
-  }));
-  menuButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
-    x: -10,
-    y: -10,
-    width: 6,
-    height: 20,
-    color: "red",
-    fillColor: "red"
-  }));
-  menuButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
-    x: 10,
-    y: -10,
-    width: -6,
-    height: 20,
-    color: "red",
-    fillColor: "red"
-  }));
-  game.gameObjects.gameplay.push(menuButton);
-
-  // Player turn indicator
-  var turnIndicator = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.TEXT,
-    x: 30,
-    y: 37.5,
-    name: 'turn_indicator'
-  });
-  turnIndicator.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('text', {
-    x: 0,
-    y: 0,
-    text: "Player:",
-    font: "30px Consolas",
-    color: "white"
-  }));
-  game.gameObjects.gameplay.push(turnIndicator);
-}
-function updateTurnSymbol(game) {
-  // Remove existing turn symbol
-  game.gameObjects.gameplay = game.gameObjects.gameplay.filter(function (obj) {
-    return obj.config.name !== 'turn_symbol';
-  });
-
-  // Add new turn symbol
-  var turnSymbol = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.ILLUSTRATION,
-    x: 165,
-    y: 30,
-    name: 'turn_symbol'
-  });
-  if (game.state.currentPlayer == 1) {
-    turnSymbol.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('line', {
-      x: -15,
-      y: -15,
-      x2: 15,
-      y2: 15,
-      color: "rgba(40, 151, 255, 1)",
-      lineWidth: 4
-    }));
-    turnSymbol.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('line', {
-      x: 15,
-      y: -15,
-      x2: -15,
-      y2: 15,
-      color: "rgba(40, 151, 255, 1)",
-      lineWidth: 4
-    }));
-  } else {
-    turnSymbol.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('circle', {
-      x: 0,
-      y: 0,
-      radius: 15,
-      color: "rgba(248, 66, 66, 1)",
-      lineWidth: 4
-    }));
-  }
-  game.gameObjects.gameplay.push(turnSymbol);
-}
-
-/***/ }),
-
-/***/ "./resources/components/ui/uiMenu.js":
-/*!*******************************************!*\
-  !*** ./resources/components/ui/uiMenu.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   create: () => (/* binding */ create)
-/* harmony export */ });
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
-
-
-function create(game) {
-  var startButton = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
-    x: game.displayData.gameWidth / 2,
-    y: game.displayData.gameHeight / 2,
-    name: 'start_button',
-    outline: {
-      top: 60,
-      left: 60,
-      bottom: 60,
-      right: 60
-    }
-  });
-  startButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
-    x: -60,
-    y: -60,
-    width: 120,
-    height: 120,
-    color: "red"
-  }));
-  startButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('polygon', {
-    x: -0,
-    y: -0,
-    points: [{
-      x: -30,
-      y: -40
-    }, {
-      x: 40,
-      y: 0
-    }, {
-      x: -30,
-      y: 40
-    }],
-    color: "red",
-    fillColor: "red"
-  }));
-  game.gameObjects.menu.push(startButton);
-}
-
-/***/ }),
-
-/***/ "./resources/components/ui/uiPause.js":
-/*!********************************************!*\
-  !*** ./resources/components/ui/uiPause.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   create: () => (/* binding */ create)
-/* harmony export */ });
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
-/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
-
-
-
-function create(game) {
-  var continueButton = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
-    x: game.displayData.gameWidth - 30,
-    y: 30,
-    name: 'continue_button',
-    outline: {
-      top: 20,
-      left: 20,
-      bottom: 20,
-      right: 20
-    }
-  });
-  continueButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
-    x: -20,
-    y: -20,
-    width: 40,
-    height: 40,
-    color: "red"
-  }));
-  continueButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('polygon', {
-    points: [{
-      x: -10,
-      y: -10
-    }, {
-      x: 10,
-      y: 0
-    }, {
-      x: -10,
-      y: 10
-    }],
-    color: "red",
-    fillColor: "red"
-  }));
-  game.gameObjects.paused.push(continueButton);
-  var stopButton = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.BUTTON,
-    x: game.displayData.gameWidth - 80,
-    y: 30,
-    name: 'stop_button',
-    outline: {
-      top: 20,
-      left: 20,
-      bottom: 20,
-      right: 20
-    }
-  });
-  stopButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
-    x: -20,
-    y: -20,
-    width: 40,
-    height: 40,
-    color: "red"
-  }));
-  stopButton.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('rectangle', {
-    x: -10,
-    y: -10,
-    width: 20,
-    height: 20,
-    color: "red",
-    fillColor: "red"
-  }));
-  game.gameObjects.paused.push(stopButton);
-  var pauseText = new _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    variant: _GameObject_js__WEBPACK_IMPORTED_MODULE_0__["default"].VARIANT.TEXT,
-    x: game.displayData.gameWidth / 2,
-    y: game.displayData.gameHeight / 2,
-    name: 'pause_text'
-  });
-  pauseText.addShape(new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('text', {
-    x: -150,
-    y: 0,
-    text: "Game Paused",
-    font: "50px Consolas",
-    color: "white"
-  }));
-  var pauseLine = new _GameShape_js__WEBPACK_IMPORTED_MODULE_1__["default"]('line', {
-    x: -150,
-    y: 5,
-    x2: 150,
-    y2: 5,
-    color: "white",
-    lineWidth: 4
-  });
-  pauseLine.addAnimation(new _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
-    duration: 1000,
-    loop: _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__["default"].INFINITE
-  }));
-  pauseText.addShape(pauseLine);
-  game.gameObjects.paused.push(pauseText);
-}
-
-/***/ }),
-
-/***/ "./resources/components/userInput/userInput.js":
-/*!*****************************************************!*\
-  !*** ./resources/components/userInput/userInput.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   handleUserInputs: () => (/* binding */ handleUserInputs)
-/* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _userInputGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userInputGameplay.js */ "./resources/components/userInput/userInputGameplay.js");
-/* harmony import */ var _userInputPause_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./userInputPause.js */ "./resources/components/userInput/userInputPause.js");
-/* harmony import */ var _userInputMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userInputMenu.js */ "./resources/components/userInput/userInputMenu.js");
-
-
-
-
-function handleUserInputs(game) {
-  game.userInputs.forEach(function (input) {
-    if (input.type == 'click') {
-      switch (game.mode) {
-        case _Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY:
-          (0,_userInputGameplay_js__WEBPACK_IMPORTED_MODULE_1__.handleUserInputsGameplay)(game, input);
-          break;
-        case _Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.PAUSED:
-          (0,_userInputPause_js__WEBPACK_IMPORTED_MODULE_2__.handleUserInputPause)(game, input);
-          break;
-        case _Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.MENU:
-          (0,_userInputMenu_js__WEBPACK_IMPORTED_MODULE_3__.handleUserInputMenu)(game, input);
-          break;
-        default:
-          break;
-      }
-    }
-  });
-  game.userInputs = [];
-}
-;
-
-/***/ }),
-
-/***/ "./resources/components/userInput/userInputGameplay.js":
-/*!*************************************************************!*\
-  !*** ./resources/components/userInput/userInputGameplay.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   handleUserInputsGameplay: () => (/* binding */ handleUserInputsGameplay)
-/* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ui/uiGameplay.js */ "./resources/components/ui/uiGameplay.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
-/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
-
-
-
-
-
-function handleUserInputsGameplay(game, input) {
-  game.gameObjects[_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY].forEach(function (gameObject) {
-    // Check clock on board cells
-    if (gameObject.config.variant == _GameObject_js__WEBPACK_IMPORTED_MODULE_4__["default"].VARIANT.BOARD) {
-      if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
-        gameObject.state.occupiedBy = game.state.currentPlayer;
-        switch (game.state.currentPlayer) {
-          case 1:
-            addCrossShape(game, gameObject);
-            game.state.currentPlayer = 2;
-            break;
-          case 2:
-            addCircleShape(game, gameObject);
-            game.state.currentPlayer = 1;
-            break;
-          default:
-            break;
-        }
-        _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__.updateTurnSymbol(game);
-      }
-    }
-
-    // Check click on menu button
-    if (gameObject.config.variant == _GameObject_js__WEBPACK_IMPORTED_MODULE_4__["default"].VARIANT.BUTTON) {
-      if (gameObject.checkCollision(input.x, input.y)) {
-        if (gameObject.config.name === 'menu_button') {
-          game.mode = _Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.PAUSED;
-        }
-      }
-    }
-  });
-}
-function addCrossShape(game, gameObject) {
-  var line1 = new _GameShape_js__WEBPACK_IMPORTED_MODULE_2__["default"]('line', {
-    x: game.config.cellPadding - game.config.cellWidth / 2,
-    y: game.config.cellPadding - game.config.cellHeight / 2,
-    x2: game.config.cellWidth / 2 - game.config.cellPadding,
-    y2: game.config.cellHeight / 2 - game.config.cellPadding,
-    color: "rgba(40, 151, 255, 1)",
-    lineWidth: 4
-  });
-  line1.addAnimation(new _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
-    duration: 150,
-    direction: _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"].BACKWARD
-  }));
-  gameObject.addShape(line1);
-  var line2 = new _GameShape_js__WEBPACK_IMPORTED_MODULE_2__["default"]('line', {
-    x: game.config.cellPadding - game.config.cellWidth / 2,
-    y: game.config.cellHeight / 2 - game.config.cellPadding,
-    x2: game.config.cellWidth / 2 - game.config.cellPadding,
-    y2: -game.config.cellHeight / 2 + game.config.cellPadding,
-    color: "rgba(40, 151, 255, 1)",
-    lineWidth: 4
-  });
-  line2.addAnimation(new _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
-    duration: 150,
-    startDelay: 150
-  }));
-  gameObject.addShape(line2);
-}
-function addCircleShape(game, gameObject) {
-  var circle = new _GameShape_js__WEBPACK_IMPORTED_MODULE_2__["default"]('circle', {
-    x: 0,
-    y: 0,
-    radius: game.config.cellWidth / 2 - game.config.cellPadding,
-    color: "rgba(248, 66, 66, 1)",
-    lineWidth: 4
-  });
-  circle.addAnimation(new _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
-    duration: 300
-  }));
-  gameObject.addShape(circle);
-}
-
-/***/ }),
-
-/***/ "./resources/components/userInput/userInputMenu.js":
-/*!*********************************************************!*\
-  !*** ./resources/components/userInput/userInputMenu.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   handleUserInputMenu: () => (/* binding */ handleUserInputMenu)
-/* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _gameBoard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../gameBoard.js */ "./resources/components/gameBoard.js");
-
-
-
-function handleUserInputMenu(game, input) {
-  game.gameObjects[_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.MENU].forEach(function (gameObject) {
-    // Check click on start button
-    if (gameObject.config.variant == _GameObject_js__WEBPACK_IMPORTED_MODULE_1__["default"].VARIANT.BUTTON) {
-      if (gameObject.checkCollision(input.x, input.y)) {
-        if (gameObject.config.name === 'start_button') {
-          game.mode = _Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY;
-          _gameBoard_js__WEBPACK_IMPORTED_MODULE_2__.create(game);
-        }
-      }
-    }
-  });
-}
-
-/***/ }),
-
-/***/ "./resources/components/userInput/userInputPause.js":
-/*!**********************************************************!*\
-  !*** ./resources/components/userInput/userInputPause.js ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   handleUserInputPause: () => (/* binding */ handleUserInputPause)
-/* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
-
-
-function handleUserInputPause(game, input) {
-  game.gameObjects[_Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.PAUSED].forEach(function (gameObject) {
-    // Check click on continue button
-    if (gameObject.config.variant == _GameObject_js__WEBPACK_IMPORTED_MODULE_1__["default"].VARIANT.BUTTON) {
-      if (gameObject.checkCollision(input.x, input.y)) {
-        if (gameObject.config.name === 'continue_button') {
-          game.mode = _Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.GAMEPLAY;
-        }
-      }
-    }
-    // Check click on stop button
-    if (gameObject.config.variant == _GameObject_js__WEBPACK_IMPORTED_MODULE_1__["default"].VARIANT.BUTTON) {
-      if (gameObject.checkCollision(input.x, input.y)) {
-        if (gameObject.config.name === 'stop_button') {
-          game.mode = _Game_js__WEBPACK_IMPORTED_MODULE_0__.GAME_MODE.MENU;
-        }
-      }
-    }
-  });
-}
-
-/***/ }),
-
-/***/ "./resources/components/utils.js":
-/*!***************************************!*\
-  !*** ./resources/components/utils.js ***!
-  \***************************************/
+/***/ "./resources/components/utils/utils.js":
+/*!*********************************************!*\
+  !*** ./resources/components/utils/utils.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1249,11 +1249,11 @@ var __webpack_exports__ = {};
   !*** ./resources/index.js ***!
   \****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Game.js */ "./resources/components/Game.js");
+/* harmony import */ var _components_classes_Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/classes/Game.js */ "./resources/components/classes/Game.js");
 
 window.onload = function () {
   var canvas = document.getElementById('gameCanvas');
-  var game = new _components_Game_js__WEBPACK_IMPORTED_MODULE_0__.Game(canvas);
+  var game = new _components_classes_Game_js__WEBPACK_IMPORTED_MODULE_0__.Game(canvas);
 };
 })();
 

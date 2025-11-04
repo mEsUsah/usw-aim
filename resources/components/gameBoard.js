@@ -1,5 +1,5 @@
-import GameObject from "./GameObject.js";
-import GameShape from "./GameShape.js";
+import GameObject from "./classes/GameObject.js";
+import GameShape from "./classes/GameShape.js";
 
 export function create(game){
     // Clear existing game board objects

@@ -1,11 +1,11 @@
-import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
-import * as graphicDebug from './graphicDebug.js' ;
-import { getMousePos } from './mouseUtils.js';
-import * as uiMenu from './ui/uiMenu.js';
-import * as uiGameplay from './ui/uiGameplay.js';
-import * as uiPause from './ui/uiPause.js';
+import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from '../utils/utils.js';
+import * as graphicDebug from '../utils/graphicDebug.js' ;
+import { getMousePos } from '../utils/mouseUtils.js';
+import * as uiMenu from '../ui/uiMenu.js';
+import * as uiGameplay from '../ui/uiGameplay.js';
+import * as uiPause from '../ui/uiPause.js';
 
-import { handleUserInputs } from './userInput/userInput.js';
+import { handleUserInputs } from '../userInput/userInput.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;

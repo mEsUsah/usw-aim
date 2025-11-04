@@ -1,4 +1,4 @@
-import {Game} from './components/Game.js';
+import {Game} from './components/classes/Game.js';
 
 window.onload = function() {
     const canvas = document.getElementById('gameCanvas');
