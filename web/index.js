@@ -16,9 +16,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./resources/components/utils.js");
 /* harmony import */ var _graphicDebug_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphicDebug.js */ "./resources/components/graphicDebug.js");
 /* harmony import */ var _mouseUtils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mouseUtils.js */ "./resources/components/mouseUtils.js");
-/* harmony import */ var _uiMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./uiMenu.js */ "./resources/components/uiMenu.js");
-/* harmony import */ var _uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./uiGameplay.js */ "./resources/components/uiGameplay.js");
-/* harmony import */ var _uiPause_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./uiPause.js */ "./resources/components/uiPause.js");
+/* harmony import */ var _ui_uiMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui/uiMenu.js */ "./resources/components/ui/uiMenu.js");
+/* harmony import */ var _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ui/uiGameplay.js */ "./resources/components/ui/uiGameplay.js");
+/* harmony import */ var _ui_uiPause_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ui/uiPause.js */ "./resources/components/ui/uiPause.js");
 /* harmony import */ var _userInput_userInput_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./userInput/userInput.js */ "./resources/components/userInput/userInput.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
@@ -95,12 +95,12 @@ var Game = /*#__PURE__*/function () {
     this.config = this.config();
 
     // Setup UI
-    _uiMenu_js__WEBPACK_IMPORTED_MODULE_3__.create(this);
-    _uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__.create(this);
-    _uiPause_js__WEBPACK_IMPORTED_MODULE_5__.create(this);
+    _ui_uiMenu_js__WEBPACK_IMPORTED_MODULE_3__.create(this);
+    _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__.create(this);
+    _ui_uiPause_js__WEBPACK_IMPORTED_MODULE_5__.create(this);
 
     // Start the game
-    _uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__.updateTurnSymbol(this);
+    _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__.updateTurnSymbol(this);
     this.start();
   }
   return _createClass(Game, [{
@@ -630,10 +630,10 @@ function getMousePos(evt, displayData, canvas) {
 
 /***/ }),
 
-/***/ "./resources/components/uiGameplay.js":
-/*!********************************************!*\
-  !*** ./resources/components/uiGameplay.js ***!
-  \********************************************/
+/***/ "./resources/components/ui/uiGameplay.js":
+/*!***********************************************!*\
+  !*** ./resources/components/ui/uiGameplay.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -641,8 +641,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   create: () => (/* binding */ create),
 /* harmony export */   updateTurnSymbol: () => (/* binding */ updateTurnSymbol)
 /* harmony export */ });
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameShape.js */ "./resources/components/GameShape.js");
+/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
+/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
 
 
 function create(game) {
@@ -744,18 +744,18 @@ function updateTurnSymbol(game) {
 
 /***/ }),
 
-/***/ "./resources/components/uiMenu.js":
-/*!****************************************!*\
-  !*** ./resources/components/uiMenu.js ***!
-  \****************************************/
+/***/ "./resources/components/ui/uiMenu.js":
+/*!*******************************************!*\
+  !*** ./resources/components/ui/uiMenu.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   create: () => (/* binding */ create)
 /* harmony export */ });
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameShape.js */ "./resources/components/GameShape.js");
+/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
+/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
 
 
 function create(game) {
@@ -799,19 +799,19 @@ function create(game) {
 
 /***/ }),
 
-/***/ "./resources/components/uiPause.js":
-/*!*****************************************!*\
-  !*** ./resources/components/uiPause.js ***!
-  \*****************************************/
+/***/ "./resources/components/ui/uiPause.js":
+/*!********************************************!*\
+  !*** ./resources/components/ui/uiPause.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   create: () => (/* binding */ create)
 /* harmony export */ });
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameShape.js */ "./resources/components/GameShape.js");
-/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
+/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
+/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
+/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
 
 
 
@@ -962,7 +962,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   handleUserInputsGameplay: () => (/* binding */ handleUserInputsGameplay)
 /* harmony export */ });
 /* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../uiGameplay.js */ "./resources/components/uiGameplay.js");
+/* harmony import */ var _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ui/uiGameplay.js */ "./resources/components/ui/uiGameplay.js");
 /* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
 /* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
 /* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
@@ -989,7 +989,7 @@ function handleUserInputsGameplay(game, input) {
           default:
             break;
         }
-        _uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__.updateTurnSymbol(game);
+        _ui_uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__.updateTurnSymbol(game);
       }
     }
 

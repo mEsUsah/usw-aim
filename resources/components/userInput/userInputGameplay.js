@@ -1,5 +1,5 @@
 import { GAME_MODE } from '../Game.js';
-import * as uiGameplay from '../uiGameplay.js';
+import * as uiGameplay from '../ui/uiGameplay.js';
 import GameShape from '../GameShape.js';
 import GameShapeAnimation from '../GameShapeAnimation.js';
 import GameObject from '../GameObject.js';

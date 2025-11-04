@@ -1,6 +1,6 @@
-import GameObject from "./GameObject.js";
-import GameShape from "./GameShape.js";
-import GameShapeAnimation from "./GameShapeAnimation.js";
+import GameObject from "../GameObject.js";
+import GameShape from "../GameShape.js";
+import GameShapeAnimation from "../GameShapeAnimation.js";
 
 export function create(game){
     const continueButton = new GameObject({

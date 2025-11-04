@@ -1,9 +1,9 @@
 import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
 import * as graphicDebug from './graphicDebug.js' ;
 import { getMousePos } from './mouseUtils.js';
-import * as uiMenu from './uiMenu.js';
-import * as uiGameplay from './uiGameplay.js';
-import * as uiPause from './uiPause.js';
+import * as uiMenu from './ui/uiMenu.js';
+import * as uiGameplay from './ui/uiGameplay.js';
+import * as uiPause from './ui/uiPause.js';
 
 import { handleUserInputs } from './userInput/userInput.js';
 

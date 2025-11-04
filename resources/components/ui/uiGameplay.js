@@ -1,5 +1,5 @@
-import GameObject from "./GameObject.js";
-import GameShape from "./GameShape.js";
+import GameObject from "../GameObject.js";
+import GameShape from "../GameShape.js";
 
 export function create(game){
     // Menu button
