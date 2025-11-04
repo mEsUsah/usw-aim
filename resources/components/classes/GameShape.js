@@ -91,6 +91,8 @@ export default class GameShape {
             case 'text':
                 ctx.font = this.config.font || "20px Arial";
                 ctx.fillStyle = this.config.color || "black";
+                ctx.textAlign = this.config.align || "left";
+                ctx.textBaseline = this.config.baseline || "alphabetic";
                 ctx.fillText(this.config.text || "", 0, 0);
                 break;
 
