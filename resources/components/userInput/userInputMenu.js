@@ -20,12 +20,26 @@ export function handleUserInputMenu(game, input){
                     // remove existing shape size indicator
                     game.gameObjects[GAME_MODE.MENU].forEach(obj => {
                         if (obj.config.variant == GameObject.VARIANT.BUTTON && obj.config.name === 'size_button') {
-                            obj.removeShape('selected_size_indicator');
+                            obj.removeShape('selected_indicator');
                         }
                     });
 
                     // add shape size indicator
-                    gameObject.addShape(uiMenu.getSelectedSizeIndicator());
+                    gameObject.addShape(uiMenu.getSelectedIndicator());
+                }
+                if(gameObject.config.name === 'win_length_button'){
+                    game.state.winLength = gameObject.config.winLength;
+                    game.updateConfig();
+
+                    // remove existing shape win length indicator
+                    game.gameObjects[GAME_MODE.MENU].forEach(obj => {
+                        if (obj.config.variant == GameObject.VARIANT.BUTTON && obj.config.name === 'win_length_button') {
+                            obj.removeShape('selected_indicator');
+                        }
+                    });
+
+                    // add shape win length indicator
+                    gameObject.addShape(uiMenu.getSelectedIndicator());
                 }
             }
         }

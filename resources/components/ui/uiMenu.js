@@ -87,13 +87,71 @@ export function create(game){
         }));
 
         if(i === game.state.boardSize){
-            sizeButton.addShape(getSelectedSizeIndicator());
+            sizeButton.addShape(getSelectedIndicator());
         }
         game.gameObjects.menu.push(sizeButton);
     }
+
+
+    // Win length selector
+    const winLengthText = new GameObject({
+        variant: GameObject.VARIANT.TEXT,
+        x: 50,
+        y: game.displayData.gameHeight / 4 * 1 + 100,
+        name: 'win_length_text',
+    });
+    winLengthText.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Win Length:",
+        font: "30px Consolas",
+        color: "white",
+        align: "left",
+        baseline: "middle"
+    }));
+    game.gameObjects.menu.push(winLengthText);
+
+    for(let i = 3; i <= 8; i++){
+        const winLengthButton = new GameObject({
+            variant: GameObject.VARIANT.BUTTON,
+            x: (game.displayData.gameWidth - 80 * 6) + (i - 3) * 80,
+            y: game.displayData.gameHeight / 4 * 1 + 100,
+            name: 'win_length_button',
+            outline: {
+                top: 30,
+                left: 30,
+                bottom: 30,
+                right: 30
+            },
+            winLength: i
+        });
+
+        winLengthButton.addShape(new GameShape('rectangle', {
+            x: -30,
+            y: -30,
+            width: 60,
+            height: 60,
+            color: "red"
+        }));
+        winLengthButton.addShape(new GameShape('text', {
+            x: 0,
+            y: 0,
+            text: `${i}`,
+            font: "30px Consolas",
+            color: "white",
+            align: "center",
+            baseline: "middle"
+        }));
+
+        if(i === game.state.winLength){
+            winLengthButton.addShape(getSelectedIndicator());
+        }
+        game.gameObjects.menu.push(winLengthButton);
+    }
+
 }
 
-export function getSelectedSizeIndicator(){
+export function getSelectedIndicator(){
     return new GameShape('rectangle', {
         x: -30,
         y: -30,
@@ -101,6 +159,6 @@ export function getSelectedSizeIndicator(){
         height: 60,
         fillColor: "rgba(0, 255, 0, 0.2)",
         color: "rgba(0, 0, 0, 0)",
-        name: 'selected_size_indicator'
+        name: 'selected_indicator'
     });
 }
