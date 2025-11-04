@@ -5,7 +5,7 @@ import * as uiMenu from './uiMenu.js';
 import * as uiGameplay from './uiGameplay.js';
 import * as uiPause from './uiPause.js';
 
-import { handleUserInputs } from './userInput.js';
+import { handleUserInputs } from './userInput/userInput.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;

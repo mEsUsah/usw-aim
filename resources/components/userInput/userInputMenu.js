@@ -1,6 +1,6 @@
-import { GAME_MODE } from './Game.js';
-import GameObject from './GameObject.js';
-import * as gameBoard from './gameBoard.js';
+import { GAME_MODE } from '../Game.js';
+import GameObject from '../GameObject.js';
+import * as gameBoard from '../gameBoard.js';
 
 export function handleUserInputMenu(game, input){
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {

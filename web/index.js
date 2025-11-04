@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _uiMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./uiMenu.js */ "./resources/components/uiMenu.js");
 /* harmony import */ var _uiGameplay_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./uiGameplay.js */ "./resources/components/uiGameplay.js");
 /* harmony import */ var _uiPause_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./uiPause.js */ "./resources/components/uiPause.js");
-/* harmony import */ var _userInput_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./userInput.js */ "./resources/components/userInput.js");
+/* harmony import */ var _userInput_userInput_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./userInput/userInput.js */ "./resources/components/userInput/userInput.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -130,7 +130,7 @@ var Game = /*#__PURE__*/function () {
       var _this3 = this;
       // Update game state
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.updateFrameData)(timestamp, this.frameData);
-      (0,_userInput_js__WEBPACK_IMPORTED_MODULE_6__.handleUserInputs)(this);
+      (0,_userInput_userInput_js__WEBPACK_IMPORTED_MODULE_6__.handleUserInputs)(this);
 
       // Update animations
       this.gameObjects[this.mode].forEach(function (gameObject) {
@@ -909,20 +909,20 @@ function create(game) {
 
 /***/ }),
 
-/***/ "./resources/components/userInput.js":
-/*!*******************************************!*\
-  !*** ./resources/components/userInput.js ***!
-  \*******************************************/
+/***/ "./resources/components/userInput/userInput.js":
+/*!*****************************************************!*\
+  !*** ./resources/components/userInput/userInput.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   handleUserInputs: () => (/* binding */ handleUserInputs)
 /* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _userInputGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userInputGameplay.js */ "./resources/components/userInputGameplay.js");
-/* harmony import */ var _userInputPause_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./userInputPause.js */ "./resources/components/userInputPause.js");
-/* harmony import */ var _userInputMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userInputMenu.js */ "./resources/components/userInputMenu.js");
+/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
+/* harmony import */ var _userInputGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userInputGameplay.js */ "./resources/components/userInput/userInputGameplay.js");
+/* harmony import */ var _userInputPause_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./userInputPause.js */ "./resources/components/userInput/userInputPause.js");
+/* harmony import */ var _userInputMenu_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userInputMenu.js */ "./resources/components/userInput/userInputMenu.js");
 
 
 
@@ -951,21 +951,21 @@ function handleUserInputs(game) {
 
 /***/ }),
 
-/***/ "./resources/components/userInputGameplay.js":
-/*!***************************************************!*\
-  !*** ./resources/components/userInputGameplay.js ***!
-  \***************************************************/
+/***/ "./resources/components/userInput/userInputGameplay.js":
+/*!*************************************************************!*\
+  !*** ./resources/components/userInput/userInputGameplay.js ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   handleUserInputsGameplay: () => (/* binding */ handleUserInputsGameplay)
 /* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uiGameplay.js */ "./resources/components/uiGameplay.js");
-/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GameShape.js */ "./resources/components/GameShape.js");
-/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GameObject.js */ "./resources/components/GameObject.js");
+/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
+/* harmony import */ var _uiGameplay_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../uiGameplay.js */ "./resources/components/uiGameplay.js");
+/* harmony import */ var _GameShape_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../GameShape.js */ "./resources/components/GameShape.js");
+/* harmony import */ var _GameShapeAnimation_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GameShapeAnimation.js */ "./resources/components/GameShapeAnimation.js");
+/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
 
 
 
@@ -1047,19 +1047,19 @@ function addCircleShape(game, gameObject) {
 
 /***/ }),
 
-/***/ "./resources/components/userInputMenu.js":
-/*!***********************************************!*\
-  !*** ./resources/components/userInputMenu.js ***!
-  \***********************************************/
+/***/ "./resources/components/userInput/userInputMenu.js":
+/*!*********************************************************!*\
+  !*** ./resources/components/userInput/userInputMenu.js ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   handleUserInputMenu: () => (/* binding */ handleUserInputMenu)
 /* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameObject.js */ "./resources/components/GameObject.js");
-/* harmony import */ var _gameBoard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gameBoard.js */ "./resources/components/gameBoard.js");
+/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
+/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
+/* harmony import */ var _gameBoard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../gameBoard.js */ "./resources/components/gameBoard.js");
 
 
 
@@ -1079,18 +1079,18 @@ function handleUserInputMenu(game, input) {
 
 /***/ }),
 
-/***/ "./resources/components/userInputPause.js":
-/*!************************************************!*\
-  !*** ./resources/components/userInputPause.js ***!
-  \************************************************/
+/***/ "./resources/components/userInput/userInputPause.js":
+/*!**********************************************************!*\
+  !*** ./resources/components/userInput/userInputPause.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   handleUserInputPause: () => (/* binding */ handleUserInputPause)
 /* harmony export */ });
-/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Game.js */ "./resources/components/Game.js");
-/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameObject.js */ "./resources/components/GameObject.js");
+/* harmony import */ var _Game_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Game.js */ "./resources/components/Game.js");
+/* harmony import */ var _GameObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameObject.js */ "./resources/components/GameObject.js");
 
 
 function handleUserInputPause(game, input) {

@@ -1,5 +1,5 @@
-import { GAME_MODE } from './Game.js';
-import GameObject from './GameObject.js';
+import { GAME_MODE } from '../Game.js';
+import GameObject from '../GameObject.js';
 
 export function handleUserInputPause(game, input){
     game.gameObjects[GAME_MODE.PAUSED].forEach(gameObject => {
