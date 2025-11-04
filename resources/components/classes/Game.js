@@ -68,6 +68,7 @@ export class Game{
         
         this.state = {
             boardSize: 3,
+            winLength: 3,
             currentPlayer: 1
         };
         
