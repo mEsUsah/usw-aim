@@ -50,6 +50,7 @@ export class Game{
             menu: [],
             paused: []
         };
+        this.gameFields = [];
         this.userInputs = [];
         this.playerTurn = 1;
         uiGameplay.updateTurnSymbol(this);
@@ -69,7 +70,7 @@ export class Game{
             });
         });
         
-        this.boardSize = 4;
+        this.boardSize = 3;
         this.gameConfig = this.config();
 
         uiMenu.create(this);

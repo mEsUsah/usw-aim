@@ -4,13 +4,15 @@ import GameShape from "./GameShape.js";
 export function create(game){
     // Clear existing game board objects
     game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.variant !== GameObject.VARIANT.BOARD);
+    game.gameFields = [];
+    
     // Initialize board cells
     for (let i = 0; i < game.gameConfig.boardSize; i++) {
         for (let j = 0; j < game.gameConfig.boardSize; j++) {
             const gameObject = new GameObject({
                 variant: GameObject.VARIANT.BOARD,
-                x: game.gameConfig.cellWidth / 2 + i * game.gameConfig.cellWidth + game.gameConfig.boardMargin,
-                y: game.gameConfig.cellHeight / 2 + j * game.gameConfig.cellHeight + game.gameConfig.boardMargin,
+                x: game.gameConfig.cellWidth / 2 + j * game.gameConfig.cellWidth + game.gameConfig.boardMargin,
+                y: game.gameConfig.cellHeight / 2 + i * game.gameConfig.cellHeight + game.gameConfig.boardMargin,
                 name: `board_${i}_${j}`,
                 outline: {
                     top: game.gameConfig.cellHeight / 2,
@@ -28,6 +30,7 @@ export function create(game){
             });
             gameObject.addShape(shape);
             game.gameObjects.gameplay.push(gameObject);
+            game.gameFields.push(gameObject);
         }
     }
 }
