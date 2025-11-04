@@ -1,19 +1,17 @@
 import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from './utils.js';
 import * as graphicDebug from './graphicDebug.js' ;
-import GameObject from './GameObject.js';
-import GameShape from './GameShape.js';
-import GameShapeAnimation from './GameShapeAnimation.js';
 import { getMousePos } from './mouseUtils.js';
 import * as uiMenu from './uiMenu.js';
 import * as uiGameplay from './uiGameplay.js';
 import * as uiPause from './uiPause.js';
-import * as gameBoard from './gameBoard.js';    
+
+import { handleUserInputs } from './userInput.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 800;
-const GAME_MODE = {
+export const GAME_MODE = {
     GAMEPLAY: 'gameplay',
     MENU: 'menu',
     PAUSED: 'paused'
@@ -72,14 +70,14 @@ export class Game{
             boardSize: 3,
             currentPlayer: 1
         };
-
         this.gameConfig = this.config();
 
+        // Setup UI
         uiMenu.create(this);
         uiGameplay.create(this);
         uiPause.create(this);
 
-
+        // Start the game
         uiGameplay.updateTurnSymbol(this);
         this.start();
     };
@@ -103,7 +101,7 @@ export class Game{
     gameLoop(timestamp) {
         // Update game state
         updateFrameData(timestamp, this.frameData);
-        this.handleUserInputs();
+        handleUserInputs(this);
 
         // Update animations
         this.gameObjects[this.gameMode].forEach(gameObject => {
@@ -122,120 +120,5 @@ export class Game{
 
         // Request the next frame
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
-    };
-
-
-    handleUserInputs() {
-        this.userInputs.forEach(input => {
-            if(input.type == 'click') { 
-                switch(this.gameMode) {
-                    case GAME_MODE.GAMEPLAY:
-                        this.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
-                            // Check clock on board cells
-                            if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
-                                if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
-                                    gameObject.state.occupiedBy = this.gameState.currentPlayer; 
-
-                                    if(this.gameState.currentPlayer === 1){
-                                        const line1 = new GameShape('line', {
-                                            x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
-                                            y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
-                                            x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
-                                            y2: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
-                                            color: "rgba(40, 151, 255, 1)",
-                                            lineWidth: 4,
-                                        });
-                                        line1.addAnimation(new GameShapeAnimation({
-                                            duration: 150,
-                                            direction: GameShapeAnimation.BACKWARD,
-                                        }));
-                                        gameObject.addShape(line1);
-                                        
-                                        const line2 = new GameShape('line', {
-                                            x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
-                                            y: this.gameConfig.cellHeight/2 - this.gameConfig.cellPadding,
-                                            x2: this.gameConfig.cellWidth/2 - this.gameConfig.cellPadding,
-                                            y2: -this.gameConfig.cellHeight/2 + this.gameConfig.cellPadding,
-                                            color: "rgba(40, 151, 255, 1)",
-                                            lineWidth: 4,
-                                        });
-                                        line2.addAnimation(new GameShapeAnimation({
-                                            duration: 150,
-                                            startDelay: 150
-                                        }));
-                                        gameObject.addShape(line2);
-                                        this.gameState.currentPlayer = 2;
-                                    } else {
-                                        const circle = new GameShape('circle', {
-                                            x: 0,
-                                            y: 0,
-                                            radius: (this.gameConfig.cellWidth/2) - this.gameConfig.cellPadding,
-                                            color: "rgba(248, 66, 66, 1)",
-                                            lineWidth: 4,
-                                        });
-                                        circle.addAnimation(new GameShapeAnimation({
-                                            duration: 300,
-                                        }));
-
-                                        gameObject.addShape(circle);
-                                        this.gameState.currentPlayer = 1;
-                                    }
-                                    uiGameplay.updateTurnSymbol(this);
-                                }
-                            }
-
-                            // Check click on menu button
-                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                                if (gameObject.checkCollision(input.x, input.y)) {
-                                    if(gameObject.config.name === 'menu_button'){
-                                        this.gameMode = GAME_MODE.PAUSED;
-                                    }
-                                }
-                            }
-                            
-                        });
-                        break;
-
-                    case GAME_MODE.PAUSED:
-                        this.gameObjects[GAME_MODE.PAUSED].forEach(gameObject => {
-                            // Check click on continue button
-                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                                if (gameObject.checkCollision(input.x, input.y)) {
-                                    if(gameObject.config.name === 'continue_button'){
-                                        this.gameMode = GAME_MODE.GAMEPLAY;
-                                    }
-                                }
-                            }
-                            // Check click on stop button
-                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                                if (gameObject.checkCollision(input.x, input.y)) {
-                                    if(gameObject.config.name === 'stop_button'){
-                                        this.gameMode = GAME_MODE.MENU;
-                                    }
-                                }
-                            }
-                        });
-                        break;
-
-                    case GAME_MODE.MENU:
-                        this.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
-                            // Check click on start button
-                            if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-                                if (gameObject.checkCollision(input.x, input.y)) {
-                                    if(gameObject.config.name === 'start_button'){
-                                        this.gameMode = GAME_MODE.GAMEPLAY;
-                                        gameBoard.create(this);
-                                    }
-                                }
-                            }
-                        });
-                        break;
-                    
-                    default:
-                        break;
-                }
-            }
-        });
-        this.userInputs = [];
     };
 }
