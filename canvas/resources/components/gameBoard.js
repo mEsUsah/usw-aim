@@ -5,7 +5,7 @@ export function create(game){
     // Clear existing game board objects
     game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.variant !== GameObject.VARIANT.BOARD);
     game.gameFields = [];
-    
+
     // Initialize board cells
     for (let i = 0; i < game.gameConfig.boardSize; i++) {
         for (let j = 0; j < game.gameConfig.boardSize; j++) {
