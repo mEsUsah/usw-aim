@@ -1,6 +1,6 @@
 name: aim.usw.haxor.no
 type: php
-docroot: ""
+docroot: "web"
 php_version: "8.3"
 webserver_type: nginx-fpm
 xdebug_enabled: false
