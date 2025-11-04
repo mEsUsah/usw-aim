@@ -70,7 +70,9 @@ export class Game{
             boardSize: 3,
             currentPlayer: 1
         };
-        this.config = this.config();
+        
+        this.config = {};
+        this.updateConfig();
 
         // Setup UI
         uiMenu.create(this);
@@ -82,9 +84,9 @@ export class Game{
         this.start();
     };
 
-    config(){
+    updateConfig(){
         const boardSize = this.state.boardSize;
-        return {
+        this.config = {
                 boardSize: boardSize,
                 boardMargin: 60,
                 cellWidth: (GAME_WIDTH - 120) / boardSize,
