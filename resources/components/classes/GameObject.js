@@ -17,6 +17,13 @@ export default class GameObject {
         this.shapes.push(shape);
     }
 
+    removeShape(shapeName) {
+        const shapeIndex = this.shapes.findIndex(shape => shape.config.name && shape.config.name === shapeName);
+        if (shapeIndex !== -1) {
+            this.shapes.splice(shapeIndex, 1);
+        }
+    }
+
     update(deltaTime) {
         this.shapes.forEach(shape => {
             shape.update(deltaTime);
