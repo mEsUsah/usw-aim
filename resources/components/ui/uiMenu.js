@@ -39,7 +39,7 @@ export function create(game){
     // Size buttons
     const sizeText = new GameObject({
         variant: GameObject.VARIANT.TEXT,
-        x: 100,
+        x: 50,
         y: game.displayData.gameHeight / 4 * 1,
         name: 'size_text',
     });
@@ -54,10 +54,10 @@ export function create(game){
     }));
     game.gameObjects.menu.push(sizeText);
 
-    for(let i = 3; i < 8; i++){
+    for(let i = 3; i <= 8; i++){
         const sizeButton = new GameObject({
             variant: GameObject.VARIANT.BUTTON,
-            x: (game.displayData.gameWidth / 2) + (i - 3) * 80,
+            x: (game.displayData.gameWidth - 80 * 6) + (i - 3) * 80,
             y: game.displayData.gameHeight / 4 * 1,
             name: `size_button`,
             outline: {
