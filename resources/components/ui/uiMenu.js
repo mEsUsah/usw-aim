@@ -74,7 +74,7 @@ export function create(game){
             y: -30,
             width: 60,
             height: 60,
-            color: "red"
+            color: "gray"
         }));
         sizeButton.addShape(new GameShape('text', {
             x: 0,
@@ -131,7 +131,7 @@ export function create(game){
             y: -30,
             width: 60,
             height: 60,
-            color: "red"
+            color: "gray"
         }));
         winLengthButton.addShape(new GameShape('text', {
             x: 0,
@@ -152,13 +152,13 @@ export function create(game){
 }
 
 export function getSelectedIndicator(){
-    return new GameShape('rectangle', {
-        x: -30,
-        y: -30,
-        width: 60,
-        height: 60,
-        fillColor: "rgba(0, 255, 0, 0.2)",
-        color: "rgba(0, 0, 0, 0)",
+    return new GameShape('line', {
+        x: -20,
+        y: 17,
+        x2: 20,
+        y2: 17,
+        color: "red",
+            lineWidth: 5,      
         name: 'selected_indicator'
     });
 }

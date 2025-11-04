@@ -5,8 +5,6 @@ import * as uiMenu from '../ui/uiMenu.js';
 
 export function handleUserInputMenu(game, input){
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
-        
-        // Check click on start button
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'start_button'){
