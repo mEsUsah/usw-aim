@@ -52,8 +52,6 @@ export class Game{
         };
         this.gameFields = [];
         this.userInputs = [];
-        this.playerTurn = 1;
-        uiGameplay.updateTurnSymbol(this);
         
         fix_dpi(this.canvas);
         
@@ -70,22 +68,29 @@ export class Game{
             });
         });
         
-        this.boardSize = 3;
+        this.gameState = {
+            boardSize: 3,
+            currentPlayer: 1
+        };
+
         this.gameConfig = this.config();
 
         uiMenu.create(this);
         uiGameplay.create(this);
         uiPause.create(this);
 
+
+        uiGameplay.updateTurnSymbol(this);
         this.start();
     };
 
     config(){
+        const boardSize = this.gameState.boardSize;
         return {
-                boardSize: this.boardSize,
+                boardSize: boardSize,
                 boardMargin: 60,
-                cellWidth: (GAME_WIDTH - 120) / this.boardSize,
-                cellHeight: (GAME_HEIGHT - 120) / this.boardSize,
+                cellWidth: (GAME_WIDTH - 120) / boardSize,
+                cellHeight: (GAME_HEIGHT - 120) / boardSize,
                 cellPadding: 20
             };
     };
@@ -129,9 +134,9 @@ export class Game{
                             // Check clock on board cells
                             if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
                                 if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
-                                    gameObject.state.occupiedBy = this.playerTurn; 
+                                    gameObject.state.occupiedBy = this.gameState.currentPlayer; 
 
-                                    if(this.playerTurn === 1){
+                                    if(this.gameState.currentPlayer === 1){
                                         const line1 = new GameShape('line', {
                                             x: this.gameConfig.cellPadding - this.gameConfig.cellWidth/2,
                                             y: this.gameConfig.cellPadding - this.gameConfig.cellHeight/2,
@@ -159,7 +164,7 @@ export class Game{
                                             startDelay: 150
                                         }));
                                         gameObject.addShape(line2);
-                                        this.playerTurn = 2;
+                                        this.gameState.currentPlayer = 2;
                                     } else {
                                         const circle = new GameShape('circle', {
                                             x: 0,
@@ -173,7 +178,7 @@ export class Game{
                                         }));
 
                                         gameObject.addShape(circle);
-                                        this.playerTurn = 1;
+                                        this.gameState.currentPlayer = 1;
                                     }
                                     uiGameplay.updateTurnSymbol(this);
                                 }
