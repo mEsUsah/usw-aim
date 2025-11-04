@@ -66,7 +66,7 @@ export class Game{
             });
         });
         
-        this.gameState = {
+        this.state = {
             boardSize: 3,
             currentPlayer: 1
         };
@@ -83,7 +83,7 @@ export class Game{
     };
 
     config(){
-        const boardSize = this.gameState.boardSize;
+        const boardSize = this.state.boardSize;
         return {
                 boardSize: boardSize,
                 boardMargin: 60,

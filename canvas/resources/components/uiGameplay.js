@@ -71,8 +71,8 @@ export function updateTurnSymbol(game){
         y: 30,
         name: 'turn_symbol',
     });
-    
-    if(game.gameState.currentPlayer == 1){
+
+    if(game.state.currentPlayer == 1){
         turnSymbol.addShape(new GameShape('line', {
             x: -15,
             y: -15,

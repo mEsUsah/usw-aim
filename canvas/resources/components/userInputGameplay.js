@@ -9,16 +9,16 @@ export function handleUserInputsGameplay(game, input){
         // Check clock on board cells
         if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
             if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
-                gameObject.state.occupiedBy = game.gameState.currentPlayer; 
+                gameObject.state.occupiedBy = game.state.currentPlayer; 
 
-                switch(game.gameState.currentPlayer){
+                switch(game.state.currentPlayer){
                     case 1:
                         addCrossShape(game, gameObject);
-                        game.gameState.currentPlayer = 2;
+                        game.state.currentPlayer = 2;
                         break;
                     case 2:
                         addCircleShape(game, gameObject);
-                        game.gameState.currentPlayer = 1;
+                        game.state.currentPlayer = 1;
                         break;
                     default:
                         break;
