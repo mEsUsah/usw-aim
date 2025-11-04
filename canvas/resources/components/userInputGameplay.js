@@ -42,10 +42,10 @@ export function handleUserInputsGameplay(game, input){
 
 function addCrossShape(game, gameObject){
     const line1 = new GameShape('line', {
-        x: game.gameConfig.cellPadding - game.gameConfig.cellWidth/2,
-        y: game.gameConfig.cellPadding - game.gameConfig.cellHeight/2,
-        x2: game.gameConfig.cellWidth/2 - game.gameConfig.cellPadding,
-        y2: game.gameConfig.cellHeight/2 - game.gameConfig.cellPadding,
+        x: game.config.cellPadding - game.config.cellWidth/2,
+        y: game.config.cellPadding - game.config.cellHeight/2,
+        x2: game.config.cellWidth/2 - game.config.cellPadding,
+        y2: game.config.cellHeight/2 - game.config.cellPadding,
         color: "rgba(40, 151, 255, 1)",
         lineWidth: 4,
     });
@@ -56,10 +56,10 @@ function addCrossShape(game, gameObject){
     gameObject.addShape(line1);
     
     const line2 = new GameShape('line', {
-        x: game.gameConfig.cellPadding - game.gameConfig.cellWidth/2,
-        y: game.gameConfig.cellHeight/2 - game.gameConfig.cellPadding,
-        x2: game.gameConfig.cellWidth/2 - game.gameConfig.cellPadding,
-        y2: -game.gameConfig.cellHeight/2 + game.gameConfig.cellPadding,
+        x: game.config.cellPadding - game.config.cellWidth/2,
+        y: game.config.cellHeight/2 - game.config.cellPadding,
+        x2: game.config.cellWidth/2 - game.config.cellPadding,
+        y2: -game.config.cellHeight/2 + game.config.cellPadding,
         color: "rgba(40, 151, 255, 1)",
         lineWidth: 4,
     });
@@ -74,7 +74,7 @@ function addCircleShape(game, gameObject){
     const circle = new GameShape('circle', {
         x: 0,
         y: 0,
-        radius: (game.gameConfig.cellWidth/2) - game.gameConfig.cellPadding,
+        radius: (game.config.cellWidth/2) - game.config.cellPadding,
         color: "rgba(248, 66, 66, 1)",
         lineWidth: 4,
     });

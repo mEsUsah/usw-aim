@@ -70,7 +70,7 @@ export class Game{
             boardSize: 3,
             currentPlayer: 1
         };
-        this.gameConfig = this.config();
+        this.config = this.config();
 
         // Setup UI
         uiMenu.create(this);

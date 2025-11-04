@@ -7,25 +7,25 @@ export function create(game){
     game.gameFields = [];
 
     // Initialize board cells
-    for (let i = 0; i < game.gameConfig.boardSize; i++) {
-        for (let j = 0; j < game.gameConfig.boardSize; j++) {
+    for (let i = 0; i < game.config.boardSize; i++) {
+        for (let j = 0; j < game.config.boardSize; j++) {
             const gameObject = new GameObject({
                 variant: GameObject.VARIANT.BOARD,
-                x: game.gameConfig.cellWidth / 2 + j * game.gameConfig.cellWidth + game.gameConfig.boardMargin,
-                y: game.gameConfig.cellHeight / 2 + i * game.gameConfig.cellHeight + game.gameConfig.boardMargin,
+                x: game.config.cellWidth / 2 + j * game.config.cellWidth + game.config.boardMargin,
+                y: game.config.cellHeight / 2 + i * game.config.cellHeight + game.config.boardMargin,
                 name: `board_${i}_${j}`,
                 outline: {
-                    top: game.gameConfig.cellHeight / 2,
-                    left: game.gameConfig.cellWidth / 2,
-                    bottom: game.gameConfig.cellHeight / 2,
-                    right: game.gameConfig.cellWidth / 2
+                    top: game.config.cellHeight / 2,
+                    left: game.config.cellWidth / 2,
+                    bottom: game.config.cellHeight / 2,
+                    right: game.config.cellWidth / 2
                 }
             });
             const shape = new GameShape('rectangle', {
-                x: -game.gameConfig.cellWidth / 2,
-                y: -game.gameConfig.cellHeight / 2,
-                width: game.gameConfig.cellWidth,
-                height: game.gameConfig.cellHeight,
+                x: -game.config.cellWidth / 2,
+                y: -game.config.cellHeight / 2,
+                width: game.config.cellWidth,
+                height: game.config.cellHeight,
                 color: "gray"
             });
             gameObject.addShape(shape);
