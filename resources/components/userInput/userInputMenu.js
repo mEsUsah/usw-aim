@@ -14,34 +14,50 @@ export function handleUserInputMenu(game, input){
                     gameBoard.create(game);
                 }
                 if(gameObject.config.name === 'size_button'){
+                    if(gameObject.config.boardSize === game.state.boardSize) return;
                     game.state.boardSize = gameObject.config.boardSize;
+                    if(game.state.boardSize < game.state.winLength){
+                        game.state.winLength = game.state.boardSize;
+                        setWinLengthIndicator(game);
+                    }
+                    setGameSizeIndicator(game);
                     game.updateConfig();
-
-                    // remove existing shape size indicator
-                    game.gameObjects[GAME_MODE.MENU].forEach(obj => {
-                        if (obj.config.variant == GameObject.VARIANT.BUTTON && obj.config.name === 'size_button') {
-                            obj.removeShape('selected_indicator');
-                        }
-                    });
-
-                    // add shape size indicator
-                    gameObject.addShape(uiMenu.getSelectedIndicator());
                 }
                 if(gameObject.config.name === 'win_length_button'){
+                    if(gameObject.config.winLength === game.state.winLength) return;
+                    if(gameObject.config.winLength > game.state.boardSize) return;
                     game.state.winLength = gameObject.config.winLength;
+                    setWinLengthIndicator(game);
                     game.updateConfig();
-
-                    // remove existing shape win length indicator
-                    game.gameObjects[GAME_MODE.MENU].forEach(obj => {
-                        if (obj.config.variant == GameObject.VARIANT.BUTTON && obj.config.name === 'win_length_button') {
-                            obj.removeShape('selected_indicator');
-                        }
-                    });
-
-                    // add shape win length indicator
-                    gameObject.addShape(uiMenu.getSelectedIndicator());
                 }
             }
         }
     });
 }
+
+function setWinLengthIndicator(game){
+    const winLength = game.state.winLength;
+    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
+        if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+            if(gameObject.config.name === 'win_length_button' && gameObject.config.winLength === winLength){
+                gameObject.addShape(uiMenu.getSelectedIndicator());
+            } else if(gameObject.config.name === 'win_length_button'){
+                gameObject.removeShape('selected_indicator');
+            }
+        }
+    });
+}
+
+
+function setGameSizeIndicator(game){
+    const boardSize = game.state.boardSize;
+    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
+        if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+            if(gameObject.config.name === 'size_button' && gameObject.config.boardSize === boardSize){
+                gameObject.addShape(uiMenu.getSelectedIndicator());
+            } else if(gameObject.config.name === 'size_button'){
+                gameObject.removeShape('selected_indicator');
+            }
+        }
+    });
+}   
