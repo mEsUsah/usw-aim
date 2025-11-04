@@ -12,6 +12,10 @@ export function handleUserInputMenu(game, input){
                     game.mode = GAME_MODE.GAMEPLAY;
                     gameBoard.create(game);
                 }
+                if(gameObject.config.name === 'size_button'){
+                    game.state.boardSize = gameObject.config.boardSize;
+                    game.updateConfig();
+                }
             }
         }
     });
