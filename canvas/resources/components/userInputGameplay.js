@@ -32,7 +32,7 @@ export function handleUserInputsGameplay(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'menu_button'){
-                    game.gameMode = GAME_MODE.PAUSED;
+                    game.mode = GAME_MODE.PAUSED;
                 }
             }
         }

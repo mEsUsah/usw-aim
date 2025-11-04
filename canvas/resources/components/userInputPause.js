@@ -7,7 +7,7 @@ export function handleUserInputPause(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'continue_button'){
-                    game.gameMode = GAME_MODE.GAMEPLAY;
+                    game.mode = GAME_MODE.GAMEPLAY;
                 }
             }
         }
@@ -15,7 +15,7 @@ export function handleUserInputPause(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'stop_button'){
-                    game.gameMode = GAME_MODE.MENU;
+                    game.mode = GAME_MODE.MENU;
                 }
             }
         }

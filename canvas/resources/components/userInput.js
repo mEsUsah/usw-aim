@@ -6,7 +6,7 @@ import { handleUserInputMenu } from './userInputMenu.js';
 export function handleUserInputs(game) {
         game.userInputs.forEach(input => {
             if(input.type == 'click') { 
-                switch(game.gameMode) {
+                switch(game.mode) {
                     case GAME_MODE.GAMEPLAY:
                         handleUserInputsGameplay(game, input);
                         break;

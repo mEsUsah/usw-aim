@@ -9,7 +9,7 @@ export function handleUserInputMenu(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'start_button'){
-                    game.gameMode = GAME_MODE.GAMEPLAY;
+                    game.mode = GAME_MODE.GAMEPLAY;
                     gameBoard.create(game);
                 }
             }

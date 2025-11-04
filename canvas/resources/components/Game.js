@@ -42,7 +42,7 @@ export class Game{
             screenEndY: 0
         };
 
-        this.gameMode = GAME_MODE.MENU;
+        this.mode = GAME_MODE.MENU;
         this.gameObjects = {
             gameplay: [],
             menu: [],
@@ -104,7 +104,7 @@ export class Game{
         handleUserInputs(this);
 
         // Update animations
-        this.gameObjects[this.gameMode].forEach(gameObject => {
+        this.gameObjects[this.mode].forEach(gameObject => {
             gameObject.update(this.frameData.deltaTime);
         });
 
@@ -114,7 +114,7 @@ export class Game{
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
         // Draw game objects
-        this.gameObjects[this.gameMode].forEach(gameObject => {
+        this.gameObjects[this.mode].forEach(gameObject => {
             gameObject.draw(this.ctx);
         });
 
