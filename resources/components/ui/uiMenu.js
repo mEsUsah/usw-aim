@@ -85,6 +85,22 @@ export function create(game){
             align: "center",
             baseline: "middle"
         }));
+
+        if(i === game.state.boardSize){
+            sizeButton.addShape(getSelectedSizeIndicator());
+        }
         game.gameObjects.menu.push(sizeButton);
     }
+}
+
+export function getSelectedSizeIndicator(){
+    return new GameShape('rectangle', {
+        x: -30,
+        y: -30,
+        width: 60,
+        height: 60,
+        fillColor: "rgba(0, 255, 0, 0.2)",
+        color: "rgba(0, 0, 0, 0)",
+        name: 'selected_size_indicator'
+    });
 }
