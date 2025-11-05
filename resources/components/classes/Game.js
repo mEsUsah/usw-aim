@@ -4,7 +4,6 @@ import { getMousePos } from '../utils/mouseUtils.js';
 import * as uiMenu from '../ui/uiMenu.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import * as uiPause from '../ui/uiPause.js';
-
 import { handleUserInputs } from '../userInput/userInput.js';
 
 const SHOW_FPS = false;
@@ -129,9 +128,6 @@ export class Game{
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     };
 
-    checkWinCondition(){
-        console.log(this.gameFields);
-    };
 
     checkDrawCondition(){
         const maxSpaces = this.state.boardSize ** 2;

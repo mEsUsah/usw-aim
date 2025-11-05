@@ -3,6 +3,7 @@ import * as uiGameplay from '../ui/uiGameplay.js';
 import GameShape from '../classes/GameShape.js';
 import GameShapeAnimation from '../classes/GameShapeAnimation.js';
 import GameObject from '../classes/GameObject.js';
+import checkWinCondition from '../checkWinCondition.js';
 
 export function handleUserInputsGameplay(game, input){
     game.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
@@ -11,7 +12,7 @@ export function handleUserInputsGameplay(game, input){
             if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
                 gameObject.state.occupiedBy = game.state.currentPlayer; 
                 game.state.occupiedSpaces++;
-                game.checkWinCondition();
+                checkWinCondition(game, gameObject);
                 game.checkDrawCondition();
 
                 switch(game.state.currentPlayer){
