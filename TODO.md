@@ -2,8 +2,7 @@
 Coursework for the JavaScript section of the course.
 
 ## TODO
-- [ ] Check for win
-- [ ] Check for draw
+- [ ] Stop game on win/draw.
 - [ ] Statistics
     - [ ] Store win / loss / draw in localstorage
     - [ ] Display stat in menu
@@ -15,6 +14,8 @@ Coursework for the JavaScript section of the course.
 
 
 ## Completed taks
+- [X] Check for win
+- [X] Check for draw
 - [x] Dynamic screen size
 - [x] Dynamic game board
 - [x] Dynamic win length
