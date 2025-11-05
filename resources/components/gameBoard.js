@@ -1,5 +1,6 @@
 import GameObject from "./classes/GameObject.js";
 import GameShape from "./classes/GameShape.js";
+import { GAME_TYPE } from "./classes/Game.js";
 
 export function create(game){
     // Clear win lines from previous games
@@ -44,5 +45,38 @@ export function create(game){
             gameFieldRow.push(gameObject);
         }
         game.gameFields.push(gameFieldRow);
+    }
+
+    // GameType Blocked
+    if(game.state.gameType === GAME_TYPE.BLOCKED){
+        const cellsToBlock = game.state.boardSize - 2; // 2 less than board size to ensure that winning is not too hard
+        for (let i = 0; i < cellsToBlock; i++){
+            while(true){ // Keep trying until an unoccupied cell is found
+                const randX = Math.floor(Math.random() * game.state.boardSize);
+                const randY = Math.floor(Math.random() * game.state.boardSize);
+                const gameObject = game.gameFields[randX][randY];
+                if(gameObject.state.occupiedBy == null){
+                    gameObject.state.occupiedBy = 0; // Blocked
+                    gameObject.addShape(new GameShape('rectangle', {
+                        x: -game.config.cellWidth / 2 + 4,
+                        y: -game.config.cellHeight / 2 + 4,
+                        width: game.config.cellWidth - 8,
+                        height: game.config.cellHeight - 8,
+                        color: "black",
+                        fillColor: "gray",
+                    }));
+                    gameObject.addShape(new GameShape('text', {
+                        x: 0,
+                        y: 0,
+                        text: "blocked",
+                        font: `${game.config.cellWidth / 8}px Consolas`,
+                        color: "black",
+                        align: "center",
+                        baseline: "middle"
+                    }));
+                    break;
+                }
+            }
+        }
     }
 }
