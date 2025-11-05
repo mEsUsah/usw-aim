@@ -5,6 +5,7 @@ import * as uiMenu from '../ui/uiMenu.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import * as uiPause from '../ui/uiPause.js';
 import { handleUserInputs } from '../userInput/userInput.js';
+import { handleCpuInput } from '../cpuInput/cpuInput.js'; 
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -122,7 +123,11 @@ export class Game{
     gameLoop(timestamp) {
         // Update game state
         updateFrameData(timestamp, this.frameData);
-        handleUserInputs(this);
+        if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === OPPONENT_TYPE.CPU){
+            handleCpuInput(this);
+        } else {
+            handleUserInputs(this);
+        }
 
         // Update animation state
         this.gameObjects[this.mode].forEach(gameObject => {
