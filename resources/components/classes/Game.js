@@ -21,6 +21,11 @@ export const GAME_TYPE = {
     BLOCKED: 1,
 };
 
+export const OPPONENT_TYPE = {
+    HUMAN: 0,
+    CPU: 1,
+};
+
 export class Game{
     constructor(canvas) {
         this.canvas = canvas;
@@ -72,6 +77,7 @@ export class Game{
         
         this.state = {
             gameType: GAME_TYPE.NORMAL,
+            opponentType: OPPONENT_TYPE.HUMAN,
             boardSize: 3,
             winLength: 3,
             currentPlayer: 1,

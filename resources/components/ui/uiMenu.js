@@ -1,13 +1,14 @@
 import GameObject from "../classes/GameObject.js";
 import GameShape from "../classes/GameShape.js";
 import { GAME_TYPE } from "../classes/Game.js";
+import { OPPONENT_TYPE } from "../classes/Game.js";
 
 export function create(game){
     // Start button
     const startButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
         x: game.displayData.gameWidth / 2,
-        y: game.displayData.gameHeight / 4 * 3,
+        y: game.displayData.gameHeight / 5 * 4,
         name: 'start_button',
         outline: {
             top: 60,
@@ -233,6 +234,90 @@ export function create(game){
     }));
 
     game.gameObjects.menu.push(gameTypeBlockButton);
+
+    // Player 2 type selector
+    const player2TypeText = new GameObject({
+        variant: GameObject.VARIANT.TEXT,
+        x: 50,
+        y: game.displayData.gameHeight / 4 * 1 + 300,
+        name: 'player_2_type_text',
+    });
+    player2TypeText.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Player 2:",
+        font: "30px Consolas",
+        color: "white",
+        align: "left",
+        baseline: "middle"
+    }));
+    game.gameObjects.menu.push(player2TypeText);
+
+    const player2TypeNormalButton = new GameObject({
+        variant: GameObject.VARIANT.BUTTON,
+        x: (game.displayData.gameWidth - 80 * 6),
+        y: game.displayData.gameHeight / 4 * 1 + 300,
+        name: 'player_2_type_button',
+        outline: {
+            top: 30,
+            left: 30,
+            bottom: 30,
+            right: 30
+        },
+        opponentType: OPPONENT_TYPE.HUMAN
+    });
+
+    player2TypeNormalButton.addShape(new GameShape('rectangle', {
+        x: -30,
+        y: -30,
+        width: 60,
+        height: 60,
+        color: "gray"
+    }));
+    player2TypeNormalButton.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Hum",
+        font: "30px Consolas",
+        color: "white",
+        align: "center",
+        baseline: "middle"
+    }));
+    player2TypeNormalButton.addShape(getSelectedIndicator());
+    game.gameObjects.menu.push(player2TypeNormalButton);
+
+    const player2TypeCpuButton = new GameObject({
+        variant: GameObject.VARIANT.BUTTON,
+        x: (game.displayData.gameWidth - 80 * 6) + 80,
+        y: game.displayData.gameHeight / 4 * 1 + 300,
+        name: 'player_2_type_button',
+        outline: {
+            top: 30,
+            left: 30,
+            bottom: 30,
+            right: 30
+        },
+        opponentType: OPPONENT_TYPE.CPU
+    });
+
+    player2TypeCpuButton.addShape(new GameShape('rectangle', {
+        x: -30,
+        y: -30,
+        width: 60,
+        height: 60,
+        color: "gray"
+    }));
+    player2TypeCpuButton.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "CPU",
+        font: "30px Consolas",
+        color: "white",
+        align: "center",
+        baseline: "middle"
+    }));
+
+    game.gameObjects.menu.push(player2TypeCpuButton);
 
 }
 
