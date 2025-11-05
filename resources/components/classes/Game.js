@@ -70,6 +70,7 @@ export class Game{
             winLength: 3,
             currentPlayer: 1,
             occupiedSpaces: 0,
+            gameOver: false,
         };
         
         this.config = {};
@@ -98,6 +99,7 @@ export class Game{
 
     resetState(){
         this.state.occupiedSpaces = 0;
+        this.state.gameOver = false;
     };
 
     start(){

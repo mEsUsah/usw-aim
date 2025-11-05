@@ -9,19 +9,11 @@ import checkDrawCondition from '../checkDrawCondition.js';
 export function handleUserInputsGameplay(game, input){
     game.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
         // Check click on board cells
-        if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
+        if (game.state.gameOver == false && gameObject.config.variant == GameObject.VARIANT.BOARD) {
             if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
                 gameObject.state.occupiedBy = game.state.currentPlayer; 
                 game.state.occupiedSpaces++;
-                const gameWon = checkWinCondition(game, gameObject);
-                if(gameWon){
-                    addWinLine(game,gameWon);
-                }
-                const gameDraw = checkDrawCondition(game);
-                if(gameDraw){
-                    console.log("DRAW!");
-                }
-
+                
                 switch(game.state.currentPlayer){
                     case 1:
                         addCrossShape(game, gameObject);
@@ -33,6 +25,21 @@ export function handleUserInputsGameplay(game, input){
                         break;
                     default:
                         break;
+                }
+
+                // Check for win/draw conditions
+                const gameWon = checkWinCondition(game, gameObject);
+                if(gameWon){
+                    addWinLine(game,gameWon);
+                    game.state.gameOver = true;
+                    addGameOverText(game, "Game Over");
+                    return;
+                }
+                const gameDraw = checkDrawCondition(game);
+                if(gameDraw){
+                    game.state.gameOver = true;
+                    addGameOverText(game, "Game Over");
+                    return;
                 }
 
                 uiGameplay.updateTurnSymbol(game);
@@ -120,4 +127,25 @@ function addWinLine(game, winLineCoordinates){
     winLineObject.addShape(winLineShape);
 
     game.gameObjects.gameplay.push(winLineObject);
+}
+
+function addGameOverText(game, text){
+    const gameOverTextObject = new GameObject({
+        variant: GameObject.VARIANT.ILLUSTRATION,
+        x: game.displayData.gameWidth / 2,
+        y: 32,
+        name: `gameover_text`,
+    });
+    
+    gameOverTextObject.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: text,
+        font: "48px Consolas",
+        color: "red",
+        align: "center",
+        baseline: "middle",
+    }));
+
+    game.gameObjects.gameplay.push(gameOverTextObject);
 }

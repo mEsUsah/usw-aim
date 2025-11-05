@@ -4,6 +4,9 @@ import GameShape from "./classes/GameShape.js";
 export function create(game){
     // Clear win lines from previous games
     game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name != "win_line");
+
+    // Clear game over text
+    game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name != "gameover_text");
     
     // Clear existing game board objects
     game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.variant !== GameObject.VARIANT.BOARD);
