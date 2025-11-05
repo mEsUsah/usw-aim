@@ -7,8 +7,6 @@ Coursework for the JavaScript section of the course.
     - [ ] Display stat in menu
     - [ ] Reset stat button
 
-- [ ] AI opponent (basic / random)
-- [ ] Locked field mode
 - [ ] Random delete mode
 
 
@@ -21,4 +19,6 @@ Coursework for the JavaScript section of the course.
 - [x] Dynamic win length
 - [x] Basic graphics "engine" with graphical objects and simple animations based on time.
 - [x] Menu, gameplay and pause screens.
+- [x] Blocked game type
+- [x] AI opponent (basic / random)
 
