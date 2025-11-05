@@ -1,10 +1,10 @@
 import { GAME_MODE } from '../classes/Game.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
-import GameShape from '../classes/GameShape.js';
-import GameShapeAnimation from '../classes/GameShapeAnimation.js';
 import GameObject from '../classes/GameObject.js';
 import checkWinCondition from '../checkWinCondition.js';
 import checkDrawCondition from '../checkDrawCondition.js';
+import * as gameplayObjects from '../gameObjects/gameplayObjects.js'
+import * as gameObjectShapes from '../shapes/gameObjectShapes.js'
 
 export function handleUserInputsGameplay(game, input){
     game.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
@@ -16,11 +16,11 @@ export function handleUserInputsGameplay(game, input){
                 
                 switch(game.state.currentPlayer){
                     case 1:
-                        addCrossShape(game, gameObject);
+                        gameObjectShapes.addCrossShape(game, gameObject);
                         game.state.currentPlayer = 2;
                         break;
                     case 2:
-                        addCircleShape(game, gameObject);
+                        gameObjectShapes.addCircleShape(game, gameObject);
                         game.state.currentPlayer = 1;
                         break;
                     default:
@@ -30,15 +30,15 @@ export function handleUserInputsGameplay(game, input){
                 // Check for win/draw conditions
                 const gameWon = checkWinCondition(game, gameObject);
                 if(gameWon){
-                    addWinLine(game,gameWon);
+                    gameplayObjects.addWinLine(game,gameWon);
                     game.state.gameOver = true;
-                    addGameOverText(game, "Game Over");
+                    gameplayObjects.addGameOverText(game, "Game Over");
                     return;
                 }
                 const gameDraw = checkDrawCondition(game);
                 if(gameDraw){
                     game.state.gameOver = true;
-                    addGameOverText(game, "Game Over");
+                    gameplayObjects.addGameOverText(game, "Game Over");
                     return;
                 }
 
@@ -56,96 +56,4 @@ export function handleUserInputsGameplay(game, input){
         }
         
     });
-}
-
-function addCrossShape(game, gameObject){
-    const line1 = new GameShape('line', {
-        x: game.config.cellPadding - game.config.cellWidth/2,
-        y: game.config.cellPadding - game.config.cellHeight/2,
-        x2: game.config.cellWidth/2 - game.config.cellPadding,
-        y2: game.config.cellHeight/2 - game.config.cellPadding,
-        color: "rgba(40, 151, 255, 1)",
-        lineWidth: 4,
-    });
-    line1.addAnimation(new GameShapeAnimation({
-        duration: 150,
-        direction: GameShapeAnimation.BACKWARD,
-    }));
-    gameObject.addShape(line1);
-    
-    const line2 = new GameShape('line', {
-        x: game.config.cellPadding - game.config.cellWidth/2,
-        y: game.config.cellHeight/2 - game.config.cellPadding,
-        x2: game.config.cellWidth/2 - game.config.cellPadding,
-        y2: -game.config.cellHeight/2 + game.config.cellPadding,
-        color: "rgba(40, 151, 255, 1)",
-        lineWidth: 4,
-    });
-    line2.addAnimation(new GameShapeAnimation({
-        duration: 150,
-        startDelay: 150
-    }));
-    gameObject.addShape(line2);
-}
-
-function addCircleShape(game, gameObject){
-    const circle = new GameShape('circle', {
-        x: 0,
-        y: 0,
-        radius: (game.config.cellWidth/2) - game.config.cellPadding,
-        color: "rgba(248, 66, 66, 1)",
-        lineWidth: 4,
-    });
-    circle.addAnimation(new GameShapeAnimation({
-        duration: 300,
-    }));
-
-    gameObject.addShape(circle);
-}
-
-function addWinLine(game, winLineCoordinates){
-    const winLineObject = new GameObject({
-        variant: GameObject.VARIANT.ILLUSTRATION,
-        x: 0,
-        y: 0,
-        name: `win_line`,
-    });
-    
-    const winLineShape = new GameShape('line', {
-        x: winLineCoordinates.x,
-        y: winLineCoordinates.y,
-        x2: winLineCoordinates.x2,
-        y2: winLineCoordinates.y2,
-        color: "red",
-        lineWidth: 15,
-    });
-
-    winLineShape.addAnimation(new GameShapeAnimation({
-        duration: 300,
-    }));
-    
-    winLineObject.addShape(winLineShape);
-
-    game.gameObjects.gameplay.push(winLineObject);
-}
-
-function addGameOverText(game, text){
-    const gameOverTextObject = new GameObject({
-        variant: GameObject.VARIANT.ILLUSTRATION,
-        x: game.displayData.gameWidth / 2,
-        y: 32,
-        name: `gameover_text`,
-    });
-    
-    gameOverTextObject.addShape(new GameShape('text', {
-        x: 0,
-        y: 0,
-        text: text,
-        font: "48px Consolas",
-        color: "red",
-        align: "center",
-        baseline: "middle",
-    }));
-
-    game.gameObjects.gameplay.push(gameOverTextObject);
 }
