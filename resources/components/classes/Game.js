@@ -137,6 +137,8 @@ export class Game{
         const maxSpaces = this.state.boardSize ** 2;
         const occupiedSpaces = this.state.occupiedSpaces;
         const drawCondition = occupiedSpaces >= maxSpaces;
-        console.log("Draw? " + occupiedSpaces + " / " + maxSpaces + " = " + drawCondition);
+        if (drawCondition){
+            console.log("DRAW!");
+        }
     };
 }
