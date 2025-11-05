@@ -12,7 +12,10 @@ export function handleUserInputsGameplay(game, input){
             if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
                 gameObject.state.occupiedBy = game.state.currentPlayer; 
                 game.state.occupiedSpaces++;
-                checkWinCondition(game, gameObject);
+                const gameWon = checkWinCondition(game, gameObject);
+                if(gameWon){
+                    addWinLine(game,gameWon);
+                }
                 game.checkDrawCondition();
 
                 switch(game.state.currentPlayer){
@@ -87,4 +90,29 @@ function addCircleShape(game, gameObject){
     }));
 
     gameObject.addShape(circle);
+}
+
+function addWinLine(game, winLineCoordinates){
+    const winLineObject = new GameObject({
+        x: 0,
+        y: 0,
+        name: `win_line`,
+    });
+    
+    const winLineShape = new GameShape('line', {
+        x: winLineCoordinates.x,
+        y: winLineCoordinates.y,
+        x2: winLineCoordinates.x2,
+        y2: winLineCoordinates.y2,
+        color: "red",
+        lineWidth: 15,
+    });
+
+    winLineShape.addAnimation(new GameShapeAnimation({
+        duration: 300,
+    }));
+    
+    winLineObject.addShape(winLineShape);
+
+    game.gameObjects.gameplay.push(winLineObject);
 }

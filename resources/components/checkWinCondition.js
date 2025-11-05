@@ -1,33 +1,22 @@
 export default function(game, selectedTile){
-    console.log("clicked: x:" + selectedTile.config.location.x + ", y:" + selectedTile.config.location.y);
     
-    console.log("checking →");
+    // check →
     const weWin = checkWin(game, selectedTile, 1, 0);
-    if(weWin){
-        console.log("Win!!", weWin);
-        return;
-    }
+    if(weWin) return weWin;
 
-    console.log("checking ↘");
+    // check ↘
     const nwseWin = checkWin(game, selectedTile, 1, 1);
-    if(nwseWin){
-        console.log("Win!!", nwseWin);
-        return;
-    }
+    if(nwseWin) return nwseWin;
 
-    console.log("checking ↓");
+    // check ↓
     const nsWin = checkWin(game, selectedTile, 0, 1);
-    if(nsWin){
-        console.log("Win!!", nsWin);
-        return;
-    }
+    if(nsWin) return nsWin;
     
-    console.log("checking ↙");
+    // check ↙
     const neswWin = checkWin(game, selectedTile, -1, 1);
-    if(neswWin){
-        console.log("Win!!", neswWin);
-        return;
-    }
+    if(neswWin) return neswWin;
+
+    return false;
 }
 
 function checkWin(game, selectedTile, xDirection, yDirection){
