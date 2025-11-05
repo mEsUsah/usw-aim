@@ -16,6 +16,11 @@ export const GAME_MODE = {
     PAUSED: 'paused'
 };
 
+export const GAME_TYPE = {
+    NORMAL: 0,
+    BLOCKED: 1,
+};
+
 export class Game{
     constructor(canvas) {
         this.canvas = canvas;
@@ -66,6 +71,7 @@ export class Game{
         });
         
         this.state = {
+            gameType: GAME_TYPE.NORMAL,
             boardSize: 3,
             winLength: 3,
             currentPlayer: 1,

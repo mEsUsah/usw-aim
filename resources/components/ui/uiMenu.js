@@ -1,5 +1,6 @@
 import GameObject from "../classes/GameObject.js";
 import GameShape from "../classes/GameShape.js";
+import { GAME_TYPE } from "../classes/Game.js";
 
 export function create(game){
     // Start button
@@ -149,6 +150,90 @@ export function create(game){
         game.gameObjects.menu.push(winLengthButton);
     }
 
+    // Game type selector
+    const gameTypeText = new GameObject({
+        variant: GameObject.VARIANT.TEXT,
+        x: 50,
+        y: game.displayData.gameHeight / 4 * 1 + 200,
+        name: 'game_type_text',
+    });
+    gameTypeText.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Game Type:",
+        font: "30px Consolas",
+        color: "white",
+        align: "left",
+        baseline: "middle"
+    }));
+    game.gameObjects.menu.push(gameTypeText);
+
+    const gameTypeNormalButton = new GameObject({
+        variant: GameObject.VARIANT.BUTTON,
+        x: (game.displayData.gameWidth - 80 * 6),
+        y: game.displayData.gameHeight / 4 * 1 + 200,
+        name: 'game_type_button',
+        outline: {
+            top: 30,
+            left: 30,
+            bottom: 30,
+            right: 30
+        },
+        gameType: GAME_TYPE.NORMAL
+    });
+
+    gameTypeNormalButton.addShape(new GameShape('rectangle', {
+        x: -30,
+        y: -30,
+        width: 60,
+        height: 60,
+        color: "gray"
+    }));
+    gameTypeNormalButton.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Nor",
+        font: "30px Consolas",
+        color: "white",
+        align: "center",
+        baseline: "middle"
+    }));
+    gameTypeNormalButton.addShape(getSelectedIndicator());
+    game.gameObjects.menu.push(gameTypeNormalButton);
+
+    const gameTypeBlockButton = new GameObject({
+        variant: GameObject.VARIANT.BUTTON,
+        x: (game.displayData.gameWidth - 80 * 6) + 80,
+        y: game.displayData.gameHeight / 4 * 1 + 200,
+        name: 'game_type_button',
+        outline: {
+            top: 30,
+            left: 30,
+            bottom: 30,
+            right: 30
+        },
+        gameType: GAME_TYPE.BLOCKED
+    });
+
+    gameTypeBlockButton.addShape(new GameShape('rectangle', {
+        x: -30,
+        y: -30,
+        width: 60,
+        height: 60,
+        color: "gray"
+    }));
+    gameTypeBlockButton.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Blk",
+        font: "30px Consolas",
+        color: "white",
+        align: "center",
+        baseline: "middle"
+    }));
+
+    game.gameObjects.menu.push(gameTypeBlockButton);
+
 }
 
 export function getSelectedIndicator(){
@@ -158,7 +243,7 @@ export function getSelectedIndicator(){
         x2: 20,
         y2: 17,
         color: "red",
-            lineWidth: 5,      
+        lineWidth: 5,      
         name: 'selected_indicator'
     });
 }

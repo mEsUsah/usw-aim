@@ -29,6 +29,10 @@ export function handleUserInputMenu(game, input){
                     setWinLengthIndicator(game);
                     game.updateConfig();
                 }
+                if(gameObject.config.name === 'game_type_button'){
+                    game.state.gameType = gameObject.config.gameType;
+                    setGameTypeIndicator(game);
+                }
             }
         }
     });
@@ -59,4 +63,17 @@ function setGameSizeIndicator(game){
             }
         }
     });
-}   
+}
+
+function setGameTypeIndicator(game){
+    const gameType = game.state.gameType;
+    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
+        if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
+            if(gameObject.config.name === 'game_type_button' && gameObject.config.gameType === gameType){
+                gameObject.addShape(uiMenu.getSelectedIndicator());
+            } else if(gameObject.config.name === 'game_type_button'){
+                gameObject.removeShape('selected_indicator');
+            }
+        }
+    });
+}
