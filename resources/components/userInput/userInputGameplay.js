@@ -94,6 +94,7 @@ function addCircleShape(game, gameObject){
 
 function addWinLine(game, winLineCoordinates){
     const winLineObject = new GameObject({
+        variant: GameObject.VARIANT.ILLUSTRATION,
         x: 0,
         y: 0,
         name: `win_line`,

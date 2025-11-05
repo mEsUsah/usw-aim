@@ -2,11 +2,14 @@ import GameObject from "./classes/GameObject.js";
 import GameShape from "./classes/GameShape.js";
 
 export function create(game){
+    // Clear win lines from previous games
+    game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name != "win_line");
+    
     // Clear existing game board objects
     game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.variant !== GameObject.VARIANT.BOARD);
     game.gameFields = [];
 
-    // Initialize board cells
+    // Initialize new board cells
     for (let x = 0; x < game.config.boardSize; x++) {
         let gameFieldRow = [];
         for (let y = 0; y < game.config.boardSize; y++) {
