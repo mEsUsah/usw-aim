@@ -4,6 +4,7 @@ import GameShape from '../classes/GameShape.js';
 import GameShapeAnimation from '../classes/GameShapeAnimation.js';
 import GameObject from '../classes/GameObject.js';
 import checkWinCondition from '../checkWinCondition.js';
+import checkDrawCondition from '../checkDrawCondition.js';
 
 export function handleUserInputsGameplay(game, input){
     game.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
@@ -16,7 +17,10 @@ export function handleUserInputsGameplay(game, input){
                 if(gameWon){
                     addWinLine(game,gameWon);
                 }
-                game.checkDrawCondition();
+                const gameDraw = checkDrawCondition(game);
+                if(gameDraw){
+                    console.log("DRAW!");
+                }
 
                 switch(game.state.currentPlayer){
                     case 1:

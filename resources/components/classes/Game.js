@@ -128,13 +128,4 @@ export class Game{
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     };
 
-
-    checkDrawCondition(){
-        const maxSpaces = this.state.boardSize ** 2;
-        const occupiedSpaces = this.state.occupiedSpaces;
-        const drawCondition = occupiedSpaces >= maxSpaces;
-        if (drawCondition){
-            console.log("DRAW!");
-        }
-    };
 }
