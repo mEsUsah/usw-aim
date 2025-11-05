@@ -2,33 +2,44 @@ export default function(game, selectedTile){
     console.log("clicked: x:" + selectedTile.config.location.x + ", y:" + selectedTile.config.location.y);
     
     console.log("checking →");
-    if(checkWin(game, selectedTile, 1, 0)){
-        console.log("Win!!");
-        return
+    const weWin = checkWin(game, selectedTile, 1, 0);
+    if(weWin){
+        console.log("Win!!", weWin);
+        return;
     }
 
     console.log("checking ↘");
-    if(checkWin(game, selectedTile, 1, 1)){
-        console.log("Win!!");
-        return
+    const nwseWin = checkWin(game, selectedTile, 1, 1);
+    if(nwseWin){
+        console.log("Win!!", nwseWin);
+        return;
     }
 
     console.log("checking ↓");
-    if(checkWin(game, selectedTile, 0, 1)){
-        console.log("Win!!");
-        return
+    const nsWin = checkWin(game, selectedTile, 0, 1);
+    if(nsWin){
+        console.log("Win!!", nsWin);
+        return;
     }
     
     console.log("checking ↙");
-    if(checkWin(game, selectedTile, -1, 1)){
-        console.log("Win!!");
-        return
+    const neswWin = checkWin(game, selectedTile, -1, 1);
+    if(neswWin){
+        console.log("Win!!", neswWin);
+        return;
     }
 }
 
 function checkWin(game, selectedTile, xDirection, yDirection){
     // find first (draw bow)
     let firstFoundLocation = selectedTile.config.location;
+    let returnObject = {
+        x: null,
+        y: null,
+        x2: null,
+        y2: null,
+    };
+
     let currentX = selectedTile.config.location.x;
     let currentY = selectedTile.config.location.y;
     while(currentX >= 0 && currentY >= 0 && currentX < game.config.boardSize && currentY < game.config.boardSize){
@@ -37,8 +48,12 @@ function checkWin(game, selectedTile, xDirection, yDirection){
             break;
         }
         firstFoundLocation = game.gameFields[currentX][currentY].config.location;
+        returnObject.x = game.gameFields[currentX][currentY].config.x
+        returnObject.y = game.gameFields[currentX][currentY].config.y
+        
         currentX -= xDirection;
         currentY -= yDirection;
+
     }
 
     // count (shoot arrow)
@@ -52,7 +67,9 @@ function checkWin(game, selectedTile, xDirection, yDirection){
         }
         score++;
         if (score >= game.state.winLength){
-            return true;
+            returnObject.x2 = game.gameFields[currentX][currentY].config.x;
+            returnObject.y2 = game.gameFields[currentX][currentY].config.y;
+            return returnObject;
         }
         currentX += xDirection;
         currentY += yDirection;
