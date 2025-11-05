@@ -69,7 +69,8 @@ export class Game{
         this.state = {
             boardSize: 3,
             winLength: 3,
-            currentPlayer: 1
+            currentPlayer: 1,
+            occupiedSpaces: 0,
         };
         
         this.config = {};
@@ -96,6 +97,10 @@ export class Game{
             };
     };
 
+    resetState(){
+        this.state.occupiedSpaces = 0;
+    };
+
     start(){
         resizeCanvas(this.ctx, this.displayData);
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
@@ -106,22 +111,32 @@ export class Game{
         updateFrameData(timestamp, this.frameData);
         handleUserInputs(this);
 
-        // Update animations
+        // Update animation state
         this.gameObjects[this.mode].forEach(gameObject => {
             gameObject.update(this.frameData.deltaTime);
         });
 
-        // Render the game state
+        // Render frame
         clearCanvas(this.ctx, this.displayData);
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
-        // Draw game objects
         this.gameObjects[this.mode].forEach(gameObject => {
             gameObject.draw(this.ctx);
         });
 
         // Request the next frame
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+    };
+
+    checkWinCondition(){
+        console.log(this.gameFields);
+    };
+
+    checkDrawCondition(){
+        const maxSpaces = this.state.boardSize ** 2;
+        const occupiedSpaces = this.state.occupiedSpaces;
+        const drawCondition = occupiedSpaces >= maxSpaces;
+        console.log("Draw? " + occupiedSpaces + " / " + maxSpaces + " = " + drawCondition);
     };
 }

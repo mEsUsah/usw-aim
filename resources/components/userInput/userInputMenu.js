@@ -10,6 +10,7 @@ export function handleUserInputMenu(game, input){
                 if(gameObject.config.name === 'start_button'){
                     game.mode = GAME_MODE.GAMEPLAY;
                     gameBoard.create(game);
+                    game.resetState();
                 }
                 if(gameObject.config.name === 'size_button'){
                     if(gameObject.config.boardSize === game.state.boardSize) return;

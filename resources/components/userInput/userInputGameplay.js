@@ -6,10 +6,13 @@ import GameObject from '../classes/GameObject.js';
 
 export function handleUserInputsGameplay(game, input){
     game.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
-        // Check clock on board cells
+        // Check click on board cells
         if (gameObject.config.variant == GameObject.VARIANT.BOARD) {
             if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
                 gameObject.state.occupiedBy = game.state.currentPlayer; 
+                game.state.occupiedSpaces++;
+                game.checkWinCondition();
+                game.checkDrawCondition();
 
                 switch(game.state.currentPlayer){
                     case 1:

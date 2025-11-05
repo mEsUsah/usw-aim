@@ -8,6 +8,7 @@ export function create(game){
 
     // Initialize board cells
     for (let i = 0; i < game.config.boardSize; i++) {
+        let gameFieldRow = [];
         for (let j = 0; j < game.config.boardSize; j++) {
             const gameObject = new GameObject({
                 variant: GameObject.VARIANT.BOARD,
@@ -30,7 +31,8 @@ export function create(game){
             });
             gameObject.addShape(shape);
             game.gameObjects.gameplay.push(gameObject);
-            game.gameFields.push(gameObject);
+            gameFieldRow.push(gameObject);
         }
+        game.gameFields.push(gameFieldRow);
     }
 }
