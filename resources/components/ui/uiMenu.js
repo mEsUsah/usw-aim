@@ -2,7 +2,7 @@ import GameObject from "../classes/GameObject.js";
 import GameShape from "../classes/GameShape.js";
 import { GAME_TYPE } from "../classes/Game.js";
 import { OPPONENT_TYPE } from "../classes/Game.js";
-import * as gameplayShapes from "../shapes/gameplayShapes.js";
+import * as menuShapes from "../shapes/menuShapes.js";
 
 export function create(game){
     const buttonOffsetY = 150;
@@ -14,32 +14,7 @@ export function create(game){
         y: 80,
         name: 'title_text',
     });
-    titleText.addShape(new GameShape('text', {
-        x: 0,
-        y: 0,
-        text: "Noughts and Crosses",
-        font: "60px Consolas",
-        color: "white",
-        align: "center",
-        baseline: "middle"
-    }));
-    titleText.addShape(new GameShape('line', {
-        x: -350,
-        y: 35,
-        x2: 350,
-        y2: 35,
-        color: "white",
-        lineWidth: 3,      
-    }));
-    titleText.addShape(new GameShape('text', {
-        x: 0,
-        y: 60,
-        text: "Stanley Skarshaug - USW student 23092388",
-        font: "20px Consolas",
-        color: "gray",
-        align: "center",
-        baseline: "middle"
-    }));
+    menuShapes.addTitle(titleText)
 
     game.gameObjects.menu.push(titleText);
     
@@ -56,24 +31,7 @@ export function create(game){
             right: 60
         }
     });
-    startButton.addShape(new GameShape('rectangle', {
-        x: -60,
-        y: -60,
-        width: 120,
-        height: 120,
-        color: "red"
-    }));
-    startButton.addShape(new GameShape('polygon', {
-        x: -0,
-        y: -0,
-        points: [
-            {x: -30, y: -40},
-            {x: 40, y: 0},
-            {x: -30, y: 40}
-        ],
-        color: "red",
-        fillColor: "red"
-    }));
+    menuShapes.addStartButton(startButton);
     game.gameObjects.menu.push(startButton);
 
 
@@ -84,7 +42,7 @@ export function create(game){
         y: 80 + buttonOffsetY,
         name: 'size_text',
     });
-    sizeText.addShape(gameplayShapes.menuSelectionText("Board Size:"));
+    sizeText.addShape(menuShapes.selectionText("Board Size:"));
     game.gameObjects.menu.push(sizeText);
 
     for(let i = 3; i <= 8; i++){
@@ -101,10 +59,10 @@ export function create(game){
             },
             boardSize: i
         });
-        sizeButton.addShape(gameplayShapes.menuButtonOutline());
-        sizeButton.addShape(gameplayShapes.menuButtonText(`${i}x${i}`));
+        sizeButton.addShape(menuShapes.buttonOutline());
+        sizeButton.addShape(menuShapes.buttonText(`${i}x${i}`));
         if(i === game.state.boardSize){
-            sizeButton.addShape(gameplayShapes.menuSelectedIndicator());
+            sizeButton.addShape(menuShapes.selectedIndicator());
         }
         game.gameObjects.menu.push(sizeButton);
     }
@@ -117,7 +75,7 @@ export function create(game){
         y: 80 * 2 + buttonOffsetY,
         name: 'win_length_text',
     });
-    winLengthText.addShape(gameplayShapes.menuSelectionText("Win Length:"));
+    winLengthText.addShape(menuShapes.selectionText("Win Length:"));
     game.gameObjects.menu.push(winLengthText);
 
     for(let i = 3; i <= 8; i++){
@@ -134,10 +92,10 @@ export function create(game){
             },
             winLength: i
         });
-        winLengthButton.addShape(gameplayShapes.menuButtonOutline());
-        winLengthButton.addShape(gameplayShapes.menuButtonText(`${i}`));
+        winLengthButton.addShape(menuShapes.buttonOutline());
+        winLengthButton.addShape(menuShapes.buttonText(`${i}`));
         if(i === game.state.winLength){
-            winLengthButton.addShape(gameplayShapes.menuSelectedIndicator());
+            winLengthButton.addShape(menuShapes.selectedIndicator());
         }
         game.gameObjects.menu.push(winLengthButton);
     }
@@ -149,7 +107,7 @@ export function create(game){
         y: 80 * 3 + buttonOffsetY,
         name: 'game_type_text',
     });
-    gameTypeText.addShape(gameplayShapes.menuSelectionText("Game Type:"));
+    gameTypeText.addShape(menuShapes.selectionText("Game Type:"));
     game.gameObjects.menu.push(gameTypeText);
 
     const gameTypeNormalButton = new GameObject({
@@ -165,9 +123,9 @@ export function create(game){
         },
         gameType: GAME_TYPE.NORMAL
     });
-    gameTypeNormalButton.addShape(gameplayShapes.menuButtonOutline());
-    gameTypeNormalButton.addShape(gameplayShapes.menuButtonText("Nor"));
-    gameTypeNormalButton.addShape(gameplayShapes.menuSelectedIndicator());
+    gameTypeNormalButton.addShape(menuShapes.buttonOutline());
+    gameTypeNormalButton.addShape(menuShapes.buttonText("Nor"));
+    gameTypeNormalButton.addShape(menuShapes.selectedIndicator());
     game.gameObjects.menu.push(gameTypeNormalButton);
 
     const gameTypeBlockButton = new GameObject({
@@ -183,8 +141,8 @@ export function create(game){
         },
         gameType: GAME_TYPE.BLOCKED
     });
-    gameTypeBlockButton.addShape(gameplayShapes.menuButtonOutline());
-    gameTypeBlockButton.addShape(gameplayShapes.menuButtonText("Blk"));
+    gameTypeBlockButton.addShape(menuShapes.buttonOutline());
+    gameTypeBlockButton.addShape(menuShapes.buttonText("Blk"));
     game.gameObjects.menu.push(gameTypeBlockButton);
 
     // Player 2 type selector
@@ -194,7 +152,7 @@ export function create(game){
         y: 80 * 4 + buttonOffsetY,
         name: 'player_2_type_text',
     });
-    player2TypeText.addShape(gameplayShapes.menuSelectionText("Player 2:"));
+    player2TypeText.addShape(menuShapes.selectionText("Player 2:"));
     game.gameObjects.menu.push(player2TypeText);
 
     const player2TypeNormalButton = new GameObject({
@@ -210,9 +168,9 @@ export function create(game){
         },
         opponentType: OPPONENT_TYPE.HUMAN
     });
-    player2TypeNormalButton.addShape(gameplayShapes.menuButtonOutline());
-    player2TypeNormalButton.addShape(gameplayShapes.menuButtonText("Hum"));
-    player2TypeNormalButton.addShape(gameplayShapes.menuSelectedIndicator());
+    player2TypeNormalButton.addShape(menuShapes.buttonOutline());
+    player2TypeNormalButton.addShape(menuShapes.buttonText("Hum"));
+    player2TypeNormalButton.addShape(menuShapes.selectedIndicator());
     game.gameObjects.menu.push(player2TypeNormalButton);
 
     const player2TypeCpuButton = new GameObject({
@@ -228,8 +186,8 @@ export function create(game){
         },
         opponentType: OPPONENT_TYPE.CPU
     });
-    player2TypeCpuButton.addShape(gameplayShapes.menuButtonOutline());
-    player2TypeCpuButton.addShape(gameplayShapes.menuButtonText("CPU"));
+    player2TypeCpuButton.addShape(menuShapes.buttonOutline());
+    player2TypeCpuButton.addShape(menuShapes.buttonText("CPU"));
     game.gameObjects.menu.push(player2TypeCpuButton);
 }
 
