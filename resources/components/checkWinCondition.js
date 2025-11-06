@@ -1,3 +1,9 @@
+/**
+ * Check for a win condition in all directions from the selected tile.
+ * @param {Game} game - The game instance.
+ * @param {GameObject} selectedTile - The tile that was picked.
+ * @returns {Object|boolean} - Coordinates of the winning line if a win is found, false otherwise.
+ */
 export default function(game, selectedTile){
     
     // check →
@@ -19,8 +25,16 @@ export default function(game, selectedTile){
     return false;
 }
 
+/**
+ * Check for a win condition in a specific direction from the selected tile.
+ * @param {Game} game - The game instance.
+ * @param {GameObject} selectedTile - The tile that was picked.
+ * @param {number} xDirection - The x direction to check (1 (right), 0, or -1 (left)).
+ * @param {number} yDirection - The y direction to check (1 (down), 0, or -1 (up)).
+ * @returns {Object|boolean} - Coordinates of the winning line if a win is found, false otherwise.
+ */
 function checkWin(game, selectedTile, xDirection, yDirection){
-    // find first (draw bow)
+    // find first ("draw bow")
     let firstFoundLocation = selectedTile.config.location;
     let returnObject = {
         x: null,
@@ -45,7 +59,7 @@ function checkWin(game, selectedTile, xDirection, yDirection){
 
     }
 
-    // count (shoot arrow)
+    // count ("shoot arrow")
     let score = 0;
     currentX = firstFoundLocation.x;
     currentY = firstFoundLocation.y;
