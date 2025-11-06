@@ -1,3 +1,9 @@
+/**
+ * GameShapeAnimation manages the animation state of a game shape.
+ * It handles progress, looping, direction, and timing of the animation.
+ * @class GameShapeAnimation
+ * @property {Object} config - Configuration object for the animation.
+ */
 export default class GameShapeAnimation {
     static INFINITE = -1;
     static FORWARD = 1;
@@ -15,6 +21,10 @@ export default class GameShapeAnimation {
         this.loopCount = 1;
     }
 
+    /**
+     * Updates the animation progress based on the elapsed time.
+     * @param {number} deltaTime - The time elapsed since the last update.
+     */
     updateProgress(deltaTime) {
         this.progress += deltaTime;
         this.lifetime += deltaTime;
@@ -40,8 +50,11 @@ export default class GameShapeAnimation {
         }        
     }
 
+    /**
+     * Gets the current progress of the animation as a value between 0 and 1.
+     * @returns {number} The current progress of the animation.
+     */
     getProgress() {
-        
         return this.progress / this.config.duration;
     }
 }
