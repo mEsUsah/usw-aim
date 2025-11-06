@@ -1,7 +1,7 @@
 import GameShape from "../classes/GameShape.js";
 
 /** 
- * Adds a large game title to the given game object.
+ * Adds the game title to a game object.
  * @param {GameObject} gameObject - The game object the title will be added to.
  */
 export function addTitle(gameObject){
@@ -34,7 +34,7 @@ export function addTitle(gameObject){
 }
 
 /** 
- * Adds a start large play button shape to the game object.
+ * Adds a start large play button shape to a game object.
  * @param {GameObject} gameObject - The game object the start button will be added to.
  */
 export function addStartButton(gameObject){
