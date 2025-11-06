@@ -1,7 +1,7 @@
 import { GAME_VIEW } from '../classes/Game.js';
 import GameObject from '../classes/GameObject.js';
 import * as gameBoard from '../gameBoard.js';
-import * as gameplayShapes from '../shapes/gameplayShapes.js';
+import * as menuShapes from '../shapes/menuShapes.js';
 
 /** * Handles user inputs specific to the menu view.
  * @param {Game} game - The game instance.
@@ -53,7 +53,7 @@ function setSelectedIndicator(game, configValue, buttonName){
             // Remove all existing indicators to avoid duplicates
             gameObject.removeShape('selected_indicator');
             if(gameObject.config[configValue] === game.state[configValue]){
-                gameObject.addShape(gameplayShapes.menuSelectedIndicator());
+                gameObject.addShape(menuShapes.selectedIndicator());
             }
         }
     });

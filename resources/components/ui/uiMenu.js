@@ -1,5 +1,4 @@
 import GameObject from "../classes/GameObject.js";
-import GameShape from "../classes/GameShape.js";
 import { GAME_TYPE } from "../classes/Game.js";
 import { OPPONENT_TYPE } from "../classes/Game.js";
 import * as menuShapes from "../shapes/menuShapes.js";
