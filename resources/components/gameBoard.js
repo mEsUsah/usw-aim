@@ -77,6 +77,7 @@ export function create(game){
                     break;
                 }
             }
+            game.state.occupiedSpaces++;
         }
     }
 }
