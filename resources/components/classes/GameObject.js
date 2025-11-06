@@ -1,3 +1,10 @@
+/**
+ * A game object is the basic building block of the game engine. 
+ * * It can represent various entities such as boards, buttons, text, and illustrations.
+ * * A game object can contain multiple shapes, which combined define its visual representation.
+ * @class GameObject
+ * @property {Object} config - Configuration object for the game object.
+ */
 export default class GameObject {
     static VARIANT = {
         BOARD: 1,
@@ -13,10 +20,18 @@ export default class GameObject {
         this.state = {};
     }
 
+    /**
+     * Adds a game shape to the game object.
+     * @param {GameShape} shape - The shape to add.
+     */
     addShape(shape) {
         this.shapes.push(shape);
     }
 
+    /**
+     * Removes a game shape from the game object.
+     * @param {string} shapeName - The name of the shape to be removed.
+     */
     removeShape(shapeName) {
         const shapeIndex = this.shapes.findIndex(shape => shape.config.name && shape.config.name === shapeName);
         if (shapeIndex !== -1) {
@@ -24,6 +39,11 @@ export default class GameObject {
         }
     }
 
+    /**
+     * Updates all game shapes within the game object.
+     * * This is used to manage shape lifetimes and animation progress.
+     * @param {number} deltaTime - The time elapsed since the last update.
+     */
     update(deltaTime) {
         this.shapes.forEach(shape => {
             shape.update(deltaTime);
@@ -38,6 +58,10 @@ export default class GameObject {
         });
     }
 
+    /**
+     * Draws all game shapes onto the canvas.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     draw(ctx) {
         if(!this.shapes.length) return;
         ctx.save();
@@ -48,6 +72,12 @@ export default class GameObject {
         ctx.restore();
     }
 
+    /**
+     * Checks if a point is colliding with the game object's outline.
+     * @param {number} x - The x-coordinate of the point.
+     * @param {number} y - The y-coordinate of the point.
+     * @returns {boolean} - True if the point is colliding, false otherwise.
+     */
     checkCollision(x, y) {
         if(!this.config.outline) return false;
         
