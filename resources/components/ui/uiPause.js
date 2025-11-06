@@ -2,6 +2,10 @@ import GameObject from "../classes/GameObject.js";
 import * as pauseShapes from "../shapes/pauseShapes.js";
 import * as commonShapes from "../shapes/commonShapes.js";
 
+/**
+ * Creates and adds pause UI elements to the game.
+ * @param {Game} game - The game instance.
+ */
 export function create(game){
     const continueButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
