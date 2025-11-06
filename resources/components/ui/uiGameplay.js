@@ -2,6 +2,10 @@ import GameObject from "../classes/GameObject.js";
 import * as gameplayShapes from '../shapes/gameplayShapes.js';
 import * as commonShapes from "../shapes/commonShapes.js";
 
+/**
+ * Creates and adds gameplay UI elements to the game.
+ * @param {Game} game - The game instance.
+ */
 export function create(game){
     // Menu button
     const menuButton = new GameObject({
@@ -30,6 +34,10 @@ export function create(game){
     game.gameObjects.gameplay.push(turnIndicator);
 }
 
+/**
+ * Updates the turn symbol in the gameplay UI to reflect the current player.
+ * @param {Game} game - The game instance.
+ */
 export function updateTurnSymbol(game){
     // Remove existing turn symbol
     game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name !== 'turn_symbol');
