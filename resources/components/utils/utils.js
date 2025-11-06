@@ -1,5 +1,10 @@
 export const radian = Math.PI / 180;
 
+/**
+ * Resize the canvas to fit the window while maintaining aspect ratio and updates displayData with scale and offsets.
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+ * @param {Object} displayData - The display data containing game dimensions and offsets.
+ */
 export function resizeCanvas(ctx, displayData) {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
@@ -20,6 +25,10 @@ export function resizeCanvas(ctx, displayData) {
     displayData.screenEndY = displayData.offsetY * 2 + displayData.gameHeight;
 }
 
+/**
+ * Fix the DPI of the canvas for crisp rendering on high-DPI displays.
+ * @param {HTMLCanvasElement} canvas 
+ */
 export function fix_dpi(canvas) {
     let dpi = window.devicePixelRatio;
     // Create a style object that returns width and height
@@ -37,6 +46,11 @@ export function fix_dpi(canvas) {
     canvas.setAttribute('height', style.height() * dpi);
 }
 
+/**
+ * Clear all graphics on the entire canvas
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+ * @param {Object} displayData - The display data containing screen bounds and offsets.
+ */
 export function clearCanvas(ctx, displayData){
     ctx.clearRect(
         displayData.screenStartX, 
@@ -46,6 +60,11 @@ export function clearCanvas(ctx, displayData){
     );
 }
 
+/**
+ * Update frame data including delta time since last frame and FPS.
+ * @param {number} timestamp - The current timestamp.
+ * @param {Object} frameData - The frame data object to be updated.
+ */
 export function updateFrameData(timestamp, frameData){
     frameData.deltaTime = timestamp - frameData.lastTime;
     frameData.lastTime = timestamp;
