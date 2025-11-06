@@ -2,6 +2,11 @@ import GameObject from "../classes/GameObject";
 import GameShape from "../classes/GameShape";
 import GameShapeAnimation from "../classes/GameShapeAnimation";
 
+/**
+ * Adds a line to indicate that caused a win on the game board.
+ * @param {object} game - The game instance.
+ * @param {object} winLineCoordinates - The coordinates of the winning line.
+ */
 export function addWinLine(game, winLineCoordinates){
     const winLineObject = new GameObject({
         variant: GameObject.VARIANT.ILLUSTRATION,
@@ -9,7 +14,7 @@ export function addWinLine(game, winLineCoordinates){
         y: 0,
         name: `win_line`,
     });
-    
+
     const winLineShape = new GameShape('line', {
         x: winLineCoordinates.x,
         y: winLineCoordinates.y,
@@ -24,10 +29,14 @@ export function addWinLine(game, winLineCoordinates){
     }));
     
     winLineObject.addShape(winLineShape);
-
     game.gameObjects.gameplay.push(winLineObject);
 }
 
+/**
+ * Adds a game over text to the top of the gameplay scene.
+ * @param {object} game - The game instance.
+ * @param {string} text - The text to display.
+ */
 export function addGameOverText(game, text){
     const gameOverTextObject = new GameObject({
         variant: GameObject.VARIANT.ILLUSTRATION,
