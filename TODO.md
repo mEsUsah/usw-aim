@@ -9,7 +9,6 @@ Coursework for the JavaScript section of the course.
 
 - [ ] Random delete mode
 
-
 ## Completed taks
 - [X] Check for win
 - [X] Check for draw
@@ -21,4 +20,5 @@ Coursework for the JavaScript section of the course.
 - [x] Menu, gameplay and pause screens.
 - [x] Blocked game type
 - [x] AI opponent (basic / random)
+- [x] Game Type selector bugs out.
 
