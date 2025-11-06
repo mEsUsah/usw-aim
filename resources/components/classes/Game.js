@@ -84,6 +84,8 @@ export class Game{
             currentPlayer: 1,
             occupiedSpaces: 0,
             gameOver: false,
+            cpuMoveDelay: 500,
+            cpuWaitTime: 500
         };
         
         this.config = {};

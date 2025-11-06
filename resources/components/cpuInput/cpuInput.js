@@ -5,6 +5,12 @@ import * as uiGameplay from '../ui/uiGameplay.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js';
 
 export function handleCpuInput(game){
+    game.state.cpuWaitTime -= game.frameData.deltaTime;
+    if(game.state.cpuWaitTime > 0){
+        return;
+    }
+    game.state.cpuWaitTime = game.state.cpuMoveDelay;
+    
     pickRandomTile(game);
 }
 
