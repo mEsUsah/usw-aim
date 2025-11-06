@@ -1,7 +1,7 @@
 import GameShape from "../classes/GameShape.js";
 import GameShapeAnimation from "../classes/GameShapeAnimation.js";
 
-export function addCrossShape(game, gameObject){
+export function gameboardCross(game, gameObject){
     const line1 = new GameShape('line', {
         x: game.config.cellPadding - game.config.cellWidth/2,
         y: game.config.cellPadding - game.config.cellHeight/2,
@@ -31,7 +31,7 @@ export function addCrossShape(game, gameObject){
     gameObject.addShape(line2);
 }
 
-export function addCircleShape(game, gameObject){
+export function gameboardCircle(game, gameObject){
     const circle = new GameShape('circle', {
         x: 0,
         y: 0,

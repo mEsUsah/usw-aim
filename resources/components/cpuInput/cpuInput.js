@@ -5,6 +5,7 @@ import * as uiGameplay from '../ui/uiGameplay.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js';
 
 export function handleCpuInput(game){
+    // Wait to give illusion of decition time
     game.state.cpuWaitTime -= game.frameData.deltaTime;
     if(game.state.cpuWaitTime > 0){
         return;
@@ -23,7 +24,7 @@ function pickRandomTile(game){
             gameObject.state.occupiedBy = game.state.currentPlayer; 
             game.state.occupiedSpaces++;
             
-            gameObjectShapes.addCircleShape(game, gameObject); // CPU is always player 2
+            gameObjectShapes.gameboardCircle(game, gameObject); // CPU is always player 2
             game.state.currentPlayer = 1;
 
             // Check for win/draw conditions
