@@ -120,3 +120,22 @@ export function selectedIndicator(){
         name: 'selected_indicator'
     });
 }
+
+
+/** * Adds a stats text shape to a game object.
+ * @param {GameObject} gameObject - The game object the stats text will be added to.
+ * @param {Object} stats - The stats data to display.
+ */
+export function addStatsText(gameObject, stats){
+    const statsString = `Games Played: ${stats.gamesPlayed} | Wins: ${stats.gamesWon} | Losses: ${stats.gamesLost} | Draws: ${stats.gamesDrawn}`;
+    gameObject.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: statsString,
+        font: "16px Consolas",
+        color: "white",
+        align: "center",
+        baseline: "middle",
+        name: 'stats_text'
+    }));
+}

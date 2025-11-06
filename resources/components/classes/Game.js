@@ -6,6 +6,7 @@ import * as uiGameplay from '../ui/uiGameplay.js';
 import * as uiPause from '../ui/uiPause.js';
 import { handleUserInputs } from '../userInput/userInput.js';
 import { handleCpuInput } from '../cpuInput/cpuInput.js'; 
+import * as statUtils from '../utils/statUtils.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -93,7 +94,8 @@ export class Game{
             occupiedSpaces: 0,
             gameOver: false,
             cpuMoveDelay: 500,
-            cpuWaitTime: 500
+            cpuWaitTime: 500,
+            stats: statUtils.getData()
         };
         
         // Initial configuration

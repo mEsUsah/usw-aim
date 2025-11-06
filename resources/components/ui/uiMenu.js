@@ -188,5 +188,23 @@ export function create(game){
     player2TypeCpuButton.addShape(menuShapes.buttonOutline());
     player2TypeCpuButton.addShape(menuShapes.buttonText("CPU"));
     game.gameObjects.menu.push(player2TypeCpuButton);
+
+    // Stats display
+    const statsText = new GameObject({
+        variant: GameObject.VARIANT.TEXT,
+        x: game.displayData.gameWidth / 2,
+        y: game.displayData.gameHeight - 40,
+        name: 'stats_text',
+    });
+    menuShapes.addStatsText(statsText, game.state.stats);
+    game.gameObjects.menu.push(statsText);
+}
+
+export function updateStatsText(game){
+    const statsText = game.gameObjects.menu.find(obj => obj.config.name === 'stats_text');
+    if(statsText){
+        statsText.shapes = []; // Clear existing shapes
+        menuShapes.addStatsText(statsText, game.state.stats);
+    }
 }
 

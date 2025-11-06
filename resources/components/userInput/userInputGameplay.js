@@ -5,7 +5,7 @@ import checkWinCondition from '../checkWinCondition.js';
 import checkDrawCondition from '../checkDrawCondition.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js'
 import * as gameplayShapes from '../shapes/gameplayShapes.js'
-
+import * as statUtils from '../utils/statUtils.js';
 
 /** * Handles user inputs specific to the gameplay view.
  * @param {Game} game - The game instance.
@@ -19,14 +19,13 @@ export function handleUserInputsGameplay(game, input){
                 gameObject.state.occupiedBy = game.state.currentPlayer; 
                 game.state.occupiedSpaces++;
                 
+                // Add shape based on current player
                 switch(game.state.currentPlayer){
                     case 1:
                         gameplayShapes.addGameboardCross(game, gameObject);
-                        game.state.currentPlayer = 2;
                         break;
                     case 2:
                         gameplayShapes.addGameboardCircle(game, gameObject);
-                        game.state.currentPlayer = 1;
                         break;
                     default:
                         break;
@@ -38,13 +37,27 @@ export function handleUserInputsGameplay(game, input){
                     gameplayObjects.addWinLine(game,gameWon);
                     game.state.gameOver = true;
                     gameplayObjects.addGameOverText(game, "Game Over");
+                    statUtils.update(game, game.state.currentPlayer);
                     return;
                 }
                 const gameDraw = checkDrawCondition(game);
                 if(gameDraw){
                     game.state.gameOver = true;
                     gameplayObjects.addGameOverText(game, "Game Over");
+                    statUtils.update(game, 0); // 0 for draw
                     return;
+                }
+
+                // change turn
+                switch(game.state.currentPlayer){
+                    case 1:
+                        game.state.currentPlayer = 2;
+                        break;
+                    case 2:
+                        game.state.currentPlayer = 1;
+                        break;
+                    default:
+                        break;
                 }
 
                 uiGameplay.updateTurnSymbol(game);

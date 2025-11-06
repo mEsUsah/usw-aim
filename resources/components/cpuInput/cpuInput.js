@@ -3,6 +3,7 @@ import checkWinCondition from '../checkWinCondition.js';
 import checkDrawCondition from '../checkDrawCondition.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js';
+import * as statUtils from '../utils/statUtils.js';
 
 /** 
  * Handles CPU inputs during gameplay.
@@ -43,12 +44,14 @@ function pickRandomField(game){
                 gameplayObjects.addWinLine(game,gameWon);
                 game.state.gameOver = true;
                 gameplayObjects.addGameOverText(game, "Game Over");
+                statUtils.update(game, 2);
                 break;
             }
             const gameDraw = checkDrawCondition(game);
             if(gameDraw){
                 game.state.gameOver = true;
                 gameplayObjects.addGameOverText(game, "Game Over");
+                statUtils.update(game, 0); // 0 for draw
                 break;
             }
 
