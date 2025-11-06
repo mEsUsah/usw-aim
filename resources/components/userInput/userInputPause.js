@@ -1,13 +1,13 @@
-import { GAME_MODE } from '../classes/Game.js';
+import { GAME_VIEW } from '../classes/Game.js';
 import GameObject from '../classes/GameObject.js';
 
 export function handleUserInputPause(game, input){
-    game.gameObjects[GAME_MODE.PAUSED].forEach(gameObject => {
+    game.gameObjects[GAME_VIEW.PAUSED].forEach(gameObject => {
         // Check click on continue button
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'continue_button'){
-                    game.mode = GAME_MODE.GAMEPLAY;
+                    game.view = GAME_VIEW.GAMEPLAY;
                 }
             }
         }
@@ -15,7 +15,7 @@ export function handleUserInputPause(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'stop_button'){
-                    game.mode = GAME_MODE.MENU;
+                    game.view = GAME_VIEW.MENU;
                 }
             }
         }

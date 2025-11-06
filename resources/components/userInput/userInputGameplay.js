@@ -1,4 +1,4 @@
-import { GAME_MODE } from '../classes/Game.js';
+import { GAME_VIEW } from '../classes/Game.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import GameObject from '../classes/GameObject.js';
 import checkWinCondition from '../checkWinCondition.js';
@@ -7,7 +7,7 @@ import * as gameplayObjects from '../gameObjects/gameplayObjects.js'
 import * as gameObjectShapes from '../shapes/gameObjectShapes.js'
 
 export function handleUserInputsGameplay(game, input){
-    game.gameObjects[GAME_MODE.GAMEPLAY].forEach(gameObject => {
+    game.gameObjects[GAME_VIEW.GAMEPLAY].forEach(gameObject => {
         // Check click on board cells
         if (game.state.gameOver == false && gameObject.config.variant == GameObject.VARIANT.BOARD) {
             if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
@@ -50,7 +50,7 @@ export function handleUserInputsGameplay(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'menu_button'){
-                    game.mode = GAME_MODE.PAUSED;
+                    game.view = GAME_VIEW.PAUSED;
                 }
             }
         }

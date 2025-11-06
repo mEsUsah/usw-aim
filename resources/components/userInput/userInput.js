@@ -1,4 +1,4 @@
-import { GAME_MODE } from '../classes/Game.js';
+import { GAME_VIEW } from '../classes/Game.js';
 import { handleUserInputsGameplay } from './userInputGameplay.js';
 import { handleUserInputPause } from './userInputPause.js';
 import { handleUserInputMenu } from './userInputMenu.js';
@@ -6,16 +6,16 @@ import { handleUserInputMenu } from './userInputMenu.js';
 export function handleUserInputs(game) {
         game.userInputs.forEach(input => {
             if(input.type == 'click') { 
-                switch(game.mode) {
-                    case GAME_MODE.GAMEPLAY:
+                switch(game.view) {
+                    case GAME_VIEW.GAMEPLAY:
                         handleUserInputsGameplay(game, input);
                         break;
 
-                    case GAME_MODE.PAUSED:
+                    case GAME_VIEW.PAUSED:
                         handleUserInputPause(game, input);
                         break;
 
-                    case GAME_MODE.MENU:
+                    case GAME_VIEW.MENU:
                         handleUserInputMenu(game, input);
                         break;
                     

@@ -1,14 +1,14 @@
-import { GAME_MODE } from '../classes/Game.js';
+import { GAME_VIEW } from '../classes/Game.js';
 import GameObject from '../classes/GameObject.js';
 import * as gameBoard from '../gameBoard.js';
 import * as gameObjectShapes from '../shapes/gameObjectShapes.js';
 
 export function handleUserInputMenu(game, input){
-    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
+    game.gameObjects[GAME_VIEW.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'start_button'){
-                    game.mode = GAME_MODE.GAMEPLAY;
+                    game.view = GAME_VIEW.GAMEPLAY;
                     game.resetState();
                     gameBoard.create(game);
                 }
@@ -43,7 +43,7 @@ export function handleUserInputMenu(game, input){
 }
 
 function setSelectedIndicator(game, configValue, buttonName){
-    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
+    game.gameObjects[GAME_VIEW.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON && gameObject.config.name === buttonName) {
 
             // Remove all existing indicators to avoid duplicates

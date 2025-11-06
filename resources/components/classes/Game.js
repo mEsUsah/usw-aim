@@ -11,7 +11,7 @@ const SHOW_FPS = false;
 const SHOW_GRID = false;
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 800;
-export const GAME_MODE = {
+export const GAME_VIEW = {
     GAMEPLAY: 'gameplay',
     MENU: 'menu',
     PAUSED: 'paused'
@@ -27,6 +27,11 @@ export const OPPONENT_TYPE = {
     CPU: 1,
 };
 
+/**
+ * The main Game class containing the game state, rendering context, the game loop.
+ * @class Game
+ * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
+ */
 export class Game{
     constructor(canvas) {
         this.canvas = canvas;
@@ -52,7 +57,7 @@ export class Game{
             screenEndY: 0
         };
 
-        this.mode = GAME_MODE.MENU;
+        this.view = GAME_VIEW.MENU;
         this.gameObjects = {
             gameplay: [],
             menu: [],
@@ -63,10 +68,12 @@ export class Game{
         
         fix_dpi(this.canvas);
         
+        // Handle window resizing
         window.addEventListener('resize', () =>{
             resizeCanvas(this.ctx, this.displayData);
         });
         
+        // Handle mouse clicks and transfer event to game engine
         canvas.addEventListener('click', (event) => {
             const mousePos = getMousePos(event, this.displayData, this.canvas);
             this.userInputs.push({
@@ -76,6 +83,7 @@ export class Game{
             });
         });
         
+        // Initial game state
         this.state = {
             gameType: GAME_TYPE.NORMAL,
             opponentType: OPPONENT_TYPE.HUMAN,
@@ -88,6 +96,7 @@ export class Game{
             cpuWaitTime: 500
         };
         
+        // Initial configuration
         this.config = {};
         this.updateConfig();
 
@@ -104,12 +113,12 @@ export class Game{
     updateConfig(){
         const boardSize = this.state.boardSize;
         this.config = {
-                boardSize: boardSize,
-                boardMargin: 60,
-                cellWidth: (GAME_WIDTH - 120) / boardSize,
-                cellHeight: (GAME_HEIGHT - 120) / boardSize,
-                cellPadding: 20
-            };
+            boardSize: boardSize,
+            boardMargin: 60,
+            cellWidth: (GAME_WIDTH - 120) / boardSize,
+            cellHeight: (GAME_HEIGHT - 120) / boardSize,
+            cellPadding: 20
+        };
     };
 
     resetState(){
@@ -122,6 +131,10 @@ export class Game{
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }; 
 
+    /**
+     * The main game loop that updates and renders each game frame.
+     * @param {number} timestamp - The current time stamp.
+     */
     gameLoop(timestamp) {
         // Update game state
         updateFrameData(timestamp, this.frameData);
@@ -132,7 +145,7 @@ export class Game{
         }
 
         // Update animation state
-        this.gameObjects[this.mode].forEach(gameObject => {
+        this.gameObjects[this.view].forEach(gameObject => {
             gameObject.update(this.frameData.deltaTime);
         });
 
@@ -141,7 +154,7 @@ export class Game{
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
-        this.gameObjects[this.mode].forEach(gameObject => {
+        this.gameObjects[this.view].forEach(gameObject => {
             gameObject.draw(this.ctx);
         });
 
