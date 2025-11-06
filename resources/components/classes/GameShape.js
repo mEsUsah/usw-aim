@@ -1,5 +1,13 @@
 import GameShapeAnimation from './GameShapeAnimation.js';
 
+/**
+ * GameShape represents a drawable shape in the game.
+ * It supports various types of shapes including rectangles, circles, lines, polygons, and text.
+ * Each shape (except text) can have an associated animation that affects its drawing.
+ * @class GameShape
+ * @property {string} type - The type of the shape ('rectangle', 'circle', 'line', 'polygon', 'text').
+ * @property {Object} config - Configuration object for the shape (position, size, color, fillColor, lineWidth, text).
+ */
 export default class GameShape {
     constructor(type, config) {
         this.type = type;
@@ -8,17 +16,28 @@ export default class GameShape {
         this.lifetime = 0;
     }
 
+    /**
+     * Adds an animation to the shape.
+     * @param {GameShapeAnimation} animation - The animation to add.
+     */
     addAnimation(animation) {
         this.animation = animation;
     }
 
+    /**
+     * Updates the shape's state, including its lifetime and animation progress.
+     * @param {number} deltaTime - The time elapsed since the last update.
+     */
     update(deltaTime) {
         this.lifetime += deltaTime;
         if(this.animation) {
             this.animation.updateProgress(deltaTime);
         }
     }
-
+    /**
+     * Draws the shape onto the canvas context.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     draw(ctx) {
         ctx.strokeStyle = this.config.color || "red";
         ctx.lineWidth = this.config.lineWidth || 2;
