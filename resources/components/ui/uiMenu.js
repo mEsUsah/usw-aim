@@ -104,7 +104,7 @@ export function create(game){
         sizeButton.addShape(gameObjectShapes.menuButtonOutline());
         sizeButton.addShape(gameObjectShapes.menuButtonText(`${i}x${i}`));
         if(i === game.state.boardSize){
-            sizeButton.addShape(getSelectedIndicator());
+            sizeButton.addShape(gameObjectShapes.menuSelectedIndicator());
         }
         game.gameObjects.menu.push(sizeButton);
     }
@@ -137,7 +137,7 @@ export function create(game){
         winLengthButton.addShape(gameObjectShapes.menuButtonOutline());
         winLengthButton.addShape(gameObjectShapes.menuButtonText(`${i}`));
         if(i === game.state.winLength){
-            winLengthButton.addShape(getSelectedIndicator());
+            winLengthButton.addShape(gameObjectShapes.menuSelectedIndicator());
         }
         game.gameObjects.menu.push(winLengthButton);
     }
@@ -167,7 +167,7 @@ export function create(game){
     });
     gameTypeNormalButton.addShape(gameObjectShapes.menuButtonOutline());
     gameTypeNormalButton.addShape(gameObjectShapes.menuButtonText("Nor"));
-    gameTypeNormalButton.addShape(getSelectedIndicator());
+    gameTypeNormalButton.addShape(gameObjectShapes.menuSelectedIndicator());
     game.gameObjects.menu.push(gameTypeNormalButton);
 
     const gameTypeBlockButton = new GameObject({
@@ -212,7 +212,7 @@ export function create(game){
     });
     player2TypeNormalButton.addShape(gameObjectShapes.menuButtonOutline());
     player2TypeNormalButton.addShape(gameObjectShapes.menuButtonText("Hum"));
-    player2TypeNormalButton.addShape(getSelectedIndicator());
+    player2TypeNormalButton.addShape(gameObjectShapes.menuSelectedIndicator());
     game.gameObjects.menu.push(player2TypeNormalButton);
 
     const player2TypeCpuButton = new GameObject({
@@ -233,14 +233,3 @@ export function create(game){
     game.gameObjects.menu.push(player2TypeCpuButton);
 }
 
-export function getSelectedIndicator(){
-    return new GameShape('line', {
-        x: -20,
-        y: 17,
-        x2: 20,
-        y2: 17,
-        color: "red",
-        lineWidth: 5,      
-        name: 'selected_indicator'
-    });
-}

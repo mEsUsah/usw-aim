@@ -79,3 +79,15 @@ export function menuButtonText(text){
         baseline: "middle"
     });
 }
+
+export function menuSelectedIndicator(){
+    return new GameShape('line', {
+        x: -20,
+        y: 17,
+        x2: 20,
+        y2: 17,
+        color: "red",
+        lineWidth: 5,      
+        name: 'selected_indicator'
+    });
+}

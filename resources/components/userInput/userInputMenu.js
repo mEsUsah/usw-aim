@@ -1,7 +1,7 @@
 import { GAME_MODE } from '../classes/Game.js';
 import GameObject from '../classes/GameObject.js';
 import * as gameBoard from '../gameBoard.js';
-import * as uiMenu from '../ui/uiMenu.js';
+import * as gameObjectShapes from '../shapes/gameObjectShapes.js';
 
 export function handleUserInputMenu(game, input){
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
@@ -49,7 +49,7 @@ function setSelectedIndicator(game, configValue, buttonName){
             // Remove all existing indicators to avoid duplicates
             gameObject.removeShape('selected_indicator');
             if(gameObject.config[configValue] === game.state[configValue]){
-                gameObject.addShape(uiMenu.getSelectedIndicator());
+                gameObject.addShape(gameObjectShapes.menuSelectedIndicator());
             }
         }
     });
