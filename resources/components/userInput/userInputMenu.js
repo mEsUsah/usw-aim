@@ -46,25 +46,26 @@ function setWinLengthIndicator(game){
     const winLength = game.state.winLength;
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'win_length_button' && gameObject.config.winLength === winLength){
-                gameObject.addShape(uiMenu.getSelectedIndicator());
-            } else if(gameObject.config.name === 'win_length_button'){
+            if(gameObject.config.name === 'win_length_button'){
                 gameObject.removeShape('selected_indicator');
-            }
+                if(gameObject.config.winLength === winLength){
+                    gameObject.addShape(uiMenu.getSelectedIndicator());
+                }
+            } 
         }
     });
 }
-
 
 function setGameSizeIndicator(game){
     const boardSize = game.state.boardSize;
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'size_button' && gameObject.config.boardSize === boardSize){
-                gameObject.addShape(uiMenu.getSelectedIndicator());
-            } else if(gameObject.config.name === 'size_button'){
+            if(gameObject.config.name === 'size_button'){
                 gameObject.removeShape('selected_indicator');
-            }
+                if(gameObject.config.boardSize === boardSize){
+                    gameObject.addShape(uiMenu.getSelectedIndicator());
+                }
+            } 
         }
     });
 }
@@ -73,11 +74,12 @@ function setGameTypeIndicator(game){
     const gameType = game.state.gameType;
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'game_type_button' && gameObject.config.gameType === gameType){
-                gameObject.addShape(uiMenu.getSelectedIndicator());
-            } else if(gameObject.config.name === 'game_type_button'){
+            if(gameObject.config.name === 'game_type_button'){
                 gameObject.removeShape('selected_indicator');
-            }
+                if( gameObject.config.gameType === gameType) {
+                    gameObject.addShape(uiMenu.getSelectedIndicator());
+                }
+            } 
         }
     });
 }
@@ -86,11 +88,12 @@ function setOpponentTypeIndicator(game){
     const opponentType = game.state.opponentType;
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'player_2_type_button' && gameObject.config.opponentType === opponentType){
-                gameObject.addShape(uiMenu.getSelectedIndicator());
-            } else if(gameObject.config.name === 'player_2_type_button'){
+            if(gameObject.config.name === 'player_2_type_button'){
                 gameObject.removeShape('selected_indicator');
-            }
+                if(gameObject.config.opponentType === opponentType){
+                    gameObject.addShape(uiMenu.getSelectedIndicator());
+                }
+            } 
         }
     });
 }  
