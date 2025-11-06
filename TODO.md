@@ -2,7 +2,7 @@
 Coursework for the JavaScript section of the course.
 
 ## TODO
-- [ ] Random delete mode
+- [ ] Menu: Illustrate unselectable win lengths.
 
 ## Completed taks
 - [X] Check for win
