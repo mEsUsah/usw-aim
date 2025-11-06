@@ -17,83 +17,40 @@ export function handleUserInputMenu(game, input){
                     game.state.boardSize = gameObject.config.boardSize;
                     if(game.state.boardSize < game.state.winLength){
                         game.state.winLength = game.state.boardSize;
-                        setWinLengthIndicator(game);
+                        setSelectedIndicator(game, 'winLength', 'win_length_button');
                     }
-                    setGameSizeIndicator(game);
+                    setSelectedIndicator(game, 'boardSize', 'size_button');
                     game.updateConfig();
                 }
                 if(gameObject.config.name === 'win_length_button'){
                     if(gameObject.config.winLength === game.state.winLength) return;
                     if(gameObject.config.winLength > game.state.boardSize) return;
                     game.state.winLength = gameObject.config.winLength;
-                    setWinLengthIndicator(game);
+                    setSelectedIndicator(game, 'winLength', 'win_length_button');
                     game.updateConfig();
                 }
                 if(gameObject.config.name === 'game_type_button'){
                     game.state.gameType = gameObject.config.gameType;
-                    setGameTypeIndicator(game);
+                    setSelectedIndicator(game, 'gameType', 'game_type_button');
                 }
                 if(gameObject.config.name === 'player_2_type_button'){
                     game.state.opponentType = gameObject.config.opponentType;
-                    setOpponentTypeIndicator(game);
+                    setSelectedIndicator(game, 'opponentType', 'player_2_type_button');
                 }
             }
         }
     });
 }
 
-function setWinLengthIndicator(game){
-    const winLength = game.state.winLength;
+function setSelectedIndicator(game, configValue, buttonName){
     game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
-        if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'win_length_button'){
-                gameObject.removeShape('selected_indicator');
-                if(gameObject.config.winLength === winLength){
-                    gameObject.addShape(uiMenu.getSelectedIndicator());
-                }
-            } 
-        }
-    });
-}
+        if (gameObject.config.variant == GameObject.VARIANT.BUTTON && gameObject.config.name === buttonName) {
 
-function setGameSizeIndicator(game){
-    const boardSize = game.state.boardSize;
-    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
-        if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'size_button'){
-                gameObject.removeShape('selected_indicator');
-                if(gameObject.config.boardSize === boardSize){
-                    gameObject.addShape(uiMenu.getSelectedIndicator());
-                }
-            } 
+            // Remove all existing indicators to avoid duplicates
+            gameObject.removeShape('selected_indicator');
+            if(gameObject.config[configValue] === game.state[configValue]){
+                gameObject.addShape(uiMenu.getSelectedIndicator());
+            }
         }
     });
-}
-
-function setGameTypeIndicator(game){
-    const gameType = game.state.gameType;
-    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
-        if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'game_type_button'){
-                gameObject.removeShape('selected_indicator');
-                if( gameObject.config.gameType === gameType) {
-                    gameObject.addShape(uiMenu.getSelectedIndicator());
-                }
-            } 
-        }
-    });
-}
-
-function setOpponentTypeIndicator(game){
-    const opponentType = game.state.opponentType;
-    game.gameObjects[GAME_MODE.MENU].forEach(gameObject => {
-        if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
-            if(gameObject.config.name === 'player_2_type_button'){
-                gameObject.removeShape('selected_indicator');
-                if(gameObject.config.opponentType === opponentType){
-                    gameObject.addShape(uiMenu.getSelectedIndicator());
-                }
-            } 
-        }
-    });
-}  
+} 
