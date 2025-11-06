@@ -46,6 +46,11 @@ export function handleUserInputMenu(game, input){
     });
 }
 
+/** Sets the selected indicator on the appropriate button in the menu.
+ * @param {Game} game - The game instance.
+ * @param {string} configValue - The configuration value to check (e.g., 'boardSize', 'winLength').
+ * @param {string} buttonName - The name of the GameObject to update.
+ */
 function setSelectedIndicator(game, configValue, buttonName){
     game.gameObjects[GAME_VIEW.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON && gameObject.config.name === buttonName) {
