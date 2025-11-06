@@ -1,6 +1,6 @@
 import GameObject from "../classes/GameObject.js";
-import GameShape from "../classes/GameShape.js";
-import GameShapeAnimation from "../classes/GameShapeAnimation.js";
+import * as pauseShapes from "../shapes/pauseShapes.js";
+import * as commonShapes from "../shapes/commonShapes.js";
 
 export function create(game){
     const continueButton = new GameObject({
@@ -15,24 +15,8 @@ export function create(game){
             right: 20
         }
     });
-    continueButton.addShape(new GameShape('rectangle', {
-        x: -20,
-        y: -20,
-        width: 40,
-        height: 40,
-        color: "red"
-    }));
-    continueButton.addShape(new GameShape('polygon', {
-        points: [
-            {x: -10, y: -10},
-            {x: 10, y: 0},
-            {x: -10, y: 10}
-        ],
-        color: "red",
-        fillColor: "red"
-    }));
+    commonShapes.addPlayButton(continueButton);
     game.gameObjects.paused.push(continueButton);
-
 
     const stopButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
@@ -46,21 +30,7 @@ export function create(game){
             right: 20
         }
     });
-    stopButton.addShape(new GameShape('rectangle', {
-        x: -20,
-        y: -20,
-        width: 40,
-        height: 40,
-        color: "red"
-    }));
-    stopButton.addShape(new GameShape('rectangle', {
-        x: -10,
-        y: -10,
-        width: 20,
-        height: 20,
-        color: "red",
-        fillColor: "red"
-    }));
+    commonShapes.addStopButton(stopButton);
     game.gameObjects.paused.push(stopButton);
 
     const pauseText = new GameObject({
@@ -69,26 +39,6 @@ export function create(game){
         y: game.displayData.gameHeight / 2,
         name: 'pause_text',
     });
-    pauseText.addShape(new GameShape('text', {
-        x: -150,
-        y: 0,
-        text: "Game Paused",
-        font: "50px Consolas",
-        color: "white"
-    }));
-
-    const pauseLine = new GameShape('line', {
-        x: -150,
-        y:  5,
-        x2: 150,
-        y2: 5,
-        color: "white",
-        lineWidth: 4
-    });
-    pauseLine.addAnimation(new GameShapeAnimation({
-        duration: 1000,
-        loop: GameShapeAnimation.INFINITE,
-    }));
-    pauseText.addShape(pauseLine);
+    pauseShapes.addPauseText(pauseText);
     game.gameObjects.paused.push(pauseText);
 }
