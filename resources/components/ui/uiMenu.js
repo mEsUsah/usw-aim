@@ -3,6 +3,10 @@ import { GAME_TYPE } from "../classes/Game.js";
 import { OPPONENT_TYPE } from "../classes/Game.js";
 import * as menuShapes from "../shapes/menuShapes.js";
 
+/**
+ * Creates and adds menu UI elements to the game.
+ * @param {Game} game - The game instance.
+ */
 export function create(game){
     const buttonOffsetY = 150;
 
@@ -200,6 +204,10 @@ export function create(game){
     game.gameObjects.menu.push(statsText);
 }
 
+/**
+ * Updates the stats display to show updated game statistics.
+ * @param {Game} game - The game instance.
+ */
 export function updateStatsText(game){
     const statsText = game.gameObjects.menu.find(obj => obj.config.name === 'stats_text');
     if(statsText){
