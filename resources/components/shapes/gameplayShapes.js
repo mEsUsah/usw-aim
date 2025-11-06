@@ -1,10 +1,11 @@
+import GameObject from "../classes/GameObject.js";
 import GameShape from "../classes/GameShape.js";
 import GameShapeAnimation from "../classes/GameShapeAnimation.js";
 
 /**
- * Adds a cross shape to the specified game object with an animation.
+ * Adds a cross shape with dynamic size to the game object with a draw animation.
  * @param {Object} game - The game instance.
- * @param {Object} gameObject - The game object the cross shape will be added to.
+ * @param {GameObject} gameObject - The game object the cross shape will be added to.
  */
 export function addGameboardCross(game, gameObject){
     const line1 = new GameShape('line', {
@@ -37,9 +38,9 @@ export function addGameboardCross(game, gameObject){
 }
 
 /**
- * Adds a circle shape to the specified game object with an animation.
+ * Adds a circle shape with dynamic size to the game object with a draw animation.
  * @param {Object} game - The game instance.
- * @param {Object} gameObject - The game object the circle shape will be added to.
+ * @param {GameObject} gameObject - The game object the circle shape will be added to.
  */
 export function addGameboardCircle(game, gameObject){
     const circle = new GameShape('circle', {
@@ -54,6 +55,43 @@ export function addGameboardCircle(game, gameObject){
     }));
 
     gameObject.addShape(circle);
+}
+
+/**
+ * Adds a small cross shape to game object.
+ * @param {GameObject} gameObject - The game object the turn symbol will be added to.
+ */
+export function addTurnSymbolCross(gameObject){
+    gameObject.addShape(new GameShape('line', {
+        x: -15,
+        y: -15,
+        x2: 15,
+        y2: 15,
+        color: "rgba(40, 151, 255, 1)",
+        lineWidth: 4,
+    }));
+    gameObject.addShape(new GameShape('line', {
+        x: 15,
+        y: -15,
+        x2: -15,
+        y2: 15,
+        color: "rgba(40, 151, 255, 1)",
+        lineWidth: 4,
+    }));
+}
+
+/** 
+ * Adds a small circle shape to game object.
+ * @param {GameObject} gameObject - The game object the turn symbol will be added to.
+ */
+export function addTurnSymbolCircle(gameObject){
+    gameObject.addShape(new GameShape('circle', {
+        x: 0,
+        y: 0,
+        radius: 15,
+        color: "rgba(248, 66, 66, 1)",
+        lineWidth: 4,
+    }));
 }
 
 /**

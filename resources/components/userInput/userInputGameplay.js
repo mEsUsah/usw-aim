@@ -4,7 +4,7 @@ import GameObject from '../classes/GameObject.js';
 import checkWinCondition from '../checkWinCondition.js';
 import checkDrawCondition from '../checkDrawCondition.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js'
-import * as gameObjectShapes from '../shapes/gameObjectShapes.js'
+import * as gameplayShapes from '../shapes/gameplayShapes.js'
 
 
 /** * Handles user inputs specific to the gameplay view.
@@ -21,11 +21,11 @@ export function handleUserInputsGameplay(game, input){
                 
                 switch(game.state.currentPlayer){
                     case 1:
-                        gameObjectShapes.addGameboardCross(game, gameObject);
+                        gameplayShapes.addGameboardCross(game, gameObject);
                         game.state.currentPlayer = 2;
                         break;
                     case 2:
-                        gameObjectShapes.addGameboardCircle(game, gameObject);
+                        gameplayShapes.addGameboardCircle(game, gameObject);
                         game.state.currentPlayer = 1;
                         break;
                     default:

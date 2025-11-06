@@ -1,5 +1,6 @@
 import GameObject from "../classes/GameObject.js";
 import GameShape from "../classes/GameShape.js";
+import * as gameplayShapes from '../shapes/gameplayShapes.js';
 
 export function create(game){
     // Menu button
@@ -40,8 +41,6 @@ export function create(game){
     }));
     game.gameObjects.gameplay.push(menuButton);
 
-
-
     // Player turn indicator
     const turnIndicator = new GameObject({
         variant: GameObject.VARIANT.TEXT,
@@ -57,7 +56,6 @@ export function create(game){
         color: "white"
     }));
     game.gameObjects.gameplay.push(turnIndicator);
-
 }
 
 export function updateTurnSymbol(game){
@@ -73,30 +71,9 @@ export function updateTurnSymbol(game){
     });
 
     if(game.state.currentPlayer == 1){
-        turnSymbol.addShape(new GameShape('line', {
-            x: -15,
-            y: -15,
-            x2: 15,
-            y2: 15,
-            color: "rgba(40, 151, 255, 1)",
-            lineWidth: 4,
-        }));
-        turnSymbol.addShape(new GameShape('line', {
-            x: 15,
-            y: -15,
-            x2: -15,    
-            y2: 15,
-            color: "rgba(40, 151, 255, 1)",
-            lineWidth: 4,
-        }));
+        gameplayShapes.addTurnSymbolCross(turnSymbol);
     } else {
-        turnSymbol.addShape(new GameShape('circle', {
-            x: 0,
-            y: 0,
-            radius: 15,
-            color: "rgba(248, 66, 66, 1)",
-            lineWidth: 4,
-        }));
+        gameplayShapes.addTurnSymbolCircle(turnSymbol);
     }
     game.gameObjects.gameplay.push(turnSymbol);
 }

@@ -1,4 +1,4 @@
-import * as gameObjectShapes from '../shapes/gameObjectShapes.js';
+import * as gameplayShapes from '../shapes/gameplayShapes.js';
 import checkWinCondition from '../checkWinCondition.js';
 import checkDrawCondition from '../checkDrawCondition.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
@@ -34,7 +34,7 @@ function pickRandomField(game){
             gameObject.state.occupiedBy = game.state.currentPlayer; 
             game.state.occupiedSpaces++;
             
-            gameObjectShapes.addGameboardCircle(game, gameObject); // CPU is always player 2
+            gameplayShapes.addGameboardCircle(game, gameObject); // CPU is always player 2
             game.state.currentPlayer = 1;
 
             // Check for win/draw conditions
