@@ -1,6 +1,6 @@
 import GameObject from "../classes/GameObject.js";
-import GameShape from "../classes/GameShape.js";
 import * as gameplayShapes from '../shapes/gameplayShapes.js';
+import * as commonShapes from "../shapes/commonShapes.js";
 
 export function create(game){
     // Menu button
@@ -16,29 +16,7 @@ export function create(game){
             right: 20
         }
     });
-    menuButton.addShape(new GameShape('rectangle', {
-        x: -20,
-        y: -20,
-        width: 40,
-        height: 40,
-        color: "red"
-    }));
-    menuButton.addShape(new GameShape('rectangle', {
-        x: -10,
-        y: -10,
-        width: 6,
-        height: 20,
-        color: "red",
-        fillColor: "red"
-    }));
-    menuButton.addShape(new GameShape('rectangle', {
-        x: 10,
-        y: -10,
-        width: -6,
-        height: 20,
-        color: "red",
-        fillColor: "red"
-    }));
+    commonShapes.addPauseButton(menuButton);
     game.gameObjects.gameplay.push(menuButton);
 
     // Player turn indicator
@@ -48,13 +26,7 @@ export function create(game){
         y: 37.5,
         name: 'turn_indicator',
     });
-    turnIndicator.addShape(new GameShape('text', {
-        x: 0,
-        y: 0,
-        text: "Player:",
-        font: "30px Consolas",
-        color: "white"
-    }));
+    gameplayShapes.addTurnIndicator(turnIndicator);
     game.gameObjects.gameplay.push(turnIndicator);
 }
 

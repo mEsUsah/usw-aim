@@ -57,6 +57,16 @@ export function addGameboardCircle(game, gameObject){
     gameObject.addShape(circle);
 }
 
+export function addTurnIndicator(gameObject){
+    gameObject.addShape(new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: "Player:",
+        font: "30px Consolas",
+        color: "white"
+    }));
+}
+
 /**
  * Adds a small cross shape to game object.
  * @param {GameObject} gameObject - The game object the turn symbol will be added to.
@@ -94,64 +104,3 @@ export function addTurnSymbolCircle(gameObject){
     }));
 }
 
-/**
- * Creates a text shape for menu options.
- * @param {string} text - The text used to describe the menu option.
- * @returns {GameShape} - The created text shape.
- */
-export function menuSelectionText(text){
-    return new GameShape('text', {
-        x: 0,
-        y: 0,
-        text: text,
-        font: "30px Consolas",
-        color: "white",
-        align: "left",
-        baseline: "middle"
-    });
-}
-
-
-/** * Creates an outline shape for menu buttons.
- * @returns {GameShape} - The created outline shape.
- */
-export function menuButtonOutline(){
-    return new GameShape('rectangle', {
-        x: -30,
-        y: -30,
-        width: 60,
-        height: 60,
-        color: "gray"
-    });
-}
-
-/** * Creates a text shape for menu buttons.
- * @param {string} text - The text to be place inside the button.
- * @returns {GameShape} - The created text shape.
- */
-export function menuButtonText(text){
-    return new GameShape('text', {
-        x: 0,
-        y: 0,
-        text: text,
-        font: "30px Consolas",
-        color: "white",
-        align: "center",
-        baseline: "middle"
-    });
-}
-
-/** * Creates a shape indicating the selected menu option.
- * @returns {GameShape} - The created selected indicator shape.
- */
-export function menuSelectedIndicator(){
-    return new GameShape('line', {
-        x: -20,
-        y: 17,
-        x2: 20,
-        y2: 17,
-        color: "red",
-        lineWidth: 5,      
-        name: 'selected_indicator'
-    });
-}

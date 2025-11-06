@@ -24,6 +24,36 @@ export function addPlayButton(gameObject) {
 }
 
 /**
+ * Adds a pause button shape to a game object.
+ * @param {GameObject} gameObject - The game object the pause button shape will be added to.
+ */
+export function addPauseButton(gameObject) {
+    gameObject.addShape(new GameShape('rectangle', {
+        x: -20,
+        y: -20,
+        width: 40,
+        height: 40,
+        color: "red"
+    }));
+    gameObject.addShape(new GameShape('rectangle', {
+        x: -10,
+        y: -10,
+        width: 6,
+        height: 20,
+        color: "red",
+        fillColor: "red"
+    }));
+    gameObject.addShape(new GameShape('rectangle', {
+        x: 10,
+        y: -10,
+        width: -6,
+        height: 20,
+        color: "red",
+        fillColor: "red"
+    }));
+}
+
+/**
  * Adds a stop button shape to a game object.
  * @param {GameObject} gameObject - The game object the stop button shape will be added to.
  */
