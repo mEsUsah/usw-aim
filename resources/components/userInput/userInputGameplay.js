@@ -64,10 +64,10 @@ export function handleUserInputsGameplay(game, input){
             }
         }
 
-        // Check click on menu button
+        // Check click on pause button
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
-                if(gameObject.config.name === 'menu_button'){
+                if(gameObject.config.name === 'pause_button'){
                     game.view = GAME_VIEW.PAUSED;
                 }
             }

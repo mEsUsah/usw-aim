@@ -12,7 +12,7 @@ export function create(game){
         variant: GameObject.VARIANT.BUTTON,
         x: game.displayData.gameWidth - 30,
         y: 30,
-        name: 'menu_button',
+        name: 'pause_button',
         outline: {
             top: 20,
             left: 20,
