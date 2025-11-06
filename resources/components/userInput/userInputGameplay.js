@@ -16,11 +16,11 @@ export function handleUserInputsGameplay(game, input){
                 
                 switch(game.state.currentPlayer){
                     case 1:
-                        gameObjectShapes.gameboardCross(game, gameObject);
+                        gameObjectShapes.addGameboardCross(game, gameObject);
                         game.state.currentPlayer = 2;
                         break;
                     case 2:
-                        gameObjectShapes.gameboardCircle(game, gameObject);
+                        gameObjectShapes.addGameboardCircle(game, gameObject);
                         game.state.currentPlayer = 1;
                         break;
                     default:

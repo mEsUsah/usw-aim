@@ -1,7 +1,12 @@
 import GameShape from "../classes/GameShape.js";
 import GameShapeAnimation from "../classes/GameShapeAnimation.js";
 
-export function gameboardCross(game, gameObject){
+/**
+ * Adds a cross shape to the specified game object with an animation.
+ * @param {Object} game - The game instance.
+ * @param {Object} gameObject - The game object the cross shape will be added to.
+ */
+export function addGameboardCross(game, gameObject){
     const line1 = new GameShape('line', {
         x: game.config.cellPadding - game.config.cellWidth/2,
         y: game.config.cellPadding - game.config.cellHeight/2,
@@ -31,7 +36,12 @@ export function gameboardCross(game, gameObject){
     gameObject.addShape(line2);
 }
 
-export function gameboardCircle(game, gameObject){
+/**
+ * Adds a circle shape to the specified game object with an animation.
+ * @param {Object} game - The game instance.
+ * @param {Object} gameObject - The game object the circle shape will be added to.
+ */
+export function addGameboardCircle(game, gameObject){
     const circle = new GameShape('circle', {
         x: 0,
         y: 0,
@@ -46,6 +56,11 @@ export function gameboardCircle(game, gameObject){
     gameObject.addShape(circle);
 }
 
+/**
+ * Creates a text shape for menu options.
+ * @param {string} text - The text used to describe the menu option.
+ * @returns {GameShape} - The created text shape.
+ */
 export function menuSelectionText(text){
     return new GameShape('text', {
         x: 0,
@@ -58,6 +73,10 @@ export function menuSelectionText(text){
     });
 }
 
+
+/** * Creates an outline shape for menu buttons.
+ * @returns {GameShape} - The created outline shape.
+ */
 export function menuButtonOutline(){
     return new GameShape('rectangle', {
         x: -30,
@@ -68,6 +87,10 @@ export function menuButtonOutline(){
     });
 }
 
+/** * Creates a text shape for menu buttons.
+ * @param {string} text - The text to be place inside the button.
+ * @returns {GameShape} - The created text shape.
+ */
 export function menuButtonText(text){
     return new GameShape('text', {
         x: 0,
@@ -80,6 +103,9 @@ export function menuButtonText(text){
     });
 }
 
+/** * Creates a shape indicating the selected menu option.
+ * @returns {GameShape} - The created selected indicator shape.
+ */
 export function menuSelectedIndicator(){
     return new GameShape('line', {
         x: -20,
