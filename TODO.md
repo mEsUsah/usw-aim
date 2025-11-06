@@ -2,11 +2,6 @@
 Coursework for the JavaScript section of the course.
 
 ## TODO
-- [ ] Statistics
-    - [ ] Store win / loss / draw in localstorage
-    - [ ] Display stat in menu
-    - [ ] Reset stat button
-
 - [ ] Random delete mode
 
 ## Completed taks
@@ -21,4 +16,7 @@ Coursework for the JavaScript section of the course.
 - [x] Blocked game type
 - [x] AI opponent (basic / random)
 - [x] Game Type selector bugs out.
+- [X] Statistics
+    - [X] Store win / loss / draw in localstorage
+    - [X] Display stat in menu
 
