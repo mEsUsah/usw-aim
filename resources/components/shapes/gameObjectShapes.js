@@ -45,3 +45,37 @@ export function addCircleShape(game, gameObject){
 
     gameObject.addShape(circle);
 }
+
+export function menuSelectionText(text){
+    return new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: text,
+        font: "30px Consolas",
+        color: "white",
+        align: "left",
+        baseline: "middle"
+    });
+}
+
+export function menuButtonOutline(){
+    return new GameShape('rectangle', {
+        x: -30,
+        y: -30,
+        width: 60,
+        height: 60,
+        color: "gray"
+    });
+}
+
+export function menuButtonText(text){
+    return new GameShape('text', {
+        x: 0,
+        y: 0,
+        text: text,
+        font: "30px Consolas",
+        color: "white",
+        align: "center",
+        baseline: "middle"
+    });
+}
