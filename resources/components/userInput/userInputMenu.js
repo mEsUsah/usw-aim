@@ -3,6 +3,10 @@ import GameObject from '../classes/GameObject.js';
 import * as gameBoard from '../gameBoard.js';
 import * as gameObjectShapes from '../shapes/gameObjectShapes.js';
 
+/** * Handles user inputs specific to the menu view.
+ * @param {Game} game - The game instance.
+ * @param {Object} input - The user input data (click coordinates).
+ */
 export function handleUserInputMenu(game, input){
     game.gameObjects[GAME_VIEW.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {

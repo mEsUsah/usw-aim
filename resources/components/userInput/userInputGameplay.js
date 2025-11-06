@@ -6,6 +6,11 @@ import checkDrawCondition from '../checkDrawCondition.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js'
 import * as gameObjectShapes from '../shapes/gameObjectShapes.js'
 
+
+/** * Handles user inputs specific to the gameplay view.
+ * @param {Game} game - The game instance.
+ * @param {Object} input - The user input data (click coordinates).
+ */
 export function handleUserInputsGameplay(game, input){
     game.gameObjects[GAME_VIEW.GAMEPLAY].forEach(gameObject => {
         // Check click on board cells
