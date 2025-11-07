@@ -121,6 +121,10 @@ export function selectedIndicator(){
     });
 }
 
+/**
+ * Creates a disabled overlay shape for menu options.
+ * @returns {GameShape} - The created disabled overlay shape.
+ */
 export function disabledOverlay(){
     return new GameShape('rectangle', {
         x: -25,
