@@ -2,14 +2,14 @@
  * Draw a grid on the canvas.
  * Helps to visualize the coordinate system and scaling.
  * @param CanvasRenderingContext2D ctx 
- * @param Object displayData 
+ * @param Object displayState 
  * @param number minor 
  * @param number major 
  * @param string stroke 
  * @param string fill 
  */
-export function drawGrid(ctx, displayData, minor, major, stroke, fill){
-    displayData = displayData || {
+export function drawGrid(ctx, displayState, minor, major, stroke, fill){
+    displayState = displayState || {
         scale: 1,
         offsetX: 0,
         offsetY: 0,
@@ -28,10 +28,10 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.font = "16px Arial";
 
     // Draw vertical lines
-    let startX = -(displayData.offsetX - displayData.offsetX % minor);
-    let endX = Math.max(displayData.offsetX + displayData.gameWidth, displayData.gameWidth);
-    let startY = -(displayData.offsetY - displayData.offsetY % minor);
-    let endY = Math.max(displayData.offsetY + displayData.gameHeight, displayData.gameHeight);
+    let startX = -(displayState.offsetX - displayState.offsetX % minor);
+    let endX = Math.max(displayState.offsetX + displayState.gameWidth, displayState.gameWidth);
+    let startY = -(displayState.offsetY - displayState.offsetY % minor);
+    let endY = Math.max(displayState.offsetY + displayState.gameHeight, displayState.gameHeight);
     for(let x = startX; x < endX; x += minor){
         ctx.beginPath();
         ctx.moveTo(x, startY);
@@ -64,45 +64,45 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.strokeStyle = "red";
     ctx.fillStyle = "red";
     ctx.lineWidth = 2;
-    ctx.moveTo(0, displayData.gameHeight/2);
-    ctx.lineTo(-displayData.offsetX + 10, displayData.gameHeight/2);
-    ctx.lineTo(-displayData.offsetX + 10, (displayData.gameHeight/2) - 5);
-    ctx.lineTo(-displayData.offsetX, (displayData.gameHeight/2));
-    ctx.lineTo(-displayData.offsetX + 10, (displayData.gameHeight/2) + 5);
-    ctx.lineTo(-displayData.offsetX + 10, displayData.gameHeight/2);
+    ctx.moveTo(0, displayState.gameHeight/2);
+    ctx.lineTo(-displayState.offsetX + 10, displayState.gameHeight/2);
+    ctx.lineTo(-displayState.offsetX + 10, (displayState.gameHeight/2) - 5);
+    ctx.lineTo(-displayState.offsetX, (displayState.gameHeight/2));
+    ctx.lineTo(-displayState.offsetX + 10, (displayState.gameHeight/2) + 5);
+    ctx.lineTo(-displayState.offsetX + 10, displayState.gameHeight/2);
     ctx.stroke();
     ctx.fill();
 
     // Draw arrow from viewport to right edge
     ctx.beginPath();
-    ctx.moveTo(displayData.gameWidth, displayData.gameHeight/2);
-    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, displayData.gameHeight/2);
-    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, (displayData.gameHeight/2) - 5);
-    ctx.lineTo(displayData.gameWidth + displayData.offsetX, (displayData.gameHeight/2));
-    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, (displayData.gameHeight/2) + 5);
-    ctx.lineTo(displayData.gameWidth - 10 + displayData.offsetX, displayData.gameHeight/2);
+    ctx.moveTo(displayState.gameWidth, displayState.gameHeight/2);
+    ctx.lineTo(displayState.gameWidth - 10 + displayState.offsetX, displayState.gameHeight/2);
+    ctx.lineTo(displayState.gameWidth - 10 + displayState.offsetX, (displayState.gameHeight/2) - 5);
+    ctx.lineTo(displayState.gameWidth + displayState.offsetX, (displayState.gameHeight/2));
+    ctx.lineTo(displayState.gameWidth - 10 + displayState.offsetX, (displayState.gameHeight/2) + 5);
+    ctx.lineTo(displayState.gameWidth - 10 + displayState.offsetX, displayState.gameHeight/2);
     ctx.stroke();
     ctx.fill();
 
     // Draw arrow from viewport to top edge
     ctx.beginPath();
-    ctx.moveTo(displayData.gameWidth/2, 0);
-    ctx.lineTo(displayData.gameWidth/2, -displayData.offsetY + 10);
-    ctx.lineTo((displayData.gameWidth/2) - 5, -displayData.offsetY + 10);
-    ctx.lineTo((displayData.gameWidth/2), -displayData.offsetY);
-    ctx.lineTo((displayData.gameWidth/2) + 5, -displayData.offsetY + 10);
-    ctx.lineTo(displayData.gameWidth/2, -displayData.offsetY + 10);
+    ctx.moveTo(displayState.gameWidth/2, 0);
+    ctx.lineTo(displayState.gameWidth/2, -displayState.offsetY + 10);
+    ctx.lineTo((displayState.gameWidth/2) - 5, -displayState.offsetY + 10);
+    ctx.lineTo((displayState.gameWidth/2), -displayState.offsetY);
+    ctx.lineTo((displayState.gameWidth/2) + 5, -displayState.offsetY + 10);
+    ctx.lineTo(displayState.gameWidth/2, -displayState.offsetY + 10);
     ctx.stroke();
     ctx.fill();
 
     // Draw arrow from viewport to bottom edge
     ctx.beginPath();
-    ctx.moveTo(displayData.gameWidth/2, displayData.gameHeight);
-    ctx.lineTo(displayData.gameWidth/2, displayData.gameHeight + displayData.offsetY - 10);
-    ctx.lineTo((displayData.gameWidth/2) - 5, displayData.gameHeight + displayData.offsetY - 10);
-    ctx.lineTo((displayData.gameWidth/2), displayData.gameHeight + displayData.offsetY);
-    ctx.lineTo((displayData.gameWidth/2) + 5, displayData.gameHeight + displayData.offsetY - 10);
-    ctx.lineTo(displayData.gameWidth/2, displayData.gameHeight + displayData.offsetY - 10);
+    ctx.moveTo(displayState.gameWidth/2, displayState.gameHeight);
+    ctx.lineTo(displayState.gameWidth/2, displayState.gameHeight + displayState.offsetY - 10);
+    ctx.lineTo((displayState.gameWidth/2) - 5, displayState.gameHeight + displayState.offsetY - 10);
+    ctx.lineTo((displayState.gameWidth/2), displayState.gameHeight + displayState.offsetY);
+    ctx.lineTo((displayState.gameWidth/2) + 5, displayState.gameHeight + displayState.offsetY - 10);
+    ctx.lineTo(displayState.gameWidth/2, displayState.gameHeight + displayState.offsetY - 10);
     ctx.stroke();
     ctx.fill();
 
@@ -110,7 +110,7 @@ export function drawGrid(ctx, displayData, minor, major, stroke, fill){
     ctx.strokeStyle = "red";
     ctx.lineWidth = 4;
     ctx.fillStyle = "red";
-    ctx.strokeRect(20,20, displayData.gameWidth - 40,displayData.gameHeight - 40);
+    ctx.strokeRect(20,20, displayState.gameWidth - 40,displayState.gameHeight - 40);
     
     ctx.restore();
 }

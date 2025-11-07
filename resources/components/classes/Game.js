@@ -39,7 +39,7 @@ export default class Game{
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
 
-        this.displayData = {
+        this.displayState = {
             gameWidth: GAME_WIDTH,
             gameHeight: GAME_HEIGHT,
             scale: 1,
@@ -62,12 +62,12 @@ export default class Game{
         
         // Handle window resizing
         window.addEventListener('resize', () =>{
-            utils.resizeCanvas(this.ctx, this.displayData);
+            utils.resizeCanvas(this.ctx, this.displayState);
         });
         
         // Handle mouse clicks and transfer event to game engine
         canvas.addEventListener('click', (event) => {
-            const mousePos = mouseUtils.getMousePos(event, this.displayData, this.canvas);
+            const mousePos = mouseUtils.getMousePos(event, this.displayState, this.canvas);
             this.state.userInputs.push({
                 type: 'click',
                 x: mousePos.x,
@@ -128,7 +128,7 @@ export default class Game{
     };
 
     start(){
-        utils.resizeCanvas(this.ctx, this.displayData);
+        utils.resizeCanvas(this.ctx, this.displayState);
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }; 
 
@@ -138,7 +138,7 @@ export default class Game{
      */
     gameLoop(timestamp) {
         // Update game state
-        utils.updateFrameData(timestamp, this.displayData);
+        utils.updateFrameData(timestamp, this.displayState);
         if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === Game.OPPONENT.CPU){
             handleCpuInput(this);
         } else {
@@ -147,13 +147,13 @@ export default class Game{
 
         // Update animation state
         this.state.gameObjects[this.state.view].forEach(gameObject => {
-            gameObject.update(this.displayData.deltaTime);
+            gameObject.update(this.displayState.deltaTime);
         });
 
         // Render frame
-        utils.clearCanvas(this.ctx, this.displayData);
-        if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
-        if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.displayData.fps.avg);
+        utils.clearCanvas(this.ctx, this.displayState);
+        if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayState);
+        if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.displayState.fps.avg);
 
         this.state.gameObjects[this.state.view].forEach(gameObject => {
             gameObject.draw(this.ctx);

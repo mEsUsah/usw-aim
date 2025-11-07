@@ -40,7 +40,7 @@ export function addWinLine(game, winLineCoordinates){
 export function addGameOverText(game, text){
     const gameOverTextObject = new GameObject({
         variant: GameObject.VARIANT.ILLUSTRATION,
-        x: game.displayData.gameWidth / 2,
+        x: game.displayState.gameWidth / 2,
         y: 32,
         name: `gameover_text`,
     });

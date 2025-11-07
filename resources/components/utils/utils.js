@@ -1,28 +1,28 @@
 export const radian = Math.PI / 180;
 
 /**
- * Resize the canvas to fit the window while maintaining aspect ratio and updates displayData with scale and offsets.
+ * Resize the canvas to fit the window while maintaining aspect ratio and updates displayState with scale and offsets.
  * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
- * @param {Object} displayData - The display data containing game dimensions and offsets.
+ * @param {Object} displayState - The display data containing game dimensions and offsets.
  */
-export function resizeCanvas(ctx, displayData) {
+export function resizeCanvas(ctx, displayState) {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
 
     // Set scale to fit the game area within the canvas while maintaining aspect ratio
-    displayData.scale = Math.min(ctx.canvas.width / displayData.gameWidth, ctx.canvas.height / displayData.gameHeight);
-    ctx.scale(displayData.scale, displayData.scale);
+    displayState.scale = Math.min(ctx.canvas.width / displayState.gameWidth, ctx.canvas.height / displayState.gameHeight);
+    ctx.scale(displayState.scale, displayState.scale);
 
     // Center the game area within the canvas
-    displayData.offsetX = Math.floor((ctx.canvas.width / displayData.scale - displayData.gameWidth) / 2);
-    displayData.offsetY = Math.floor((ctx.canvas.height / displayData.scale - displayData.gameHeight) / 2);
-    ctx.translate(displayData.offsetX, displayData.offsetY);
+    displayState.offsetX = Math.floor((ctx.canvas.width / displayState.scale - displayState.gameWidth) / 2);
+    displayState.offsetY = Math.floor((ctx.canvas.height / displayState.scale - displayState.gameHeight) / 2);
+    ctx.translate(displayState.offsetX, displayState.offsetY);
 
     // Update screen bounds coordinates
-    displayData.screenStartX = -displayData.offsetX;
-    displayData.screenStartY = -displayData.offsetY;
-    displayData.screenEndX = displayData.offsetX * 2 + displayData.gameWidth;
-    displayData.screenEndY = displayData.offsetY * 2 + displayData.gameHeight;
+    displayState.screenStartX = -displayState.offsetX;
+    displayState.screenStartY = -displayState.offsetY;
+    displayState.screenEndX = displayState.offsetX * 2 + displayState.gameWidth;
+    displayState.screenEndY = displayState.offsetY * 2 + displayState.gameHeight;
 }
 
 /**
@@ -49,14 +49,14 @@ export function fix_dpi(canvas) {
 /**
  * Clear all graphics on the entire canvas
  * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
- * @param {Object} displayData - The display data containing screen bounds and offsets.
+ * @param {Object} displayState - The display data containing screen bounds and offsets.
  */
-export function clearCanvas(ctx, displayData){
+export function clearCanvas(ctx, displayState){
     ctx.clearRect(
-        displayData.screenStartX, 
-        displayData.screenStartY, 
-        displayData.gameWidth + displayData.offsetX * 2, // width of clerar area
-        displayData.gameHeight + displayData.offsetY * 2 // height of clear area
+        displayState.screenStartX, 
+        displayState.screenStartY, 
+        displayState.gameWidth + displayState.offsetX * 2, // width of clerar area
+        displayState.gameHeight + displayState.offsetY * 2 // height of clear area
     );
 }
 

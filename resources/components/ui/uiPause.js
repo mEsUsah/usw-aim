@@ -9,7 +9,7 @@ import * as commonShapes from "../shapes/commonShapes.js";
 export function create(game){
     const continueButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: game.displayData.gameWidth - 30,
+        x: game.displayState.gameWidth - 30,
         y: 30,
         name: 'continue_button',
         outline: {
@@ -24,7 +24,7 @@ export function create(game){
 
     const stopButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: game.displayData.gameWidth - 80,
+        x: game.displayState.gameWidth - 80,
         y: 30,
         name: 'stop_button',
         outline: {
@@ -39,8 +39,8 @@ export function create(game){
 
     const pauseText = new GameObject({
         variant: GameObject.VARIANT.TEXT,
-        x: game.displayData.gameWidth / 2,
-        y: game.displayData.gameHeight / 2,
+        x: game.displayState.gameWidth / 2,
+        y: game.displayState.gameHeight / 2,
         name: 'pause_text',
     });
     pauseShapes.addPauseText(pauseText);

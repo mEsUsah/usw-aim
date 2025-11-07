@@ -10,7 +10,7 @@ export function create(game){
     // Menu button
     const menuButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: game.displayData.gameWidth - 30,
+        x: game.displayState.gameWidth - 30,
         y: 30,
         name: 'pause_button',
         outline: {

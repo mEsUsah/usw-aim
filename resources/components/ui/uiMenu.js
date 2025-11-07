@@ -12,7 +12,7 @@ export function create(game){
     // Game title
     const titleText = new GameObject({
         variant: GameObject.VARIANT.TEXT,
-        x: game.displayData.gameWidth / 2,
+        x: game.displayState.gameWidth / 2,
         y: 80,
         name: 'title_text',
     });
@@ -23,8 +23,8 @@ export function create(game){
     // Start button
     const startButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: game.displayData.gameWidth / 2,
-        y: game.displayData.gameHeight / 5 * 4,
+        x: game.displayState.gameWidth / 2,
+        y: game.displayState.gameHeight / 5 * 4,
         name: 'start_button',
         outline: {
             top: 60,
@@ -50,7 +50,7 @@ export function create(game){
     for(let i = 3; i <= 8; i++){
         const sizeButton = new GameObject({
             variant: GameObject.VARIANT.BUTTON,
-            x: (game.displayData.gameWidth - 80 * 6) + (i - 3) * 80,
+            x: (game.displayState.gameWidth - 80 * 6) + (i - 3) * 80,
             y: 80 + buttonOffsetY,
             name: `size_button`,
             outline: {
@@ -83,7 +83,7 @@ export function create(game){
     for(let i = 3; i <= 8; i++){
         const winLengthButton = new GameObject({
             variant: GameObject.VARIANT.BUTTON,
-            x: (game.displayData.gameWidth - 80 * 6) + (i - 3) * 80,
+            x: (game.displayState.gameWidth - 80 * 6) + (i - 3) * 80,
             y: 80 * 2 + buttonOffsetY,
             name: 'win_length_button',
             outline: {
@@ -114,7 +114,7 @@ export function create(game){
 
     const gameTypeNormalButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: (game.displayData.gameWidth - 80 * 6),
+        x: (game.displayState.gameWidth - 80 * 6),
         y: 80 * 3 + buttonOffsetY,
         name: 'game_type_button',
         outline: {
@@ -132,7 +132,7 @@ export function create(game){
 
     const gameTypeBlockButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: (game.displayData.gameWidth - 80 * 6) + 80,
+        x: (game.displayState.gameWidth - 80 * 6) + 80,
         y: 80 * 3 + buttonOffsetY,
         name: 'game_type_button',
         outline: {
@@ -159,7 +159,7 @@ export function create(game){
 
     const player2TypeNormalButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: (game.displayData.gameWidth - 80 * 6),
+        x: (game.displayState.gameWidth - 80 * 6),
         y: 80 * 4 + buttonOffsetY,
         name: 'player_2_type_button',
         outline: {
@@ -177,7 +177,7 @@ export function create(game){
 
     const player2TypeCpuButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
-        x: (game.displayData.gameWidth - 80 * 6) + 80,
+        x: (game.displayState.gameWidth - 80 * 6) + 80,
         y: 80 * 4 + buttonOffsetY,
         name: 'player_2_type_button',
         outline: {
@@ -195,8 +195,8 @@ export function create(game){
     // Stats display
     const statsText = new GameObject({
         variant: GameObject.VARIANT.TEXT,
-        x: game.displayData.gameWidth / 2,
-        y: game.displayData.gameHeight - 40,
+        x: game.displayState.gameWidth / 2,
+        y: game.displayState.gameHeight - 40,
         name: 'stats_text',
     });
     menuShapes.addStatsText(statsText, game.state.stats);
