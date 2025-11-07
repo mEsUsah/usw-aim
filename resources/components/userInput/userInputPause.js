@@ -6,7 +6,7 @@ import GameObject from '../classes/GameObject.js';
  * @param {Object} input - The user input data (click coordinates).
  */
 export default function handleUserInputPause(game, input){
-    game.gameObjects[Game.VIEW.PAUSED].forEach(gameObject => {
+    game.state.gameObjects[Game.VIEW.PAUSED].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'continue_button'){

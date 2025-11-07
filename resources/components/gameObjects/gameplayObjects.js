@@ -29,7 +29,7 @@ export function addWinLine(game, winLineCoordinates){
     }));
     
     winLineObject.addShape(winLineShape);
-    game.gameObjects.gameplay.push(winLineObject);
+    game.state.gameObjects.gameplay.push(winLineObject);
 }
 
 /**
@@ -55,5 +55,5 @@ export function addGameOverText(game, text){
         baseline: "middle",
     }));
 
-    game.gameObjects.gameplay.push(gameOverTextObject);
+    game.state.gameObjects.gameplay.push(gameOverTextObject);
 }

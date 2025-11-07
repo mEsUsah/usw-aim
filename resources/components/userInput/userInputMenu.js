@@ -8,7 +8,7 @@ import * as menuShapes from '../shapes/menuShapes.js';
  * @param {Object} input - The user input data (click coordinates).
  */
 export default function handleUserInputMenu(game, input){
-    game.gameObjects[Game.VIEW.MENU].forEach(gameObject => {
+    game.state.gameObjects[Game.VIEW.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'start_button'){
@@ -52,7 +52,7 @@ export default function handleUserInputMenu(game, input){
  * @param {string} buttonName - The name of the GameObject to update.
  */
 function setSelectedIndicator(game, configValue, buttonName){
-    game.gameObjects[Game.VIEW.MENU].forEach(gameObject => {
+    game.state.gameObjects[Game.VIEW.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON && gameObject.config.name === buttonName) {
 
             // Remove all existing indicators to avoid duplicates

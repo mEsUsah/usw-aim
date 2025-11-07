@@ -20,7 +20,7 @@ export function create(game){
         }
     });
     commonShapes.addPlayButton(continueButton);
-    game.gameObjects.paused.push(continueButton);
+    game.state.gameObjects.paused.push(continueButton);
 
     const stopButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
@@ -35,7 +35,7 @@ export function create(game){
         }
     });
     commonShapes.addStopButton(stopButton);
-    game.gameObjects.paused.push(stopButton);
+    game.state.gameObjects.paused.push(stopButton);
 
     const pauseText = new GameObject({
         variant: GameObject.VARIANT.TEXT,
@@ -44,5 +44,5 @@ export function create(game){
         name: 'pause_text',
     });
     pauseShapes.addPauseText(pauseText);
-    game.gameObjects.paused.push(pauseText);
+    game.state.gameObjects.paused.push(pauseText);
 }

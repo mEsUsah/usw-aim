@@ -18,7 +18,7 @@ export function create(game){
     });
     menuShapes.addTitle(titleText)
 
-    game.gameObjects.menu.push(titleText);
+    game.state.gameObjects.menu.push(titleText);
     
     // Start button
     const startButton = new GameObject({
@@ -34,7 +34,7 @@ export function create(game){
         }
     });
     menuShapes.addStartButton(startButton);
-    game.gameObjects.menu.push(startButton);
+    game.state.gameObjects.menu.push(startButton);
 
 
     // Size buttons
@@ -45,7 +45,7 @@ export function create(game){
         name: 'size_text',
     });
     sizeText.addShape(menuShapes.selectionText("Board Size:"));
-    game.gameObjects.menu.push(sizeText);
+    game.state.gameObjects.menu.push(sizeText);
 
     for(let i = 3; i <= 8; i++){
         const sizeButton = new GameObject({
@@ -66,7 +66,7 @@ export function create(game){
         if(i === game.state.boardSize){
             sizeButton.addShape(menuShapes.selectedIndicator());
         }
-        game.gameObjects.menu.push(sizeButton);
+        game.state.gameObjects.menu.push(sizeButton);
     }
 
 
@@ -78,7 +78,7 @@ export function create(game){
         name: 'win_length_text',
     });
     winLengthText.addShape(menuShapes.selectionText("Win Length:"));
-    game.gameObjects.menu.push(winLengthText);
+    game.state.gameObjects.menu.push(winLengthText);
 
     for(let i = 3; i <= 8; i++){
         const winLengthButton = new GameObject({
@@ -99,7 +99,7 @@ export function create(game){
         if(i === game.state.winLength){
             winLengthButton.addShape(menuShapes.selectedIndicator());
         }
-        game.gameObjects.menu.push(winLengthButton);
+        game.state.gameObjects.menu.push(winLengthButton);
     }
 
     // Game type selector
@@ -110,7 +110,7 @@ export function create(game){
         name: 'game_type_text',
     });
     gameTypeText.addShape(menuShapes.selectionText("Game Type:"));
-    game.gameObjects.menu.push(gameTypeText);
+    game.state.gameObjects.menu.push(gameTypeText);
 
     const gameTypeNormalButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
@@ -128,7 +128,7 @@ export function create(game){
     gameTypeNormalButton.addShape(menuShapes.buttonOutline());
     gameTypeNormalButton.addShape(menuShapes.buttonText("Nor"));
     gameTypeNormalButton.addShape(menuShapes.selectedIndicator());
-    game.gameObjects.menu.push(gameTypeNormalButton);
+    game.state.gameObjects.menu.push(gameTypeNormalButton);
 
     const gameTypeBlockButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
@@ -145,7 +145,7 @@ export function create(game){
     });
     gameTypeBlockButton.addShape(menuShapes.buttonOutline());
     gameTypeBlockButton.addShape(menuShapes.buttonText("Blk"));
-    game.gameObjects.menu.push(gameTypeBlockButton);
+    game.state.gameObjects.menu.push(gameTypeBlockButton);
 
     // Player 2 type selector
     const player2TypeText = new GameObject({
@@ -155,7 +155,7 @@ export function create(game){
         name: 'player_2_type_text',
     });
     player2TypeText.addShape(menuShapes.selectionText("Player 2:"));
-    game.gameObjects.menu.push(player2TypeText);
+    game.state.gameObjects.menu.push(player2TypeText);
 
     const player2TypeNormalButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
@@ -173,7 +173,7 @@ export function create(game){
     player2TypeNormalButton.addShape(menuShapes.buttonOutline());
     player2TypeNormalButton.addShape(menuShapes.buttonText("Hum"));
     player2TypeNormalButton.addShape(menuShapes.selectedIndicator());
-    game.gameObjects.menu.push(player2TypeNormalButton);
+    game.state.gameObjects.menu.push(player2TypeNormalButton);
 
     const player2TypeCpuButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
@@ -190,7 +190,7 @@ export function create(game){
     });
     player2TypeCpuButton.addShape(menuShapes.buttonOutline());
     player2TypeCpuButton.addShape(menuShapes.buttonText("CPU"));
-    game.gameObjects.menu.push(player2TypeCpuButton);
+    game.state.gameObjects.menu.push(player2TypeCpuButton);
 
     // Stats display
     const statsText = new GameObject({
@@ -200,7 +200,7 @@ export function create(game){
         name: 'stats_text',
     });
     menuShapes.addStatsText(statsText, game.state.stats);
-    game.gameObjects.menu.push(statsText);
+    game.state.gameObjects.menu.push(statsText);
 }
 
 /**
@@ -208,7 +208,7 @@ export function create(game){
  * @param {Game} game - The game instance.
  */
 export function updateStatsText(game){
-    const statsText = game.gameObjects.menu.find(obj => obj.config.name === 'stats_text');
+    const statsText = game.state.gameObjects.menu.find(obj => obj.config.name === 'stats_text');
     if(statsText){
         statsText.shapes = []; // Clear existing shapes
         menuShapes.addStatsText(statsText, game.state.stats);

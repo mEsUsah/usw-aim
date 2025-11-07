@@ -59,11 +59,6 @@ export default class Game{
             screenEndY: 0
         };
 
-        this.gameObjects = {
-            gameplay: [],
-            menu: [],
-            paused: []
-        };
         this.userInputs = [];
         
         utils.fix_dpi(this.canvas);
@@ -94,6 +89,11 @@ export default class Game{
             occupiedSpaces: 0,
             gameOver: false,
             gameFields: [],
+            gameObjects: {
+                gameplay: [],
+                menu: [],
+                paused: []
+            },
             cpuMoveDelay: 500,
             cpuWaitTime: 500,
             stats: statUtils.getData()
@@ -148,7 +148,7 @@ export default class Game{
         }
 
         // Update animation state
-        this.gameObjects[this.state.view].forEach(gameObject => {
+        this.state.gameObjects[this.state.view].forEach(gameObject => {
             gameObject.update(this.frameData.deltaTime);
         });
 
@@ -157,7 +157,7 @@ export default class Game{
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
-        this.gameObjects[this.state.view].forEach(gameObject => {
+        this.state.gameObjects[this.state.view].forEach(gameObject => {
             gameObject.draw(this.ctx);
         });
 

@@ -4,13 +4,13 @@ import GameShape from "./classes/GameShape.js";
 
 export function create(game){
     // Clear win lines from previous games
-    game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name != "win_line");
+    game.state.gameObjects.gameplay = game.state.gameObjects.gameplay.filter(obj => obj.config.name != "win_line");
 
     // Clear game over text
-    game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name != "gameover_text");
+    game.state.gameObjects.gameplay = game.state.gameObjects.gameplay.filter(obj => obj.config.name != "gameover_text");
     
     // Clear existing game board objects
-    game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.variant !== GameObject.VARIANT.BOARD);
+    game.state.gameObjects.gameplay = game.state.gameObjects.gameplay.filter(obj => obj.config.variant !== GameObject.VARIANT.BOARD);
     game.state.gameFields = [];
 
     // Initialize new board cells
@@ -41,7 +41,7 @@ export function create(game){
                 color: "gray"
             });
             gameObject.addShape(shape);
-            game.gameObjects.gameplay.push(gameObject);
+            game.state.gameObjects.gameplay.push(gameObject);
             gameFieldRow.push(gameObject);
         }
         game.state.gameFields.push(gameFieldRow);

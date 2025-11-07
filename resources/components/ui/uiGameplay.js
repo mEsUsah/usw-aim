@@ -21,7 +21,7 @@ export function create(game){
         }
     });
     commonShapes.addPauseButton(menuButton);
-    game.gameObjects.gameplay.push(menuButton);
+    game.state.gameObjects.gameplay.push(menuButton);
 
     // Player turn indicator
     const turnIndicator = new GameObject({
@@ -31,7 +31,7 @@ export function create(game){
         name: 'turn_indicator',
     });
     gameplayShapes.addTurnIndicator(turnIndicator);
-    game.gameObjects.gameplay.push(turnIndicator);
+    game.state.gameObjects.gameplay.push(turnIndicator);
 }
 
 /**
@@ -40,7 +40,7 @@ export function create(game){
  */
 export function updateTurnSymbol(game){
     // Remove existing turn symbol
-    game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.name !== 'turn_symbol');
+    game.state.gameObjects.gameplay = game.state.gameObjects.gameplay.filter(obj => obj.config.name !== 'turn_symbol');
 
     // Add new turn symbol
     const turnSymbol = new GameObject({
@@ -55,5 +55,5 @@ export function updateTurnSymbol(game){
     } else {
         gameplayShapes.addTurnSymbolCircle(turnSymbol);
     }
-    game.gameObjects.gameplay.push(turnSymbol);
+    game.state.gameObjects.gameplay.push(turnSymbol);
 }
