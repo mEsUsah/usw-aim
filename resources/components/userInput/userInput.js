@@ -8,7 +8,7 @@ import handleUserInputMenu from './userInputMenu.js';
  * @param {Game} game - The game instance.
  */
 export default function handleUserInputs(game) {
-    game.userInputs.forEach(input => {
+    game.state.userInputs.forEach(input => {
         if(input.type == 'click') { 
             switch(game.state.view) {
                 case Game.VIEW.GAMEPLAY:
@@ -30,5 +30,5 @@ export default function handleUserInputs(game) {
     });
 
     // Clear processed inputs
-    game.userInputs = [];
+    game.state.userInputs = [];
 };

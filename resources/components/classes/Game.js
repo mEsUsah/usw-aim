@@ -58,8 +58,6 @@ export default class Game{
             screenEndX: 0,
             screenEndY: 0
         };
-
-        this.userInputs = [];
         
         utils.fix_dpi(this.canvas);
         
@@ -71,16 +69,17 @@ export default class Game{
         // Handle mouse clicks and transfer event to game engine
         canvas.addEventListener('click', (event) => {
             const mousePos = mouseUtils.getMousePos(event, this.displayData, this.canvas);
-            this.userInputs.push({
+            this.state.userInputs.push({
                 type: 'click',
                 x: mousePos.x,
                 y: mousePos.y
             });
         });
         
-        // Initial game state
+        // Initialize game state
         this.state = {
             view: Game.VIEW.MENU,
+            userInputs: [],
             gameType: Game.TYPE.NORMAL,
             opponentType: Game.OPPONENT.HUMAN,
             boardSize: 3,
@@ -99,7 +98,7 @@ export default class Game{
             stats: statUtils.getData()
         };
         
-        // Initial configuration
+        // Initialize configuration
         this.config = {};
         this.updateConfig();
 
