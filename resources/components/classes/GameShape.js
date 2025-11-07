@@ -116,7 +116,7 @@ export default class GameShape {
                 break;
 
             default:
-                console.warn(`GameShape::draw - Unknown shape type: ${this.type}`);
+                console.warn(`GameShape.draw() - Unknown shape type: ${this.type}`);
                 break;
         }
 
