@@ -168,7 +168,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        opponentType: Game.OPPONENT_TYPE.HUMAN
+        opponentType: Game.OPPONENT.HUMAN
     });
     player2TypeNormalButton.addShape(menuShapes.buttonOutline());
     player2TypeNormalButton.addShape(menuShapes.buttonText("Hum"));
@@ -186,7 +186,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        opponentType: Game.OPPONENT_TYPE.CPU
+        opponentType: Game.OPPONENT.CPU
     });
     player2TypeCpuButton.addShape(menuShapes.buttonOutline());
     player2TypeCpuButton.addShape(menuShapes.buttonText("CPU"));

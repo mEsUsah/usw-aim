@@ -24,7 +24,7 @@ export default class Game{
         BLOCKED: 1,
     };
     
-    static OPPONENT_TYPE = {
+    static OPPONENT = {
         HUMAN: 0,
         CPU: 1,
     };
@@ -88,7 +88,7 @@ export default class Game{
         // Initial game state
         this.state = {
             gameType: Game.TYPE.NORMAL,
-            opponentType: Game.OPPONENT_TYPE.HUMAN,
+            opponentType: Game.OPPONENT.HUMAN,
             boardSize: 3,
             winLength: 3,
             currentPlayer: 1,
@@ -141,7 +141,7 @@ export default class Game{
     gameLoop(timestamp) {
         // Update game state
         updateFrameData(timestamp, this.frameData);
-        if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === Game.OPPONENT_TYPE.CPU){
+        if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === Game.OPPONENT.CPU){
             handleCpuInput(this);
         } else {
             handleUserInputs(this);
