@@ -1,6 +1,6 @@
 import GameObject from "../classes/GameObject.js";
 import { GAME_TYPE } from "../classes/Game.js";
-import { OPPONENT_TYPE } from "../classes/Game.js";
+import { Game } from "../classes/Game.js";
 import * as menuShapes from "../shapes/menuShapes.js";
 
 /**
@@ -169,7 +169,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        opponentType: OPPONENT_TYPE.HUMAN
+        opponentType: Game.OPPONENT_TYPE.HUMAN
     });
     player2TypeNormalButton.addShape(menuShapes.buttonOutline());
     player2TypeNormalButton.addShape(menuShapes.buttonText("Hum"));
@@ -187,7 +187,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        opponentType: OPPONENT_TYPE.CPU
+        opponentType: Game.OPPONENT_TYPE.CPU
     });
     player2TypeCpuButton.addShape(menuShapes.buttonOutline());
     player2TypeCpuButton.addShape(menuShapes.buttonText("CPU"));

@@ -23,17 +23,17 @@ export const GAME_TYPE = {
     BLOCKED: 1,
 };
 
-export const OPPONENT_TYPE = {
-    HUMAN: 0,
-    CPU: 1,
-};
-
 /**
  * The main Game class containing the game state, rendering context, the game loop.
  * @class Game
  * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
  */
 export class Game{
+    static OPPONENT_TYPE = {
+        HUMAN: 0,
+        CPU: 1,
+    };
+    
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
@@ -87,7 +87,7 @@ export class Game{
         // Initial game state
         this.state = {
             gameType: GAME_TYPE.NORMAL,
-            opponentType: OPPONENT_TYPE.HUMAN,
+            opponentType: Game.OPPONENT_TYPE.HUMAN,
             boardSize: 3,
             winLength: 3,
             currentPlayer: 1,
@@ -140,7 +140,7 @@ export class Game{
     gameLoop(timestamp) {
         // Update game state
         updateFrameData(timestamp, this.frameData);
-        if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === OPPONENT_TYPE.CPU){
+        if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === Game.OPPONENT_TYPE.CPU){
             handleCpuInput(this);
         } else {
             handleUserInputs(this);
