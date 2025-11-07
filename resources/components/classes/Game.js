@@ -111,6 +111,9 @@ export default class Game{
         this.start();
     };
 
+    /**
+     * Updates the game configuration based on the current state.
+     */
     updateConfig(){
         const boardSize = this.state.boardSize;
         this.config = {
@@ -122,11 +125,17 @@ export default class Game{
         };
     };
 
+    /**
+     * Resets the game state to make it ready for a a new game.
+     */
     resetState(){
         this.state.occupiedSpaces = 0;
         this.state.gameOver = false;
     };
 
+    /**
+     * Starts the game loop.
+     */
     start(){
         utils.resizeCanvas(this.ctx, this.displayState);
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
