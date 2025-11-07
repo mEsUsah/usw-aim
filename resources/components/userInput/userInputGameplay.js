@@ -12,7 +12,7 @@ import * as statUtils from '../utils/statUtils.js';
  * @param {Object} input - The user input data (click coordinates).
  */
 export function handleUserInputsGameplay(game, input){
-    game.gameObjects[GAME_VIEW.GAMEPLAY].forEach(gameObject => {
+    game.gameObjects[Game.GAME_VIEW.GAMEPLAY].forEach(gameObject => {
         // Check click on board cells
         if (game.state.gameOver == false && gameObject.config.variant == GameObject.VARIANT.BOARD) {
             if (gameObject.checkCollision(input.x, input.y) && gameObject.state.occupiedBy == null) {
