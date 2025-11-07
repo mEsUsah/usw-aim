@@ -1,5 +1,5 @@
-import checkWinCondition from '../checkWinCondition.js';
-import checkDrawCondition from '../checkDrawCondition.js';
+import checkWinCondition from '../utils/checkWinCondition.js';
+import checkDrawCondition from '../utils/checkDrawCondition.js';
 import * as gameplayShapes from '../shapes/gameplayShapes.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js';

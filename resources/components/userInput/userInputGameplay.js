@@ -1,8 +1,8 @@
 import Game from '../classes/Game.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import GameObject from '../classes/GameObject.js';
-import checkWinCondition from '../checkWinCondition.js';
-import checkDrawCondition from '../checkDrawCondition.js';
+import checkWinCondition from '../utils/checkWinCondition.js';
+import checkDrawCondition from '../utils/checkDrawCondition.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js'
 import * as gameplayShapes from '../shapes/gameplayShapes.js'
 import * as statUtils from '../utils/statUtils.js';
