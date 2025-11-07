@@ -48,7 +48,7 @@ export function create(game){
     }
 
     // GameType Blocked
-    if(game.state.gameType === Game.GAME_TYPE.BLOCKED){
+    if(game.state.gameType === Game.TYPE.BLOCKED){
         const cellsToBlock = game.state.boardSize - 2; // 2 less than board size to ensure that winning is not too hard
         for (let i = 0; i < cellsToBlock; i++){
             while(true){ // Keep trying until an unoccupied cell is found

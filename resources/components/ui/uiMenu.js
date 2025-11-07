@@ -123,7 +123,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        gameType: Game.GAME_TYPE.NORMAL
+        gameType: Game.TYPE.NORMAL
     });
     gameTypeNormalButton.addShape(menuShapes.buttonOutline());
     gameTypeNormalButton.addShape(menuShapes.buttonText("Nor"));
@@ -141,7 +141,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        gameType: Game.GAME_TYPE.BLOCKED
+        gameType: Game.TYPE.BLOCKED
     });
     gameTypeBlockButton.addShape(menuShapes.buttonOutline());
     gameTypeBlockButton.addShape(menuShapes.buttonText("Blk"));

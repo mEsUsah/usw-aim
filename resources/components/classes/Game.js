@@ -19,7 +19,7 @@ const GAME_HEIGHT = 800;
  * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
  */
 export default class Game{
-    static GAME_TYPE = {
+    static TYPE = {
         NORMAL: 0,
         BLOCKED: 1,
     };
@@ -87,7 +87,7 @@ export default class Game{
         
         // Initial game state
         this.state = {
-            gameType: Game.GAME_TYPE.NORMAL,
+            gameType: Game.TYPE.NORMAL,
             opponentType: Game.OPPONENT_TYPE.HUMAN,
             boardSize: 3,
             winLength: 3,
@@ -106,10 +106,10 @@ export default class Game{
         // Setup UI
         uiMenu.create(this);
         uiGameplay.create(this);
+        uiGameplay.updateTurnSymbol(this);
         uiPause.create(this);
 
         // Start the game
-        uiGameplay.updateTurnSymbol(this);
         this.start();
     };
 
