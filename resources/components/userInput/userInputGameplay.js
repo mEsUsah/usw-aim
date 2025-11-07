@@ -1,4 +1,4 @@
-import { GAME_VIEW } from '../classes/Game.js';
+import { Game } from '../classes/Game.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import GameObject from '../classes/GameObject.js';
 import checkWinCondition from '../checkWinCondition.js';
@@ -68,7 +68,7 @@ export function handleUserInputsGameplay(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'pause_button'){
-                    game.view = GAME_VIEW.PAUSED;
+                    game.view = Game.GAME_VIEW.PAUSED;
                 }
             }
         }

@@ -12,11 +12,6 @@ const SHOW_FPS = false;
 const SHOW_GRID = false;
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 800;
-export const GAME_VIEW = {
-    GAMEPLAY: 'gameplay',
-    MENU: 'menu',
-    PAUSED: 'paused'
-};
 
 /**
  * The main Game class containing the game state, rendering context, the game loop.
@@ -32,6 +27,12 @@ export class Game{
     static OPPONENT_TYPE = {
         HUMAN: 0,
         CPU: 1,
+    };
+
+    static GAME_VIEW = {
+        GAMEPLAY: 'gameplay',
+        MENU: 'menu',
+        PAUSED: 'paused'
     };
     
     constructor(canvas) {
@@ -58,7 +59,7 @@ export class Game{
             screenEndY: 0
         };
 
-        this.view = GAME_VIEW.MENU;
+        this.view = Game.GAME_VIEW.MENU;
         this.gameObjects = {
             gameplay: [],
             menu: [],
