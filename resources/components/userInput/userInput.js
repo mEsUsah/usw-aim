@@ -11,15 +11,15 @@ export default function handleUserInputs(game) {
     game.userInputs.forEach(input => {
         if(input.type == 'click') { 
             switch(game.view) {
-                case Game.GAME_VIEW.GAMEPLAY:
+                case Game.VIEW.GAMEPLAY:
                     handleUserInputsGameplay(game, input);
                     break;
 
-                case Game.GAME_VIEW.PAUSED:
+                case Game.VIEW.PAUSED:
                     handleUserInputPause(game, input);
                     break;
 
-                case Game.GAME_VIEW.MENU:
+                case Game.VIEW.MENU:
                     handleUserInputMenu(game, input);
                     break;
                 

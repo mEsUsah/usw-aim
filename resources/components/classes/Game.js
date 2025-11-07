@@ -29,7 +29,7 @@ export default class Game{
         CPU: 1,
     };
 
-    static GAME_VIEW = {
+    static VIEW = {
         GAMEPLAY: 'gameplay',
         MENU: 'menu',
         PAUSED: 'paused'
@@ -59,7 +59,7 @@ export default class Game{
             screenEndY: 0
         };
 
-        this.view = Game.GAME_VIEW.MENU;
+        this.view = Game.VIEW.MENU;
         this.gameObjects = {
             gameplay: [],
             menu: [],
