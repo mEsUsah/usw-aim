@@ -1,4 +1,4 @@
-import { Game } from '../classes/Game.js';
+import Game from '../classes/Game.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import GameObject from '../classes/GameObject.js';
 import checkWinCondition from '../checkWinCondition.js';

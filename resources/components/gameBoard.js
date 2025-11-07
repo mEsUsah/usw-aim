@@ -1,6 +1,6 @@
 import GameObject from "./classes/GameObject.js";
 import GameShape from "./classes/GameShape.js";
-import { Game } from "./classes/Game.js";
+import Game from "./classes/Game.js";
 
 export function create(game){
     // Clear win lines from previous games

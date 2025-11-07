@@ -1,4 +1,4 @@
-import { Game } from '../classes/Game.js';
+import Game from '../classes/Game.js';
 import GameObject from '../classes/GameObject.js';
 import * as gameBoard from '../gameBoard.js';
 import * as menuShapes from '../shapes/menuShapes.js';

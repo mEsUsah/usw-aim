@@ -1,5 +1,5 @@
 import GameObject from "../classes/GameObject.js";
-import { Game } from "../classes/Game.js";
+import Game from "../classes/Game.js";
 import * as menuShapes from "../shapes/menuShapes.js";
 
 /**

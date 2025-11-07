@@ -1,4 +1,4 @@
-import { Game } from '../classes/Game.js';
+import Game from '../classes/Game.js';
 import { handleUserInputsGameplay } from './userInputGameplay.js';
 import { handleUserInputPause } from './userInputPause.js';
 import { handleUserInputMenu } from './userInputMenu.js';

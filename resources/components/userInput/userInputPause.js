@@ -1,4 +1,4 @@
-import { Game } from '../classes/Game.js';
+import Game from '../classes/Game.js';
 import GameObject from '../classes/GameObject.js';
 
 /** * Handles user inputs specific to the pause view.

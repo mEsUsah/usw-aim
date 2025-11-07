@@ -18,7 +18,7 @@ const GAME_HEIGHT = 800;
  * @class Game
  * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
  */
-export class Game{
+export default class Game{
     static GAME_TYPE = {
         NORMAL: 0,
         BLOCKED: 1,
