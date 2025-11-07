@@ -30,7 +30,7 @@ function pickRandomField(game){
     while(true){
         const randX = Math.floor(Math.random() * game.state.boardSize);
         const randY = Math.floor(Math.random() * game.state.boardSize);
-        const gameObject = game.gameFields[randX][randY];
+        const gameObject = game.state.gameFields[randX][randY];
         if(gameObject.state.occupiedBy == null){
             gameObject.state.occupiedBy = game.state.currentPlayer; 
             game.state.occupiedSpaces++;

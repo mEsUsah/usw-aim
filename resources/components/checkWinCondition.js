@@ -47,12 +47,12 @@ function checkWin(game, selectedTile, xDirection, yDirection){
     let currentY = selectedTile.config.location.y;
     while(currentX >= 0 && currentY >= 0 && currentX < game.config.boardSize && currentY < game.config.boardSize){
         // stop search if checked tile is unused or occupied by anything else than the current player
-        if(!game.gameFields[currentX][currentY].state || game.gameFields[currentX][currentY].state.occupiedBy != selectedTile.state.occupiedBy){
+        if(!game.state.gameFields[currentX][currentY].state || game.state.gameFields[currentX][currentY].state.occupiedBy != selectedTile.state.occupiedBy){
             break;
         }
-        firstFoundLocation = game.gameFields[currentX][currentY].config.location;
-        returnObject.x = game.gameFields[currentX][currentY].config.x
-        returnObject.y = game.gameFields[currentX][currentY].config.y
+        firstFoundLocation = game.state.gameFields[currentX][currentY].config.location;
+        returnObject.x = game.state.gameFields[currentX][currentY].config.x
+        returnObject.y = game.state.gameFields[currentX][currentY].config.y
         
         currentX -= xDirection;
         currentY -= yDirection;
@@ -65,13 +65,13 @@ function checkWin(game, selectedTile, xDirection, yDirection){
     currentY = firstFoundLocation.y;
     while(currentX < game.config.boardSize && currentY < game.config.boardSize && currentX >= 0 && currentY >= 0){
         // stop counting if chekced tile is unused or occupied by anyting else than the current player
-        if(!game.gameFields[currentX][currentY].state || game.gameFields[currentX][currentY].state.occupiedBy != selectedTile.state.occupiedBy){
+        if(!game.state.gameFields[currentX][currentY].state || game.state.gameFields[currentX][currentY].state.occupiedBy != selectedTile.state.occupiedBy){
             break;
         }
         score++;
         if (score >= game.state.winLength){
-            returnObject.x2 = game.gameFields[currentX][currentY].config.x;
-            returnObject.y2 = game.gameFields[currentX][currentY].config.y;
+            returnObject.x2 = game.state.gameFields[currentX][currentY].config.x;
+            returnObject.y2 = game.state.gameFields[currentX][currentY].config.y;
             return returnObject;
         }
         currentX += xDirection;

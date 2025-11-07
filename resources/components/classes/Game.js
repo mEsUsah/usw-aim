@@ -64,7 +64,6 @@ export default class Game{
             menu: [],
             paused: []
         };
-        this.gameFields = [];
         this.userInputs = [];
         
         utils.fix_dpi(this.canvas);
@@ -94,6 +93,7 @@ export default class Game{
             currentPlayer: 1,
             occupiedSpaces: 0,
             gameOver: false,
+            gameFields: [],
             cpuMoveDelay: 500,
             cpuWaitTime: 500,
             stats: statUtils.getData()

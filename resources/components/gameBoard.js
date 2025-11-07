@@ -11,7 +11,7 @@ export function create(game){
     
     // Clear existing game board objects
     game.gameObjects.gameplay = game.gameObjects.gameplay.filter(obj => obj.config.variant !== GameObject.VARIANT.BOARD);
-    game.gameFields = [];
+    game.state.gameFields = [];
 
     // Initialize new board cells
     for (let x = 0; x < game.config.boardSize; x++) {
@@ -44,7 +44,7 @@ export function create(game){
             game.gameObjects.gameplay.push(gameObject);
             gameFieldRow.push(gameObject);
         }
-        game.gameFields.push(gameFieldRow);
+        game.state.gameFields.push(gameFieldRow);
     }
 
     // GameType Blocked
@@ -54,7 +54,7 @@ export function create(game){
             while(true){ // Keep trying until an unoccupied cell is found
                 const randX = Math.floor(Math.random() * game.state.boardSize);
                 const randY = Math.floor(Math.random() * game.state.boardSize);
-                const gameObject = game.gameFields[randX][randY];
+                const gameObject = game.state.gameFields[randX][randY];
                 if(gameObject.state.occupiedBy == null){
                     gameObject.state.occupiedBy = 0; // Blocked
                     gameObject.addShape(new GameShape('rectangle', {
