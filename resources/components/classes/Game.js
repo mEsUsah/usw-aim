@@ -1,12 +1,12 @@
-import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from '../utils/utils.js';
-import * as graphicDebug from '../utils/graphicDebug.js' ;
-import { getMousePos } from '../utils/mouseUtils.js';
+import handleUserInputs  from '../userInput/userInput.js';
+import handleCpuInput from '../cpuInput/cpuInput.js'; 
 import * as uiMenu from '../ui/uiMenu.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import * as uiPause from '../ui/uiPause.js';
-import { handleUserInputs } from '../userInput/userInput.js';
-import { handleCpuInput } from '../cpuInput/cpuInput.js'; 
+import * as graphicDebug from '../utils/graphicDebug.js' ;
 import * as statUtils from '../utils/statUtils.js';
+import * as mouseUtils from '../utils/mouseUtils.js';
+import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from '../utils/utils.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -77,7 +77,7 @@ export default class Game{
         
         // Handle mouse clicks and transfer event to game engine
         canvas.addEventListener('click', (event) => {
-            const mousePos = getMousePos(event, this.displayData, this.canvas);
+            const mousePos = mouseUtils.getMousePos(event, this.displayData, this.canvas);
             this.userInputs.push({
                 type: 'click',
                 x: mousePos.x,

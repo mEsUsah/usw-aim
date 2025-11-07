@@ -7,7 +7,7 @@ import * as menuShapes from '../shapes/menuShapes.js';
  * @param {Game} game - The game instance.
  * @param {Object} input - The user input data (click coordinates).
  */
-export function handleUserInputMenu(game, input){
+export default function handleUserInputMenu(game, input){
     game.gameObjects[Game.GAME_VIEW.MENU].forEach(gameObject => {
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {

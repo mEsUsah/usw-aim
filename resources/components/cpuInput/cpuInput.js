@@ -1,6 +1,6 @@
-import * as gameplayShapes from '../shapes/gameplayShapes.js';
 import checkWinCondition from '../checkWinCondition.js';
 import checkDrawCondition from '../checkDrawCondition.js';
+import * as gameplayShapes from '../shapes/gameplayShapes.js';
 import * as uiGameplay from '../ui/uiGameplay.js';
 import * as gameplayObjects from '../gameObjects/gameplayObjects.js';
 import * as statUtils from '../utils/statUtils.js';
@@ -10,7 +10,7 @@ import * as statUtils from '../utils/statUtils.js';
  * Emulates a player making a decision.
  * @param {Game} game - The game instance.
  */
-export function handleCpuInput(game){
+export default function handleCpuInput(game){
     // Wait a moment to give illusion of decision time
     game.state.cpuWaitTime -= game.frameData.deltaTime;
     if(game.state.cpuWaitTime > 0){

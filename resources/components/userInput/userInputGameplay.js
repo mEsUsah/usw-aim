@@ -11,7 +11,7 @@ import * as statUtils from '../utils/statUtils.js';
  * @param {Game} game - The game instance.
  * @param {Object} input - The user input data (click coordinates).
  */
-export function handleUserInputsGameplay(game, input){
+export default function handleUserInputsGameplay(game, input){
     game.gameObjects[Game.GAME_VIEW.GAMEPLAY].forEach(gameObject => {
         // Check click on board cells
         if (game.state.gameOver == false && gameObject.config.variant == GameObject.VARIANT.BOARD) {
