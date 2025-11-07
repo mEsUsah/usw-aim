@@ -99,6 +99,9 @@ export function create(game){
         if(i === game.state.winLength){
             winLengthButton.addShape(menuShapes.selectedIndicator());
         }
+        if(i > game.state.winLength){
+            winLengthButton.addShape(menuShapes.disabledOverlay());
+        }
         game.state.gameObjects.menu.push(winLengthButton);
     }
 

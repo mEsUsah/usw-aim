@@ -24,6 +24,7 @@ export default function handleUserInputMenu(game, input){
                         setSelectedIndicator(game, 'winLength', 'win_length_button');
                     }
                     setSelectedIndicator(game, 'boardSize', 'size_button');
+                    setDisabledGameLengthOverlay(game);
                     game.updateConfig();
                 }
                 if(gameObject.config.name === 'win_length_button'){
@@ -46,7 +47,7 @@ export default function handleUserInputMenu(game, input){
     });
 }
 
-/** Sets the selected indicator on the appropriate button in the menu.
+/** Sets a selected indicator on the appropriate button in the menu.
  * @param {Game} game - The game instance.
  * @param {string} configValue - The configuration value to check (e.g., 'boardSize', 'winLength').
  * @param {string} buttonName - The name of the GameObject to update.
@@ -63,3 +64,20 @@ function setSelectedIndicator(game, configValue, buttonName){
         }
     });
 } 
+
+/**
+ * Sets a disabled overlay for the game length buttons with a size greater than the board size.
+ * @param {Game} game - The game instance.
+ */
+function setDisabledGameLengthOverlay(game){
+    game.state.gameObjects[Game.VIEW.MENU].forEach(gameObject => {
+        if (gameObject.config.variant == GameObject.VARIANT.BUTTON && gameObject.config.name === 'win_length_button') {
+
+            // Remove all existing overlays to avoid duplicates
+            gameObject.removeShape('disabled_overlay');
+            if(gameObject.config.winLength > game.state.boardSize){
+                gameObject.addShape(menuShapes.disabledOverlay());
+            }
+        }
+    });
+}

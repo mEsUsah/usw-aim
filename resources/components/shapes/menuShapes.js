@@ -121,6 +121,18 @@ export function selectedIndicator(){
     });
 }
 
+export function disabledOverlay(){
+    return new GameShape('rectangle', {
+        x: -25,
+        y: -25,
+        width: 50,
+        height: 50,
+        color: "#00000088",
+        fillColor: "#000000aa",
+        name: 'disabled_overlay'
+    });
+}
+
 
 /** * Adds a stats text shape to a game object.
  * @param {GameObject} gameObject - The game object the stats text will be added to.
