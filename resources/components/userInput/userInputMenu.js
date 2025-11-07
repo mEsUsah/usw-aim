@@ -12,7 +12,7 @@ export default function handleUserInputMenu(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'start_button'){
-                    game.view = Game.VIEW.GAMEPLAY;
+                    game.state.view = Game.VIEW.GAMEPLAY;
                     game.resetState();
                     gameBoard.create(game);
                 }

@@ -59,7 +59,6 @@ export default class Game{
             screenEndY: 0
         };
 
-        this.view = Game.VIEW.MENU;
         this.gameObjects = {
             gameplay: [],
             menu: [],
@@ -87,6 +86,7 @@ export default class Game{
         
         // Initial game state
         this.state = {
+            view: Game.VIEW.MENU,
             gameType: Game.TYPE.NORMAL,
             opponentType: Game.OPPONENT.HUMAN,
             boardSize: 3,
@@ -148,7 +148,7 @@ export default class Game{
         }
 
         // Update animation state
-        this.gameObjects[this.view].forEach(gameObject => {
+        this.gameObjects[this.state.view].forEach(gameObject => {
             gameObject.update(this.frameData.deltaTime);
         });
 
@@ -157,7 +157,7 @@ export default class Game{
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
-        this.gameObjects[this.view].forEach(gameObject => {
+        this.gameObjects[this.state.view].forEach(gameObject => {
             gameObject.draw(this.ctx);
         });
 

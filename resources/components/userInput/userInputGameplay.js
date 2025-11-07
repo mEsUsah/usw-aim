@@ -68,7 +68,7 @@ export default function handleUserInputsGameplay(game, input){
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'pause_button'){
-                    game.view = Game.VIEW.PAUSED;
+                    game.state.view = Game.VIEW.PAUSED;
                 }
             }
         }
