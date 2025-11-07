@@ -18,17 +18,17 @@ export const GAME_VIEW = {
     PAUSED: 'paused'
 };
 
-export const GAME_TYPE = {
-    NORMAL: 0,
-    BLOCKED: 1,
-};
-
 /**
  * The main Game class containing the game state, rendering context, the game loop.
  * @class Game
  * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
  */
 export class Game{
+    static GAME_TYPE = {
+        NORMAL: 0,
+        BLOCKED: 1,
+    };
+    
     static OPPONENT_TYPE = {
         HUMAN: 0,
         CPU: 1,
@@ -86,7 +86,7 @@ export class Game{
         
         // Initial game state
         this.state = {
-            gameType: GAME_TYPE.NORMAL,
+            gameType: Game.GAME_TYPE.NORMAL,
             opponentType: Game.OPPONENT_TYPE.HUMAN,
             boardSize: 3,
             winLength: 3,

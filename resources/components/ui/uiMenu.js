@@ -1,5 +1,4 @@
 import GameObject from "../classes/GameObject.js";
-import { GAME_TYPE } from "../classes/Game.js";
 import { Game } from "../classes/Game.js";
 import * as menuShapes from "../shapes/menuShapes.js";
 
@@ -124,7 +123,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        gameType: GAME_TYPE.NORMAL
+        gameType: Game.GAME_TYPE.NORMAL
     });
     gameTypeNormalButton.addShape(menuShapes.buttonOutline());
     gameTypeNormalButton.addShape(menuShapes.buttonText("Nor"));
@@ -142,7 +141,7 @@ export function create(game){
             bottom: 30,
             right: 30
         },
-        gameType: GAME_TYPE.BLOCKED
+        gameType: Game.GAME_TYPE.BLOCKED
     });
     gameTypeBlockButton.addShape(menuShapes.buttonOutline());
     gameTypeBlockButton.addShape(menuShapes.buttonText("Blk"));
