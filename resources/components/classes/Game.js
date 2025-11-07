@@ -5,8 +5,8 @@ import * as uiGameplay from '../ui/uiGameplay.js';
 import * as uiPause from '../ui/uiPause.js';
 import * as graphicDebug from '../utils/graphicDebug.js' ;
 import * as statUtils from '../utils/statUtils.js';
-import * as mouseUtils from '../utils/mouseUtils.js';
 import * as utils from '../utils/utils.js';
+import addEventListeners from '../utils/addEventListeners.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -57,23 +57,9 @@ export default class Game{
                 avg: 0
             }
         };
+        addEventListeners(this);
         
         utils.fix_dpi(this.canvas);
-        
-        // Handle window resizing
-        window.addEventListener('resize', () =>{
-            utils.resizeCanvas(this.ctx, this.displayState);
-        });
-        
-        // Handle mouse clicks and transfer event to game engine
-        canvas.addEventListener('click', (event) => {
-            const mousePos = mouseUtils.getMousePos(event, this.displayState, this.canvas);
-            this.state.userInputs.push({
-                type: 'click',
-                x: mousePos.x,
-                y: mousePos.y
-            });
-        });
         
         // Initialize game state
         this.state = {
