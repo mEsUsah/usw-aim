@@ -7,7 +7,6 @@ import GameObject from '../classes/GameObject.js';
  */
 export function handleUserInputPause(game, input){
     game.gameObjects[GAME_VIEW.PAUSED].forEach(gameObject => {
-        // Check click on continue button
         if (gameObject.config.variant == GameObject.VARIANT.BUTTON) {
             if (gameObject.checkCollision(input.x, input.y)) {
                 if(gameObject.config.name === 'continue_button'){
