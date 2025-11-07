@@ -1,3 +1,4 @@
+import addEventListeners from '../utils/addEventListeners.js';
 import handleUserInputs  from '../userInput/userInput.js';
 import handleCpuInput from '../cpuInput/cpuInput.js'; 
 import * as uiMenu from '../ui/uiMenu.js';
@@ -6,7 +7,6 @@ import * as uiPause from '../ui/uiPause.js';
 import * as graphicDebug from '../utils/graphicDebug.js' ;
 import * as statUtils from '../utils/statUtils.js';
 import * as utils from '../utils/utils.js';
-import addEventListeners from '../utils/addEventListeners.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;

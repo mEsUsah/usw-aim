@@ -1,5 +1,9 @@
 import * as mouseUtils from './mouseUtils.js';
 
+/**
+ * Sets up all event listeners for the game.
+ * @param {Game} game 
+ */
 export default function addEventListeners(game) {
     // Handle window resizing
     window.addEventListener('resize', () =>{
