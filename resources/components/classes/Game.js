@@ -38,15 +38,7 @@ export default class Game{
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
-        this.frameData = {
-            lastTime: 0,
-            deltaTime: 0,
-            fps: {
-                accum: 0,
-                frames: 0,
-                avg: 0
-            }
-        };
+
         this.displayData = {
             gameWidth: GAME_WIDTH,
             gameHeight: GAME_HEIGHT,
@@ -56,7 +48,14 @@ export default class Game{
             screenStartX: 0,
             screenStartY: 0,
             screenEndX: 0,
-            screenEndY: 0
+            screenEndY: 0,
+            lastTime: 0,
+            deltaTime: 0,
+            fps: {
+                accum: 0,
+                frames: 0,
+                avg: 0
+            }
         };
         
         utils.fix_dpi(this.canvas);
@@ -139,7 +138,7 @@ export default class Game{
      */
     gameLoop(timestamp) {
         // Update game state
-        utils.updateFrameData(timestamp, this.frameData);
+        utils.updateFrameData(timestamp, this.displayData);
         if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === Game.OPPONENT.CPU){
             handleCpuInput(this);
         } else {
@@ -148,13 +147,13 @@ export default class Game{
 
         // Update animation state
         this.state.gameObjects[this.state.view].forEach(gameObject => {
-            gameObject.update(this.frameData.deltaTime);
+            gameObject.update(this.displayData.deltaTime);
         });
 
         // Render frame
         utils.clearCanvas(this.ctx, this.displayData);
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
-        if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
+        if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.displayData.fps.avg);
 
         this.state.gameObjects[this.state.view].forEach(gameObject => {
             gameObject.draw(this.ctx);

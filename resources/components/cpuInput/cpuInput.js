@@ -12,7 +12,7 @@ import * as statUtils from '../utils/statUtils.js';
  */
 export default function handleCpuInput(game){
     // Wait a moment to give illusion of decision time
-    game.state.cpuWaitTime -= game.frameData.deltaTime;
+    game.state.cpuWaitTime -= game.displayData.deltaTime;
     if(game.state.cpuWaitTime > 0){
         return;
     }
