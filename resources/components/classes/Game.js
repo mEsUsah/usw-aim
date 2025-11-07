@@ -6,7 +6,7 @@ import * as uiPause from '../ui/uiPause.js';
 import * as graphicDebug from '../utils/graphicDebug.js' ;
 import * as statUtils from '../utils/statUtils.js';
 import * as mouseUtils from '../utils/mouseUtils.js';
-import { fix_dpi, clearCanvas, resizeCanvas, updateFrameData } from '../utils/utils.js';
+import * as utils from '../utils/utils.js';
 
 const SHOW_FPS = false;
 const SHOW_GRID = false;
@@ -68,11 +68,11 @@ export default class Game{
         this.gameFields = [];
         this.userInputs = [];
         
-        fix_dpi(this.canvas);
+        utils.fix_dpi(this.canvas);
         
         // Handle window resizing
         window.addEventListener('resize', () =>{
-            resizeCanvas(this.ctx, this.displayData);
+            utils.resizeCanvas(this.ctx, this.displayData);
         });
         
         // Handle mouse clicks and transfer event to game engine
@@ -130,7 +130,7 @@ export default class Game{
     };
 
     start(){
-        resizeCanvas(this.ctx, this.displayData);
+        utils.resizeCanvas(this.ctx, this.displayData);
         window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }; 
 
@@ -140,7 +140,7 @@ export default class Game{
      */
     gameLoop(timestamp) {
         // Update game state
-        updateFrameData(timestamp, this.frameData);
+        utils.updateFrameData(timestamp, this.frameData);
         if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === Game.OPPONENT.CPU){
             handleCpuInput(this);
         } else {
@@ -153,7 +153,7 @@ export default class Game{
         });
 
         // Render frame
-        clearCanvas(this.ctx, this.displayData);
+        utils.clearCanvas(this.ctx, this.displayData);
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayData);
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.frameData.fps.avg);
 
