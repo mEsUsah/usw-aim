@@ -53,6 +53,9 @@ export default class GameShape {
 
         switch(this.type) {
             case 'rectangle':
+                if(this.config.lineWidth) {
+                    ctx.lineWidth = this.config.lineWidth;
+                }
                 ctx.beginPath();
                 if(direction === GameShapeAnimation.FORWARD) {
                     ctx.rect(0, 0, this.config.width * progress, this.config.height * progress);
@@ -93,6 +96,9 @@ export default class GameShape {
 
             case 'polygon':
                 if(!this.config.points || this.config.points.length < 2) break;
+                if(this.config.lineWidth) {
+                    ctx.lineWidth = this.config.lineWidth;
+                }
                 ctx.beginPath();
                 ctx.moveTo(this.config.points[0].x, this.config.points[0].y);
                 this.config.points.forEach((point, index) => {
