@@ -30,7 +30,7 @@ export default class GameShapeAnimation {
         this.lifetime += deltaTime;
 
         // Not started yet
-        if(this.lifetime < this.config.startDelay) {
+        if(this.lifetime <= this.config.startDelay) {
             this.progress = 0;
         }
 
