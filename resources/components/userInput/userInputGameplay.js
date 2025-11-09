@@ -70,6 +70,9 @@ export default function handleUserInputsGameplay(game, input){
                 if(gameObject.config.name === 'pause_button'){
                     game.state.view = Game.VIEW.PAUSED;
                 }
+                if(gameObject.config.name === 'stop_button'){
+                    game.state.view = Game.VIEW.MENU;
+                }
             }
         }
         

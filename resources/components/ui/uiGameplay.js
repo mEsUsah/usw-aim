@@ -7,8 +7,8 @@ import * as commonShapes from "../shapes/commonShapes.js";
  * @param {Game} game - The game instance.
  */
 export function create(game){
-    // Menu button
-    const menuButton = new GameObject({
+    //  button
+    const pauseButton = new GameObject({
         variant: GameObject.VARIANT.BUTTON,
         x: game.displayState.gameWidth - 30,
         y: 30,
@@ -20,8 +20,23 @@ export function create(game){
             right: 20
         }
     });
-    commonShapes.addPauseButton(menuButton);
-    game.state.gameObjects.gameplay.push(menuButton);
+    commonShapes.addPauseButton(pauseButton);
+    game.state.gameObjects.gameplay.push(pauseButton);
+
+    const stopButton = new GameObject({
+        variant: GameObject.VARIANT.BUTTON,
+        x: game.displayState.gameWidth - 80,
+        y: 30,
+        name: 'stop_button',
+        outline: {
+            top: 20,
+            left: 20,
+            bottom: 20,
+            right: 20
+        }
+    });
+    commonShapes.addStopButton(stopButton);
+    game.state.gameObjects.gameplay.push(stopButton);
 
     // Player turn indicator
     const turnIndicator = new GameObject({
