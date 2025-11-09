@@ -20,7 +20,7 @@ export function addWinLine(game, winLineCoordinates){
         y: winLineCoordinates.y,
         x2: winLineCoordinates.x2,
         y2: winLineCoordinates.y2,
-        color: "red",
+        color: "white",
         lineWidth: 15,
         ttl: 300,
     });
@@ -36,7 +36,7 @@ export function addWinLine(game, winLineCoordinates){
         y: winLineCoordinates.y,
         x2: winLineCoordinates.x2,
         y2: winLineCoordinates.y2,
-        color: "red",
+        color: "white",
         lineWidth: 15,
         ttl: 1000,
     });
