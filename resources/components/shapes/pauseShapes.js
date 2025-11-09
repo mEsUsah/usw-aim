@@ -7,18 +7,20 @@ import GameShapeAnimation from "../classes/GameShapeAnimation.js";
  */
 export function addPauseText(gameObject) {
     gameObject.addShape(new GameShape('text', {
-        x: -150,
+        x: 0,
         y: 0,
-        text: "Game Paused",
-        font: "50px Consolas",
+        text: "Pause",
+        font: "84px Consolas",
+        align: "center",
+        baseline: "middle",
         color: "white"
     }));
 
     const pauseLine = new GameShape('line', {
-        x: -150,
-        y:  5,
-        x2: 150,
-        y2: 5,
+        x: -130,
+        y:  30,
+        x2: 130,
+        y2: 30,
         color: "white",
         lineWidth: 4
     });
