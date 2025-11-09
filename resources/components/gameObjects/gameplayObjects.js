@@ -22,13 +22,33 @@ export function addWinLine(game, winLineCoordinates){
         y2: winLineCoordinates.y2,
         color: "red",
         lineWidth: 15,
+        ttl: 300,
     });
 
     winLineShape.addAnimation(new GameShapeAnimation({
         duration: 300,
+        direction: GameShapeAnimation.FORWARD,
     }));
-    
     winLineObject.addShape(winLineShape);
+    
+    const winLineShape2 = new GameShape('line', {
+        x: winLineCoordinates.x,
+        y: winLineCoordinates.y,
+        x2: winLineCoordinates.x2,
+        y2: winLineCoordinates.y2,
+        color: "red",
+        lineWidth: 15,
+        ttl: 1000,
+    });
+
+    winLineShape2.addAnimation(new GameShapeAnimation({
+        duration: 300,
+        direction: GameShapeAnimation.BACKWARD,
+        startDelay: 600,
+        displayDelay: 300,
+    }));
+    winLineObject.addShape(winLineShape2);
+
     game.state.gameObjects.gameplay.push(winLineObject);
 }
 
