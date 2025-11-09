@@ -43,7 +43,7 @@ export function addStartButton(gameObject){
         y: -60,
         width: 120,
         height: 120,
-        color: "red"
+        color: "gray"
     }));
     gameObject.addShape(new GameShape('polygon', {
         x: -0,

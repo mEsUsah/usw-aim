@@ -10,7 +10,7 @@ export function addPlayButton(gameObject) {
         y: -20,
         width: 40,
         height: 40,
-        color: "red"
+        color: "gray"
     }));
     gameObject.addShape(new GameShape('polygon', {
         points: [
@@ -33,7 +33,7 @@ export function addPauseButton(gameObject) {
         y: -20,
         width: 40,
         height: 40,
-        color: "red"
+        color: "gray"
     }));
     gameObject.addShape(new GameShape('rectangle', {
         x: -10,
@@ -63,7 +63,7 @@ export function addStopButton(gameObject) {
         y: -20,
         width: 40,
         height: 40,
-        color: "red"
+        color: "gray"
     }));
     gameObject.addShape(new GameShape('rectangle', {
         x: -10,
