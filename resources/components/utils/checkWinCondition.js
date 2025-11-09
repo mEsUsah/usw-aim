@@ -34,7 +34,7 @@ export default function(game, selectedTile){
  * @returns {Object|boolean} - Coordinates of the winning line if a win is found, false otherwise.
  */
 function checkWin(game, selectedTile, xDirection, yDirection){
-    // find first ("draw bow")
+    // find first in the opposite direction ("draw bow")
     let firstFoundLocation = selectedTile.config.location;
     let returnObject = {
         x: null,
@@ -59,12 +59,12 @@ function checkWin(game, selectedTile, xDirection, yDirection){
 
     }
 
-    // count ("shoot arrow")
+    // count win length from first found in the given direction ("shoot arrow")
     let score = 0;
     currentX = firstFoundLocation.x;
     currentY = firstFoundLocation.y;
     while(currentX < game.config.boardSize && currentY < game.config.boardSize && currentX >= 0 && currentY >= 0){
-        // stop counting if chekced tile is unused or occupied by anyting else than the current player
+        // stop counting if checked tile is unused or occupied by anything else than the current player
         if(!game.state.gameFields[currentX][currentY].state || game.state.gameFields[currentX][currentY].state.occupiedBy != selectedTile.state.occupiedBy){
             break;
         }
