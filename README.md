@@ -15,7 +15,7 @@ Key objectives of the game engine:
 
 The game emgine acchieved all goals, but I was unable to make it decoupled from the game logic in a way that makes it easiliy reusable for other games.
 
-## Prod Setup.
+## Prod Installation
 * To run this in a production environment you only have to git clone the project, and host it as static HTML. 
 * Set the webroot to the web directory to avoid access to source files and potential sensitive data.
 
