@@ -39,18 +39,21 @@ export default class GameShape {
      * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
      */
     draw(ctx) {
-        ctx.strokeStyle = this.config.color || "red";
-        ctx.lineWidth = this.config.lineWidth || 2;
-        
-        ctx.save();
-        ctx.translate(this.config.x, this.config.y);
         let progress = 1;
+        let isVisible = true;
         let direction = GameShapeAnimation.FORWARD;
         if (this.animation) {
+            isVisible = this.animation.getIsVisible();
             progress = this.animation.getProgress();
             direction = this.animation.config.direction;
         }
+        if(!isVisible) return;
 
+        ctx.save();
+        ctx.translate(this.config.x, this.config.y);
+        ctx.strokeStyle = this.config.color || "red";
+        ctx.lineWidth = this.config.lineWidth || 2;
+        
         switch(this.type) {
             case 'rectangle':
                 if(this.config.lineWidth) {
@@ -89,8 +92,13 @@ export default class GameShape {
                     ctx.lineWidth = this.config.lineWidth;
                 }
                 ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.lineTo((this.config.x2 - this.config.x) * progress, (this.config.y2 - this.config.y) * progress);
+                if(direction === GameShapeAnimation.FORWARD) {
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo((this.config.x2 - this.config.x) * progress, (this.config.y2 - this.config.y) * progress);
+                } else {
+                    ctx.moveTo((this.config.x2 - this.config.x) * progress, (this.config.y2 - this.config.y) * progress);
+                    ctx.lineTo(this.config.x2 - this.config.x, this.config.y2 - this.config.y);
+                }
                 ctx.stroke();
                 break;
 

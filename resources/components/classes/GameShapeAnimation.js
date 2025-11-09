@@ -15,6 +15,7 @@ export default class GameShapeAnimation {
         this.config.loop = config.loop || 0; // -1 inifinitely, 0 no loop, n times
         this.config.direction = config.direction || GameShapeAnimation.FORWARD;
         this.config.startDelay = config.startDelay || 0;
+        this.config.displayDelay = config.displayDelay || 0;
         
         this.progress = 0;
         this.lifetime = 0;
@@ -56,5 +57,9 @@ export default class GameShapeAnimation {
      */
     getProgress() {
         return this.progress / this.config.duration;
+    }
+
+    getIsVisible() {
+        return this.lifetime >= this.config.displayDelay;
     }
 }
