@@ -36,14 +36,15 @@ export default function handleUserInputsGameplay(game, input){
                 if(gameWon){
                     gameplayObjects.addWinLine(game,gameWon);
                     game.state.gameOver = true;
-                    gameplayObjects.addGameOverText(game, "Game Over");
+                    gameplayObjects.addGameOverText(game, `Player ${game.state.currentPlayer} Wins!`);
                     statUtils.update(game, game.state.currentPlayer);
                     return;
                 }
                 const gameDraw = checkDrawCondition(game);
                 if(gameDraw){
+                    gameplayObjects.addDrawLine(game);
                     game.state.gameOver = true;
-                    gameplayObjects.addGameOverText(game, "Game Over");
+                    gameplayObjects.addGameOverText(game, "Draw");
                     statUtils.update(game, 0); // 0 for draw
                     return;
                 }
