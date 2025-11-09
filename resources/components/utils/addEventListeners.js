@@ -1,4 +1,5 @@
 import * as mouseUtils from './mouseUtils.js';
+import * as utils from './utils.js';
 
 /**
  * Sets up all event listeners for the game.
