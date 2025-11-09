@@ -134,18 +134,20 @@ export default class Game{
     gameLoop(timestamp) {
         // Update game state
         utils.updateFrameData(timestamp, this.displayState);
+
+        // Handle user and computer inputs
         if(!this.state.gameOver && this.state.currentPlayer == 2 && this.state.opponentType === Game.OPPONENT.CPU){
             handleCpuInput(this);
         } else {
             handleUserInputs(this);
         }
 
-        // Update animation state
+        // Update game objects
         this.state.gameObjects[this.state.view].forEach(gameObject => {
             gameObject.update(this.displayState.deltaTime);
         });
 
-        // Render frame
+        // Render game objects
         utils.clearCanvas(this.ctx, this.displayState);
         if(SHOW_GRID) graphicDebug.drawGrid(this.ctx, this.displayState);
         if(SHOW_FPS) graphicDebug.drawFPS(this.ctx, this.displayState.fps.avg);
