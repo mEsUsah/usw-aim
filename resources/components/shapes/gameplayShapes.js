@@ -18,7 +18,6 @@ export function addGameboardCross(game, gameObject){
     });
     line1.addAnimation(new GameShapeAnimation({
         duration: 150,
-        direction: GameShapeAnimation.BACKWARD,
     }));
     gameObject.addShape(line1);
     
