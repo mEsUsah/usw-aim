@@ -9,7 +9,7 @@ export function addTitle(gameObject){
         x: 0,
         y: 0,
         text: "Noughts and Crosses",
-        font: "60px Consolas",
+        font: "60px GameFont",
         color: "white",
         align: "center",
         baseline: "middle"
@@ -26,7 +26,7 @@ export function addTitle(gameObject){
         x: 0,
         y: 60,
         text: "Stanley Skarshaug - USW student 23092388",
-        font: "20px Consolas",
+        font: "20px GameFont",
         color: "gray",
         align: "center",
         baseline: "middle"
@@ -69,7 +69,7 @@ export function selectionText(text){
         x: 0,
         y: 0,
         text: text,
-        font: "30px Consolas",
+        font: "30px GameFont",
         color: "white",
         align: "left",
         baseline: "middle"
@@ -99,7 +99,7 @@ export function buttonText(text){
         x: 0,
         y: 0,
         text: text,
-        font: "30px Consolas",
+        font: "30px GameFont",
         color: "white",
         align: "center",
         baseline: "middle"
@@ -148,7 +148,7 @@ export function addStatsText(gameObject, stats){
         x: 0,
         y: 0,
         text: statsString,
-        font: "16px Consolas",
+        font: "16px GameFont",
         color: "white",
         align: "center",
         baseline: "middle",

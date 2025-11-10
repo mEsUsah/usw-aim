@@ -61,7 +61,7 @@ export function addTurnIndicator(gameObject){
         x: 0,
         y: 0,
         text: "Player:",
-        font: "30px Consolas",
+        font: "30px GameFont",
         color: "white"
     }));
 }

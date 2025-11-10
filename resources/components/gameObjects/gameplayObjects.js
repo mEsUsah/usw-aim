@@ -154,7 +154,7 @@ export function addGameOverText(game, text){
         x: 0,
         y: 0,
         text: text,
-        font: "84px Consolas",
+        font: "84px GameFont",
         color: "white",
         align: "center",
         baseline: "middle",

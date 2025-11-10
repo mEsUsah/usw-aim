@@ -10,7 +10,7 @@ export function addPauseText(gameObject) {
         x: 0,
         y: 0,
         text: "Pause",
-        font: "84px Consolas",
+        font: "84px GameFont",
         align: "center",
         baseline: "middle",
         color: "white"
