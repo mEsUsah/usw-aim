@@ -6,8 +6,11 @@ export const radian = Math.PI / 180;
  * @param {Object} displayState - The display data containing game dimensions and offsets.
  */
 export function resizeCanvas(ctx, displayState) {
-    ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
+    // Get device pixel ratio for high-DPI displays
+    const dpr = window.devicePixelRatio || 1;
+    
+    ctx.canvas.width = window.innerWidth * dpr;
+    ctx.canvas.height = window.innerHeight * dpr;
 
     // Set scale to fit the game area within the canvas while maintaining aspect ratio
     displayState.scale = Math.min(ctx.canvas.width / displayState.gameWidth, ctx.canvas.height / displayState.gameHeight);
