@@ -7,10 +7,10 @@ export const radian = Math.PI / 180;
  */
 export function resizeCanvas(ctx, displayState) {
     // Get device pixel ratio for high-DPI displays
-    const dpr = window.devicePixelRatio || 1;
+    displayState.devicePixelRatio = window.devicePixelRatio || 1;
     
-    ctx.canvas.width = window.innerWidth * dpr;
-    ctx.canvas.height = window.innerHeight * dpr;
+    ctx.canvas.width = window.innerWidth * displayState.devicePixelRatio;
+    ctx.canvas.height = window.innerHeight * displayState.devicePixelRatio;
 
     // Set scale to fit the game area within the canvas while maintaining aspect ratio
     displayState.scale = Math.min(ctx.canvas.width / displayState.gameWidth, ctx.canvas.height / displayState.gameHeight);

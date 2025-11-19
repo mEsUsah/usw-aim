@@ -43,6 +43,7 @@ export default class Game{
             gameWidth: GAME_WIDTH,
             gameHeight: GAME_HEIGHT,
             scale: 1,
+            devicePixelRatio: 1,
             offsetX: 0,
             offsetY: 0,
             screenStartX: 0,

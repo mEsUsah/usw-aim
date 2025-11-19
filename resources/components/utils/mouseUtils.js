@@ -7,8 +7,8 @@
  */
 export function getMousePos(event, displayState, canvas) {
     const rect = canvas.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / displayState.scale - displayState.offsetX;
-    const y = (event.clientY - rect.top) / displayState.scale - displayState.offsetY;
+    const x = (event.clientX - rect.left) / displayState.scale * displayState.devicePixelRatio - displayState.offsetX;
+    const y = (event.clientY - rect.top) / displayState.scale * displayState.devicePixelRatio - displayState.offsetY;
     return {
         x: x,
         y: y
